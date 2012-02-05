@@ -9,19 +9,28 @@ class Dict(dict):
 
 class Plugin(object):
 
+    active = True
+
     @classmethod
     def plugins(cls, *args, **kwargs):
         return Dict((subclass.name, subclass(*args, **kwargs))
-                       for subclass in cls.__subclasses__())
+                    for subclass in cls.__subclasses__()
+                    if subclass.active)
 
 
 class Action(Plugin):
 
     def __call__(self):
-        raise NotImplementedError()
+        raise NotImplementedError("All actions should implement __call__!")
 
 
 class Item(Plugin):
 
-    isStored = False
-    fields = Dict()
+    stored = False
+
+class Test(Action):
+    pass
+
+def deactivate(*classes):
+    for cls in classes:
+        cls.active = False
