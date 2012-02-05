@@ -9,13 +9,13 @@ class Dict(dict):
 
 class Plugin(object):
 
-    active = True
+    ACTIVE = True
 
     @classmethod
     def plugins(cls, *args, **kwargs):
-        return Dict((subclass.name, subclass(*args, **kwargs))
+        return Dict((subclass.NAME, subclass)
                     for subclass in cls.__subclasses__()
-                    if subclass.active)
+                    if subclass.ACTIVE)
 
 
 class Action(Plugin):
@@ -25,12 +25,21 @@ class Action(Plugin):
 
 
 class Item(Plugin):
+    ATTRIBUTES = None
 
-    stored = False
+    def __init__(self, *args, **kwargs):
+        self.attributes = Dict()
+        if hasattr(self.ATTRIBUTES, 'split'):
+            attributes = Dict.fromkeys(self.ATTRIBUTES.split())
+        elif hasattr(self.ATTRIBUTES, 'index'):
+            attributes = Dict.fromkeys(self.ATTRIBUTES)
+        else:
+            attributes = Dict(self.ATTRIBUTES)
 
-class Test(Action):
-    pass
+        for key, value in attributes.iteritems():
+            setattr(self, key, value)
+
 
 def deactivate(*classes):
     for cls in classes:
-        cls.active = False
+        cls.ACTIVE = False

@@ -40,8 +40,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'ViCE'
-copyright = u'2012, Edwin O Marshall'
+project = 'ViCE'
+copyright = '2012, Edwin O Marshall'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -183,8 +183,8 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'ViCE.tex', u'ViCE Documentation',
-   u'Edwin O Marshall', 'manual'),
+  ('index', 'ViCE.tex', 'ViCE Documentation',
+   'Edwin O Marshall', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -213,8 +213,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'vice', u'ViCE Documentation',
-     [u'Edwin O Marshall'], 1)
+    ('index', 'vice', 'ViCE Documentation',
+     ['Edwin O Marshall'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -227,8 +227,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'ViCE', u'ViCE Documentation',
-   u'Edwin O Marshall', 'ViCE', 'One line description of project.',
+  ('index', 'ViCE', 'ViCE Documentation',
+   'Edwin O Marshall', 'ViCE', 'One line description of project.',
    'Miscellaneous'),
 ]
 
@@ -245,10 +245,10 @@ texinfo_documents = [
 # -- Options for Epub output ---------------------------------------------------
 
 # Bibliographic Dublin Core info.
-epub_title = u'ViCE'
-epub_author = u'Edwin O Marshall'
-epub_publisher = u'Edwin O Marshall'
-epub_copyright = u'2012, Edwin O Marshall'
+epub_title = 'ViCE'
+epub_author = 'Edwin O Marshall'
+epub_publisher = 'Edwin O Marshall'
+epub_copyright = '2012, Edwin O Marshall'
 
 # The language of the text. It defaults to the language option
 # or en if the language is not set.
