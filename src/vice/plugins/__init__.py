@@ -1,3 +1,5 @@
+import os
+
 class Dict(dict):
 
     def __getattr__(self, attr):
@@ -39,6 +41,27 @@ class Item(Plugin):
         for key, value in attributes.iteritems():
             setattr(self, key, value)
 
+
+class Scheme(Plugin):
+    FILENAME = 'database'
+    NAME = None
+
+    def __init__(self, path="."):
+        path = os.path.join(path, self.FILENAME)
+        self.absolute_path = os.path.abspath(path)
+        self.tables = []
+
+    def create_table(name, *fields):
+        raise NotImplementedError("All Scheme plugins must implement a "
+                                  "create_table method!")
+
+    def create_record(**fields):
+        raise NotImplementedError("All Scheme plugins must implement a "
+                                  "create_record method!")
+
+    def update_record(**fields):
+        raise NotImplementedError("All Scheme plugins must implement a "
+                                  "update_record method")
 
 def deactivate(*classes):
     for cls in classes:
