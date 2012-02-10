@@ -2,8 +2,6 @@
 
 import sys
 
-from plugins import Scheme
-
 class Dict(dict):
 
     __delattr__ = dict.__delitem__

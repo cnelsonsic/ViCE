@@ -1,4 +1,5 @@
 import sys
+sys.path.insert(0, "./wtactics.zip")
 sys.path.insert(0, "/home/edwin/projects/python/vice/src")
 
 from vice import database

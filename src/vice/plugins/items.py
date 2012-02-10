@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from . import Item, Dict
+from vice.plugins import Item, Dict
 
 class Card(Item):
     NAME = 'card'

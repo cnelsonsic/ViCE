@@ -1,7 +1,9 @@
 import os
 
-from . import Scheme
-from .. import Dict
+from vice import Dict
+from vice.plugins import Scheme
+
+#TODO: returning True/False seems confusing. Raise exceptions instead?
 
 class FlatFileScheme(Scheme):
     NAME = 'flat-file'
@@ -23,7 +25,7 @@ class FlatFileScheme(Scheme):
             try:
                 open(table_location, "w").write("")
             except IOError:
-                print "table {0} already exists."
+                print("table {0} already exists.")
                 return False
 
             self.tables.append(name)
@@ -48,7 +50,6 @@ class FlatFileScheme(Scheme):
                 f.write(" ".join([str(field)
                         for field in sorted(fields.values())]))
         except IOError:
-            print 'error'
             return False
 
         current_table.records.append(fields)
