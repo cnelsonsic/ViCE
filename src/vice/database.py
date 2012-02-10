@@ -1,12 +1,4 @@
-from vice.plugins import Scheme
-
-class SchemeError(Exception):
-    def __init__(self, value):
-        self.value = value
-
-        def __str__(self):
-            return repr(self.value)
-
+from vice.plugins import Scheme, SchemeError
 
 def connect(scheme, location="."):
     schemes = Scheme.plugins()

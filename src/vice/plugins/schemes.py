@@ -1,3 +1,4 @@
+import io
 import os
 
 from vice import Dict
@@ -23,7 +24,7 @@ class FlatFileScheme(Scheme):
             return False
         else:
             try:
-                open(table_location, "w").write("")
+                io.open(table_location, "w").write("")
             except IOError:
                 print("table {0} already exists.")
                 return False
@@ -46,7 +47,7 @@ class FlatFileScheme(Scheme):
             return False
 
         try:
-            with open(getattr(self, table).location, "a") as f:
+            with io.open(getattr(self, table).location, "a") as f:
                 f.write(" ".join([str(field)
                         for field in sorted(fields.values())]))
         except IOError:

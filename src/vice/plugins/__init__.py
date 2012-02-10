@@ -7,7 +7,7 @@ class Plugin(object):
     ACTIVE = True
 
     @classmethod
-    def plugins(cls, *args, **kwargs):
+    def plugins(cls):
         cls._plugins = []
 
         def find_subclasses(cls):
@@ -23,6 +23,10 @@ class Plugin(object):
 
         return Dict((plugin.NAME, plugin)
                     for plugin in cls._plugins if plugin.ACTIVE)
+
+    @classmethod
+    def new(cls, name, attributes):
+        return type(name, (cls,), dict(NAME = name.lower(), ATTRIBUTES=attributes))
 
 
 class Action(Plugin):
@@ -46,6 +50,12 @@ class Item(Plugin):
         for key, value in attributes.iteritems():
             setattr(self, key, value)
 
+class SchemeError(Exception):
+    def __init__(self, value):
+        self.value = value
+
+        def __str__(self):
+            return repr(self.value)
 
 class Scheme(Plugin):
     FILENAME = 'database'
@@ -56,7 +66,7 @@ class Scheme(Plugin):
         self.absolute_path = os.path.abspath(path)
         self.tables = []
 
-    def create_table(name, *fields):
+    def create_table(name, fields):
         raise NotImplementedError("All Scheme plugins must implement a "
                                   "create_table method!")
 
@@ -68,9 +78,8 @@ class Scheme(Plugin):
         raise NotImplementedError("All Scheme plugins must implement a "
                                   "update_record method")
 
+
 def deactivate(*classes):
     for cls in classes:
         cls.ACTIVE = False
 
-def newItem(name, attributes, base=Item):
-    return type(name, (base,), dict(NAME = name.lower(), ATTRIBUTES=attributes))

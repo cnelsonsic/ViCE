@@ -1,2 +1,4 @@
 *.pyc
 doc/build
+__pycache__
+MANIFEST
