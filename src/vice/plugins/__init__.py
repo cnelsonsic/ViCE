@@ -24,10 +24,6 @@ class Plugin(object):
         return Dict((plugin.NAME, plugin)
                     for plugin in cls._plugins if plugin.ACTIVE)
 
-    @classmethod
-    def new(cls, name, attributes):
-        return type(name, (cls,), dict(NAME = name.lower(), ATTRIBUTES=attributes))
-
 
 class Action(Plugin):
 
@@ -37,6 +33,10 @@ class Action(Plugin):
 
 class Item(Plugin):
     ATTRIBUTES = None
+
+    @classmethod
+    def new(cls, name, attributes):
+        return type(name, (cls,), dict(NAME = name.lower(), ATTRIBUTES=attributes))
 
     def __init__(self, *args, **kwargs):
         self.attributes = Dict()
