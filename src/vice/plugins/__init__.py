@@ -15,9 +15,21 @@ class Plugin(object):
 
     @classmethod
     def plugins(cls, *args, **kwargs):
-        return Dict((subclass.NAME, subclass)
-                    for subclass in cls.__subclasses__()
-                    if subclass.ACTIVE)
+        cls._plugins = []
+
+        def find_subclasses(cls):
+            subclasses = cls.__subclasses__()
+
+            if subclasses:
+                cls._plugins += subclasses
+
+                for subclass in subclasses:
+                    find_subclasses(subclass)
+
+        find_subclasses(cls)
+
+        return Dict((plugin.NAME, plugin)
+                    for plugin in cls._plugins if plugin.ACTIVE)
 
 
 class Action(Plugin):
@@ -66,3 +78,6 @@ class Scheme(Plugin):
 def deactivate(*classes):
     for cls in classes:
         cls.ACTIVE = False
+
+def newItem(name, attributes, base=Item):
+    return type(name, (base,), dict(NAME = name.lower(), ATTRIBUTES=attributes))
