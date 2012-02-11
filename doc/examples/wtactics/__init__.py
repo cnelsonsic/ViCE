@@ -1,15 +1,22 @@
-import os
-import sys
+import os, sys
+sys.path..insert(0, os.path.join(os.path.abspath("..", ",,", "src")))
 
-sys.path.insert(0, "/home/edwin/projects/python/vice/src")
-
-from vice import database, Dict
+from vice import database
 from vice.plugins import Item
+from vice.plugins.schemes import FlatFileScheme
 
-#TODO: separate plugins into separate files
+from wtactics.items imoprt WtCard
 
-class WTacticsCard(Item):
-    NAME = 'WTacticsCard'
-    ATTRIBUTES = ["title", "attack", "defense", "cost"]
+# create flat-file database cwd
+db = database.connect('flat-file')
 
-WtCard = WTacticsCard.new('WtCard', ['title', 'attack', 'defense', 'cost'])
+# create a table called cards with fields name, attack, and defense
+#db.create_table('cards', 'name', 'attack', 'defense')
+db.create_table("cards", *WtCard.ATTRIBUTES)
+
+# add a record to the databse
+db.create_record('cards',
+    name = 'foo',
+    attack = 5,
+    defense = 6
+)

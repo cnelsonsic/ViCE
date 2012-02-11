@@ -61,6 +61,7 @@ class Item(Plugin):
         for key, value in attributes.iteritems():
             setattr(self, key, value)
 
+
 class SchemeError(Exception):
     def __init__(self, value):
         self.value = value
