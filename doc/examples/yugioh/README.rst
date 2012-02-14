@@ -34,7 +34,11 @@ Rather than list what files come in a ViCE plugin (which is a task reserved
 for the official documentaiton), the point of this section is to identify
 analogs to the LackeyCCG files
 
+* version.txt: This file seems redundant, considering plugin version
+               is already stated in plugininfo.txt. Alternatively,
+               versioned plugin names should be a simpler solution.
 
+* plugininfo.txt: metadata can be implemented as module-level variables.
 
 Plugin Size
 ===========

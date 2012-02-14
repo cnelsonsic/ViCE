@@ -1,9 +1,6 @@
 <plugin>
-<pluginversion>2.0</pluginversion>
 
-<pluginname>Yu-Gi-Oh</pluginname>
-
-<playerstat><label>LP</label><initialvalue>8000</initialvalue></playerstat>	
+<playerstat><label>LP</label><initialvalue>8000</initialvalue></playerstat>
 
 <deckzone>
 	<label>Deck</label>
@@ -82,6 +79,6 @@
 <cardfunction><label>Edit Note</label><kind>EDITNOTE</kind><includeasbutton>yes</includeasbutton><PositionX>.4</PositionX><PositionY>.95</PositionY></cardfunction>
 <cardfunction><label>Clear</label><kind>CLEARCARD</kind><includeasbutton>yes</includeasbutton></cardfunction>
 
-<definition><kind>REUSECARDIMAGES</kind></definition>	
+<definition><kind>REUSECARDIMAGES</kind></definition>
 <definition><kind>ISYOURFACEDOWNVISIBLE</kind></definition>
 </plugin>
