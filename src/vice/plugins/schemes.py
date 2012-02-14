@@ -1,10 +1,39 @@
-import io
-import os
+import io, os
 
 from vice import Dict
-from vice.plugins import Scheme
+from vice.plugins import Plugin
 
 #TODO: returning True/False seems confusing. Raise exceptions instead?
+
+class SchemeError(Exception):
+    def __init__(self, value):
+        self.value = value
+
+        def __str__(self):
+            return repr(self.value)
+
+
+class Scheme(Plugin):
+    FILENAME = 'database'
+    NAME = None
+
+    def __init__(self, path="."):
+        path = os.path.join(path, self.FILENAME)
+        self.absolute_path = os.path.abspath(path)
+        self.tables = []
+
+    def create_table(name, fields):
+        raise NotImplementedError("All Scheme plugins must implement a "
+                                  "create_table method!")
+
+    def create_record(**fields):
+        raise NotImplementedError("All Scheme plugins must implement a "
+                                  "create_record method!")
+
+    def update_record(**fields):
+        raise NotImplementedError("All Scheme plugins must implement a "
+                                  "update_record method")
+
 
 class FlatFileScheme(Scheme):
     NAME = 'flat-file'
@@ -56,4 +85,3 @@ class FlatFileScheme(Scheme):
         current_table.records.append(fields)
 
         return True
-

@@ -2,10 +2,10 @@ import os, sys
 sys.path..insert(0, os.path.join(os.path.abspath("..", ",,", "src")))
 
 from vice import database
-from vice.plugins import Item
+from vice.plugins.items import Item
 from vice.plugins.schemes import FlatFileScheme
 
-from wtactics.items imoprt WtCard
+from wtactics.items import WtCard
 
 # create flat-file database cwd
 db = database.connect('flat-file')
