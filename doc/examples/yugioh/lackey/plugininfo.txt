@@ -1,0 +1,87 @@
+<plugin>
+<pluginversion>2.0</pluginversion>
+
+<pluginname>Yu-Gi-Oh</pluginname>
+
+<playerstat><label>LP</label><initialvalue>8000</initialvalue></playerstat>	
+
+<deckzone>
+	<label>Deck</label>
+	<shuffle>yes</shuffle>
+	<gamezonetoloadto>Deck</gamezonetoloadto>
+</deckzone>
+
+<deckzone>
+	<label>Extra</label>
+	<gamezonetoloadto>Extra</gamezonetoloadto>
+</deckzone>
+
+<deckzone>
+	<label>Side Deck</label>
+	<gamezonetoloadto>Side Deck</gamezonetoloadto>
+</deckzone>
+
+<gamezone>
+	<label>Hand</label>
+	<visibletoowner>yes</visibletoowner>
+	<visibletoothers>no</visibletoothers>
+</gamezone>
+<gamezone>
+	<label>Deck</label>
+	<visibletoowner>no</visibletoowner>
+	<visibletoothers>no</visibletoothers>
+</gamezone>
+<gamezone>
+	<label>Graveyard</label>
+	<visibletoowner>yes</visibletoowner>
+	<visibletoothers>yes</visibletoothers>
+</gamezone>
+<gamezone>
+	<label>Banished</label>
+	<visibletoowner>yes</visibletoowner>
+	<visibletoothers>yes</visibletoothers>
+</gamezone>
+<gamezone>
+	<label>Extra</label>
+	<visibletoowner>yes</visibletoowner>
+	<visibletoothers>no</visibletoothers>
+</gamezone>
+<gamezone>
+	<label>Side Deck</label>
+	<visibletoowner>yes</visibletoowner>
+	<visibletoothers>no</visibletoothers>
+</gamezone>
+
+<phase><label>Draw</label></phase>
+<phase><label>Standby</label></phase>
+<phase><label>Main 1</label></phase>
+<phase><label>Battle:Start</label></phase>
+<phase><label>Battle:Battle</label></phase>
+<phase><label>Battle:Damage</label></phase>
+<phase><label>Battle:End</label></phase>
+<phase><label>Main 2</label></phase>
+<phase><label>End</label></phase>
+
+<generalfunction><label>Draw</label><kind>DRAWCARD</kind><includeasbutton>yes</includeasbutton></generalfunction>
+<generalfunction><label>Previous Phase</label><kind>PREVIOUSPHASE</kind><includeasbutton>no</includeasbutton></generalfunction>
+<generalfunction><label>Next Phase</label><kind>NEXTPHASE</kind><includeasbutton>no</includeasbutton></generalfunction>
+<generalfunction><label>Flip a Coin</label><kind>FLIPCOIN</kind><includeasbutton>no</includeasbutton></generalfunction>
+<generalfunction><label>Roll D6</label><kind>ROLLD6</kind><includeasbutton>yes</includeasbutton></generalfunction>
+<generalfunction><label>Next Turn</label><kind>NEXTTURN</kind><includeasbutton>no</includeasbutton></generalfunction>
+<generalfunction><label>Previous Turn</label><kind>PEREVIOUSTURN</kind><includeasbutton>no</includeasbutton></generalfunction>
+<generalfunction><label>Spawn Card</label><kind>SPAWNCARD</kind><includeasbutton>no</includeasbutton></generalfunction>
+
+<cardfunction><label>Switch (ATK)</label><kind>MAKERIGHT0DEGREES</kind><includeasbutton>yes</includeasbutton></cardfunction>
+<cardfunction><label>Switch (DEF)</label><kind>MAKERIGHT90DEGREES</kind><includeasbutton>yes</includeasbutton></cardfunction>
+<cardfunction><label>Spell Counter -1</label><kind>REMOVECOUNTERGREEN</kind><includeasbutton>yes</includeasbutton></cardfunction>
+<cardfunction><label>Spell Counter +1</label><kind>ADDCOUNTERGREEN</kind><includeasbutton>yes</includeasbutton><PositionX>.9</PositionX><PositionY>.04</PositionY></cardfunction>
+<cardfunction><label>Counter -1</label><kind>REMOVECOUNTERRED</kind><includeasbutton>yes</includeasbutton></cardfunction>
+<cardfunction><label>Counter +1</label><kind>ADDCOUNTERRED</kind><includeasbutton>yes</includeasbutton><PositionX>.7</PositionX><PositionY>.04</PositionY></cardfunction>
+<cardfunction><label>Flip Over</label><kind>TURNOVER</kind><includeasbutton>yes</includeasbutton></cardfunction>
+<cardfunction><label>Take Control</label><kind>CHANGEOWNER</kind><includeasbutton>yes</includeasbutton></cardfunction>
+<cardfunction><label>Edit Note</label><kind>EDITNOTE</kind><includeasbutton>yes</includeasbutton><PositionX>.4</PositionX><PositionY>.95</PositionY></cardfunction>
+<cardfunction><label>Clear</label><kind>CLEARCARD</kind><includeasbutton>yes</includeasbutton></cardfunction>
+
+<definition><kind>REUSECARDIMAGES</kind></definition>	
+<definition><kind>ISYOURFACEDOWNVISIBLE</kind></definition>
+</plugin>

@@ -1,0 +1,20 @@
+PoP? (Pass or Play?)
+Pass.
+Proceed.
+Thinking.
+Attack!
+In response...
+End of turn...
+Done.
+You done?
+gg
+/rolld6
+/flip1
+/draw5
+/clear
+Yes.
+No.
+Your turn.
+Hi.
+Wow!
+wtf
