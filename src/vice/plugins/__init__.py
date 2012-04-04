@@ -10,16 +10,16 @@ class Plugin(object):
     def plugins(cls):
         cls._plugins = []
 
-        def find_subclasses(cls):
+        def findSubclasses(cls):
             subclasses = cls.__subclasses__()
 
             if subclasses:
                 cls._plugins += subclasses
 
                 for subclass in subclasses:
-                    find_subclasses(subclass)
+                    findSubclasses(subclass)
 
-        find_subclasses(cls)
+        findSubclasses(cls)
 
         return Dict((plugin.NAME, plugin)
                     for plugin in cls._plugins if plugin.ACTIVE)

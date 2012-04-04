@@ -1,4 +1,4 @@
-from vice.plugins import Scheme, SchemeError
+from vice.plugins.schemes import Scheme, SchemeError
 
 def connect(scheme, location="."):
     schemes = Scheme.plugins()
@@ -11,5 +11,5 @@ def connect(scheme, location="."):
     else:
         return schemes[scheme](location)
 
-def from_plugin(plugin):
+def fromPlugin(plugin):
     return (plugin.NAME, plugin.ATTRIBUTES)

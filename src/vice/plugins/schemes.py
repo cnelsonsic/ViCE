@@ -19,20 +19,20 @@ class Scheme(Plugin):
 
     def __init__(self, path="."):
         path = os.path.join(path, self.FILENAME)
-        self.absolute_path = os.path.abspath(path)
+        self.absolutePath = os.path.abspath(path)
         self.tables = []
 
-    def create_table(name, fields):
+    def createTable(name, fields):
         raise NotImplementedError("All Scheme plugins must implement a "
-                                  "create_table method!")
+                                  "createTable method!")
 
-    def create_record(**fields):
+    def createRecord(**fields):
         raise NotImplementedError("All Scheme plugins must implement a "
-                                  "create_record method!")
+                                  "createRecord method!")
 
-    def update_record(**fields):
+    def updateRecord(**fields):
         raise NotImplementedError("All Scheme plugins must implement a "
-                                  "update_record method")
+                                  "updateRecord method")
 
 
 class FlatFileScheme(Scheme):
@@ -41,19 +41,19 @@ class FlatFileScheme(Scheme):
     def __init__(self, location="."):
         super(FlatFileScheme, self).__init__(location)
 
-        if not os.path.exists(self.absolute_path):
-            os.makedirs(self.absolute_path)
+        if not os.path.exists(self.absolutePath):
+            os.makedirs(self.absolutePath)
         else:
             #TODO: actually read contents of flat-file database
             pass
 
-    def create_table(self, name, *fields):
-        table_location = os.path.join(self.absolute_path, name)
-        if os.path.exists(table_location):
+    def createTable(self, name, *fields):
+        tableLocation = os.path.join(self.absolutePath, name)
+        if os.path.exists(tableLocation):
             return False
         else:
             try:
-                io.open(table_location, "w").write("")
+                io.open(tableLocation, "w").write("")
             except IOError:
                 print("table {0} already exists.")
                 return False
@@ -62,16 +62,16 @@ class FlatFileScheme(Scheme):
             setattr(self, name,
                 Dict(
                     fields = fields,
-                    location = table_location,
+                    location = tableLocation,
                     records = []
                 )
             )
 
             return True
 
-    def create_record(self, table, **fields):
+    def createRecord(self, table, **fields):
         try:
-            current_table = getattr(self, table)
+            currentTable = getattr(self, table)
         except AttributeError:
             return False
 
@@ -82,6 +82,6 @@ class FlatFileScheme(Scheme):
         except IOError:
             return False
 
-        current_table.records.append(fields)
+        currentTable.records.append(fields)
 
         return True
