@@ -9,7 +9,7 @@ class Item(Plugin):
     @classmethod
     def new(cls, name, attributes):
         return type(name, (cls,),
-                    dict(NAME = name.lower(), ATTRIBUTES=attributes))
+                    dict(NAME=name, ATTRIBUTES=tuple(set(attributes)))
 
     def __init__(self, *args, **kwargs):
         self.attributes = Dict()
@@ -26,7 +26,9 @@ class Item(Plugin):
 
 
 class Card(Item):
+    NAME = "Card"
     ATTRIBUTES = None
 
 class Die(Item):
+    NAME = "Die"
     ATTRIBUTES = "sides"

@@ -6,7 +6,7 @@ class Action(Plugin):
     @classmethod
     def new(cls, function):
         return type(function.__name__, (cls,),
-                    Dict(NAME=function.__name__.lower(), __call__=function))
+                    Dict(NAME=function.__name__, __call__=function))
 
     @classmethod
     def plugins(cls, *args, **kwargs):
