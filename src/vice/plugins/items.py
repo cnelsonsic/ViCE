@@ -24,7 +24,7 @@ class Item(Plugin):
                 try:
                     colDict[attr] = colList.pop(0)
                 except IndexError:
-                    colDict[attr] = UnicodeCol
+                    colDict[attr] = UnicodeCol()
 
 
         return type(cls.__name__, (SQLObject,), colDict)
