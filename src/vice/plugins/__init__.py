@@ -1,9 +1,7 @@
 import os
-#TODO: replace with pyside
-from PyQt4.QtCore import QObject
 from vice import Dict
 
-class Plugin(QObject):
+class Plugin(object):
 
     ACTIVE = True
 
