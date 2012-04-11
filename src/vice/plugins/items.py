@@ -29,11 +29,6 @@ class Item(Plugin):
 
         return type(cls.__name__, (SQLObject,), colDict)
 
-class Card(Item):
-    NAME = "card"
-    ATTRIBUTES = ["title"]
-
-
 class Die(Item):
     NAME = "die"
     ATTRIBUTES = ["sides"]
