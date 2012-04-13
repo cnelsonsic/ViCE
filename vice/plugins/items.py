@@ -30,5 +30,5 @@ class Item(Plugin):
         return type(cls.__name__, (SQLObject,), colDict)
 
 class Die(Item):
-    NAME = "die"
-    ATTRIBUTES = ["sides"]
+    NAME = 'die'
+    ATTRIBUTES = ['sides']

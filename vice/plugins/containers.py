@@ -11,6 +11,6 @@ class Hand(Container, list):
     # values is a dictionary of attribute: restriction pairs
     CONTAINS = Dict(
         Card = Dict(
-            types = ["foo", "bar"]
+            types = ['foo', 'bar']
         )
     )

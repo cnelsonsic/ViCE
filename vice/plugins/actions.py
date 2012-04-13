@@ -14,4 +14,4 @@ class Action(Plugin):
                     in super(Action, cls).plugins().items())
 
     def __call__(self):
-        raise NotImplementedError("All actions should implement __call__!")
+        raise NotImplementedError('All actions should implement __call__!')
