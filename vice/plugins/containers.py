@@ -1,16 +1,6 @@
 from vice import Dict
 from vice.plugins import Plugin
-from vice.plugins.items import Card
+from vice.plugins.items import Item
 
-class Container(Plugin, list):
-
+class Container(Plugin):
     CONTAINS = None
-
-class Hand(Container, list):
-    # keys are item types
-    # values is a dictionary of attribute: restriction pairs
-    CONTAINS = Dict(
-        Card = Dict(
-            types = ['foo', 'bar']
-        )
-    )
