@@ -14,19 +14,19 @@ class Item(Plugin):
                     dict(NAME=name, ATTRIBUTES=tuple(set(attributes))))
 
     @classmethod
-    def toSQLObject(cls, *colList, **colDict):
+    def toSQLObject(cls, *col_list, **col_dict):
         attrs = deepcopy(cls.__dict__['ATTRIBUTES'])
-        colList = list(colList)
+        col_list = list(col_list)
 
         for attr in attrs:
-            if not colDict.get(attr):
+            if not col_dict.get(attr):
                 try:
-                    colDict[attr] = colList.pop(0)
+                    col_dict[attr] = col_list.pop(0)
                 except IndexError:
-                    colDict[attr] = UnicodeCol()
+                    col_dict[attr] = UnicodeCol()
 
 
-        return type(cls.__name__, (SQLObject,), colDict)
+        return type(cls.__name__, (SQLObject,), col_dict)
 
 class Die(Item):
     NAME = 'die'
