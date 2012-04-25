@@ -3,7 +3,6 @@
 from copy import deepcopy
 from sqlobject import SQLObject
 from sqlobject.col import UnicodeCol
-from vice import Dict
 from vice.plugins import Plugin
 
 class Item(Plugin):
