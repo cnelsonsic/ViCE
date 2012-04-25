@@ -22,7 +22,7 @@ from vice import PropertyDict
 
 class Plugin(object):
 
-    ACTIVE = True
+    ENABLED = True
 
     @classmethod
     def plugins(cls):
@@ -40,9 +40,9 @@ class Plugin(object):
         find_subclasses(cls)
 
         return PropertyDict((plugin.NAME, plugin)
-                    for plugin in cls._plugins if plugin.ACTIVE)
+                    for plugin in cls._plugins if plugin.ENABLED)
 
 
-def deactivate(*classes):
+def disable(*classes):
     for cls in classes:
-        cls.ACTIVE = False
+        cls.ENABLED = False
