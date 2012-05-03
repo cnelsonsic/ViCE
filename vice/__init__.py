@@ -20,6 +20,12 @@
 class PropertyDict(dict):
     """ dict subclass that allows values to be retrieved by accessing their
         keys as properties.
+
+        PropertyDict provides a dictionary whose key:value pairs may be
+        assigned in the conventional brace notation (foo['bar'] = 'baz'),
+        or in the more elegant object:property notation (foo.bar = 'baz').
+        Beyond this subtle addition, they behave identically to regular
+        dictionaries.
     """
 
     __delattr__ = dict.__delitem__

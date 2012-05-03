@@ -21,14 +21,35 @@ import os
 from vice import PropertyDict
 
 class Plugin(object):
+    """ Base class for all new plugin types.
 
-    ENABLED = True
+        All new plugin types are created by subclassing Plugin. In
+        most cases, you will want to inherit from a Plugin subclass
+        rather than directly from Plugin iteself.
+
+        All new plugins must have a NAME class attribute, which is used mainly
+        for plugin discovery.
+    """
+
+    NAME = None
 
     @classmethod
     def plugins(cls):
+        """ Returns a plugin's subclasses as a vice.PropertyDict.
+
+            This PropertyDict's keys are plugin names and values are the plugin
+            classes that correspond with those names. A common idiom is to
+            assign the return value to a variable to ease the access to
+            available plugins::
+
+                foo_plugins = Foo.plugins()
+                baz = foo_plugins.Baz(x, y)
+        """
+
         cls._plugins = []
 
         def find_subclasses(cls):
+            """ Recursive function needed to find subclassses of subclasses. """
             subclasses = cls.__subclasses__()
 
             if subclasses:
@@ -40,9 +61,4 @@ class Plugin(object):
         find_subclasses(cls)
 
         return PropertyDict((plugin.NAME, plugin)
-                    for plugin in cls._plugins if plugin.ENABLED)
-
-
-def disable(*classes):
-    for cls in classes:
-        cls.ENABLED = False
+                    for plugin in cls._plugins)
