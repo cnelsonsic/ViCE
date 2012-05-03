@@ -1,4 +1,5 @@
 from unittest import TestCase, main
+
 from vice.plugins import Plugin, disable
 
 class TestPlugin(TestCase):

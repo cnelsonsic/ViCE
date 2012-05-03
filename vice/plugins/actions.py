@@ -57,7 +57,9 @@ class Action(Plugin):
             since this will be used as the class's __call__ special method
         """
 
-        return type(function.__name__.title(), (cls,),
+        class_name = function.__name__.title().replace('_', '')
+
+        return type(class_name, (cls,),
                     PropertyDict(NAME=function.__name__, __call__=function))
 
     @classmethod
@@ -73,4 +75,4 @@ class Action(Plugin):
         )
 
     def __call__(self):
-        raise NotImplementedError('All actions should implement __call__!')
+        raise NotImplementedError('All actions should implement a __call__ method!')
