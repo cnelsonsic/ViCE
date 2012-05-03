@@ -31,19 +31,19 @@ class Action(Plugin):
         NAME class attribute (by convention, lower-case), and finally overwrite
         the __call__ special method::
 
-        class Foo(Action):
-            NAME = 'foo'
+            class Foo(Action):
+                NAME = 'foo'
 
-            def __call__(cls):
-                return 'bar'
+                def __call__(cls):
+                    return 'bar'
 
         Alternatively, you can define a simple  function and pass that to the
         Action.new class method::
 
-        def foo(cls):
-            return 'bar'
+            def foo(cls):
+                return 'bar'
 
-        Action.foo(foo)
+            Action.foo(foo)
     """
 
     @classmethod

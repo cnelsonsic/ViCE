@@ -9,13 +9,12 @@ Welcome to ViCE's documentation!
 Contents:
 
 .. toctree::
-   :glob:
+    :glob:
 
-   foreward
-   user_guide/*
-   developer_guide/*
-   api_reference
-
+    foreward
+    user_guide/*
+    developer_guide/*
+    api_reference
 
 
 
