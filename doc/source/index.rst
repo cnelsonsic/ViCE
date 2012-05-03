@@ -12,7 +12,8 @@ Contents:
     :glob:
 
     foreward
-    user_guide/*
+    player_guide/*
+    designer_guide/*
     developer_guide/*
     api_reference
 

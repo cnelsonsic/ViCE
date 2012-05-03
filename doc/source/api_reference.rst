@@ -1,14 +1,14 @@
 API Reference
-=============
+#############
 
 vice
-----
+====
 
 .. autoclass:: vice.PropertyDict
 
 
 vice.plugins -- provides the core Plugin base class and plugin types
---------------------------------------------------------------------
+====================================================================
 
 .. automodule:: vice.plugins
     :members:
