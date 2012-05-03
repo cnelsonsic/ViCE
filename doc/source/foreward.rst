@@ -10,6 +10,3 @@ This documentation is organized into four parts:
     * Designer Guide
     * Developer Guide
     * API Reference
-
-Project goals
-=============
