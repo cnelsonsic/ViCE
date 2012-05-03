@@ -7,7 +7,7 @@ SPHINXBUILD   = sphinx-build2
 PAPER         =
 BUILDDIR      = ..
 
-GITHUBREPO    = http://aspidites.github.com/ViCE
+GITHUB_REPO    = http://aspidites.github.com/ViCE
 
 # Internal variables.
 PAPEROPT_a4     = -D latex_paper_size=a4
