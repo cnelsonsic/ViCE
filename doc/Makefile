@@ -5,7 +5,7 @@
 SPHINXOPTS    = -W
 SPHINXBUILD   = sphinx-build2
 PAPER         =
-BUILDDIR      = output
+BUILDDIR      = ..
 
 # Internal variables.
 PAPEROPT_a4     = -D latex_paper_size=a4
@@ -95,6 +95,13 @@ epub:
 	$(SPHINXBUILD) -b epub $(ALLSPHINXOPTS) $(BUILDDIR)/epub
 	@echo
 	@echo "Build finished. The epub file is in $(BUILDDIR)/epub."
+
+gh-pages:
+	git checkout gh-pages
+	git checkout master doc vice
+	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)
+	git add .
+	git commit -am "Updated Docmentation"
 
 latex:
 	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex
