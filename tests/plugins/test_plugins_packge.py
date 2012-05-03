@@ -1,6 +1,6 @@
 from unittest import TestCase, main
 
-from vice.plugins import Plugin, disable
+from vice.plugins import Plugin
 
 class TestPlugin(TestCase):
 
