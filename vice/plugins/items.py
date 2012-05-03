@@ -18,8 +18,10 @@
 # along with ViCE.  If not, see <http://www.gnu.org/licenses/>.
 
 from copy import deepcopy
+
 from sqlobject import SQLObject
 from sqlobject.col import UnicodeCol
+
 from vice.plugins import Plugin
 
 class Item(Plugin):

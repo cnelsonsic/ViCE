@@ -18,6 +18,7 @@
 # along with ViCE.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+
 from vice import PropertyDict
 
 class Plugin(object):
