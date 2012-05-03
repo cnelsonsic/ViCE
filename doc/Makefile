@@ -105,7 +105,7 @@ gh-pages:
 	git checkout master ../doc ../vice
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)
 	@echo "Build finished. The html pages are in the gh-pages branch's root."
-	git add .
+	git add ..
 	git commit -am "Docmentation published @ $(GITHUB_REPO)"
 	@echo "Switching back to master branch..."
 	git checkout master
