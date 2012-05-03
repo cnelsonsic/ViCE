@@ -1,4 +1,5 @@
 *.pyc
-doc/output
 __pycache__
+doc/output
+*.png
 MANIFEST
