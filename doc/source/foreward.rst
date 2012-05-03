@@ -1,7 +1,9 @@
 Foreward
 ########
 
-.. todo::
+This documentation is organized into four parts:
 
-    * brief description of ViCE
-    * explain structure of the manual
+    * Player Guide
+    * Designer Guide
+    * Developer Guide
+    * API Reference
