@@ -1,1 +1,1 @@
-Documentation is available at http://vice.rtfd.org.
+Documentation is available at http://aspidites.github.com/ViCE.
