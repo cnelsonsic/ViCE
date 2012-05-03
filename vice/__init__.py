@@ -18,7 +18,7 @@
 # along with ViCE.  If not, see <http://www.gnu.org/licenses/>.
 
 class PropertyDict(dict):
-    """ dict subclass that allows values to be retrieved by accessing their
+    """ A dict subclass that allows values to be retrieved by accessing their
         keys as properties.
 
         PropertyDict provides a dictionary whose key:value pairs may be
