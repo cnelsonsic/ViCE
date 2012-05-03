@@ -7,6 +7,8 @@ SPHINXBUILD   = sphinx-build2
 PAPER         =
 BUILDDIR      = ..
 
+GITHUBREPO    = http://aspidites.github.com/ViCE
+
 # Internal variables.
 PAPEROPT_a4     = -D latex_paper_size=a4
 PAPEROPT_letter = -D latex_paper_size=letter
@@ -97,11 +99,17 @@ epub:
 	@echo "Build finished. The epub file is in $(BUILDDIR)/epub."
 
 gh-pages:
+	@echo
+	@echo "Switching to gh-pages branch..."
 	git checkout gh-pages
-	git checkout master doc vice
+	git checkout master ../doc ../vice
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)
+	@echo "Build finished. The html pages are in the gh-pages branch's root."
 	git add .
-	git commit -am "Updated Docmentation"
+	git commit -am "Docmentation published @ $(GITHUB_REPO)"
+	@echo "Switching back to master branch..."
+	git checkout master
+
 
 latex:
 	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex
