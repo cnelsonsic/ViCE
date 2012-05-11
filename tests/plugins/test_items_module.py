@@ -10,21 +10,21 @@ class TestItem(unittest.TestCase):
 
         self.card = Card()
 
+    def test_new(self):
+        item = Item.new("Dice", ('sides',))
+
+        assert item.__name__ == 'Dice', item.__name__
+        assert item.NAME == 'Dice', item.NAME
+        assert 'Dice' in Item.plugins(), Item.plugins().keys()
+
+
     def test_attributes_created(self):
-        try:
-            self.card.name
-        except AttributeError:
-            self.fail("Attribute 'name' wasn't created on instantiation")
+        assert hasattr(self.card, 'name'), dir(self.card)
 
     def test_new_atttribute_creation_impossible(self):
         self.card.cost = 4
 
-        try:
-            self.card.cost
-        except AttributeError:
-            pass
-        else:
-            self.fail("Attribute 'cost' was created after instantiation")
+        assert not hasattr(self.card, 'cost')
 
 
 if __name__ == '__main__':
