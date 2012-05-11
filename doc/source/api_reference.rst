@@ -7,8 +7,8 @@ vice
 .. autoclass:: vice.PropertyDict
 
 
-vice.plugins -- A framework for imlementing plugins
-===================================================
+vice.plugins -- Provides infrastructure for imlementing plugins
+===============================================================
 
 .. automodule:: vice.plugins
     :members:
