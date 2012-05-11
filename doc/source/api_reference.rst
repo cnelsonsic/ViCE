@@ -19,8 +19,8 @@ vice.plugins -- provides the core Plugin base class and plugin types
 .. .. automodule:: vice.plugins.containers
 ..     :members:
 
-.. .. automodule:: vice.plugins.items
-..     :members:
+.. automodule:: vice.plugins.items
+    :members:
 
 .. vice.plugins.rules -- provides complete rule implementations
 .. ------------------------------------------------------------
