@@ -1,5 +1,4 @@
 from unittest import TestCase, main
-
 from vice.plugins.actions import Action
 
 class testAction(TestCase):

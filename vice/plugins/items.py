@@ -27,6 +27,10 @@ from vice.plugins import Plugin
 class Item(Plugin):
     ATTRIBUTES = None
 
+    def __init__(self):
+        for attribute in self.ATTRIBUTES:
+            self.__dict__[attribute] = None
+
     @classmethod
     def new(cls, name, attributes):
         return type(name, (cls,),
@@ -47,6 +51,6 @@ class Item(Plugin):
 
         return type(cls.__name__, (SQLObject,), col_dict)
 
-class Die(Item):
-    NAME = 'die'
-    ATTRIBUTES = ['sides']
+    def __setattr__(self, name, value):
+        if self.__dict__.get(name):
+            self.__dict__[name] = value
