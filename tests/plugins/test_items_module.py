@@ -1,30 +1,31 @@
-from unittest import main, TestCase
+import unittest
 from vice.plugins.items import Item
 
-class FooItem(Item):
-    ATTRIBUTES = 'bar', 'biz', 'baz'
 
-class TestItem(TestCase):
+class TestItem(unittest.TestCase):
 
     def setUp(self):
-        self.foo = FooItem()
+        class Card(Item):
+            ATTRIBUTES = 'name', 'atk', 'def'
+
+        self.card = Card()
 
     def test_attributes_created(self):
         try:
-            self.foo.bar
+            self.card.name
         except AttributeError:
-            self.fail("Attribute 'bar' wasn't created on instantiation")
+            self.fail("Attribute 'name' wasn't created on instantiation")
 
     def test_new_atttribute_creation_impossible(self):
-        self.foo.buz = None
+        self.card.cost = 4
 
         try:
-            self.foo.buz
+            self.card.cost
         except AttributeError:
             pass
         else:
-            self.fail("Attribute 'buz' was created after instantiation")
+            self.fail("Attribute 'cost' was created after instantiation")
 
 
 if __name__ == '__main__':
-    main()
+    unittest.main()

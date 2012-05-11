@@ -1,33 +1,41 @@
-from unittest import TestCase, main
+import random
+import unittest
 from vice.plugins.actions import Action
 
-class testAction(TestCase):
+
+class testAction(unittest.TestCase):
 
     def setUp(self):
-        class FooAction(Action):
-            NAME = 'foo'
+        class Move(Action):
+            NAME = 'move'
 
-            def __call__(cls):
-                return 'bar'
+            def __call__(cls, index, source, destination):
+                destination.append(source.pop(index))
 
-        self.FooAction = FooAction
+        self.Move = Move
+
+        random.seed(1)
+        self.source = [1, 2, 3]
+        self.destination = [7, 8, 9]
 
     def test_plugins(self):
         actions = Action.plugins()
 
-        assert isinstance(actions.foo, self.FooAction)
-        assert actions.foo() == 'bar'
+        assert isinstance(actions.move, self.Move), type(actions.move)
+        actions.move(1, self.source, self.destination)
+        assert self.source == [1, 3], self.source
+        assert self.destination == [7, 8, 9, 2], self.destination
 
     def test_new(self):
-        def foo_action2(cls):
-            return 'bar'
+        def shuffle(cls, item):
+            random.shuffle(item)
 
-        new_action = Action.new(foo_action2)
+        action = Action.new(shuffle)
 
-        assert new_action.__name__ == 'FooAction2'
-        assert new_action.NAME == 'foo_action2'
-        assert 'foo_action2' in Action.plugins()
+        assert action.__name__ == 'Shuffle', action.__name__
+        assert action.NAME == 'shuffle', action.NAME
+        assert 'shuffle' in Action.plugins(), Action.plugins().keys()
 
 
 if __name__ == '__main__':
-    main()
+    unittest.main()
