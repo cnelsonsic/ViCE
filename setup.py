@@ -20,6 +20,7 @@ class UnitTest(Command):
 
 setup(
     name='ViCE',
+    version='0.0.1',
     packages=['vice', 'vice.plugins', 'vice.plugins.rules'],
     cmdclass = {'test': UnitTest}
 )
