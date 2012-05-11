@@ -44,3 +44,4 @@ plenty of options.
 * Github: http://github.com/aspidites/ViCE
 * IRC: irc://freenode.net/%23wtactics
 * Forums: http://wtactics.org/forums
+* email: mailto:aspidites@wtactics.org
