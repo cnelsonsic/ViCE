@@ -42,6 +42,6 @@ If you have any questions about ViCE, or would like to contribute, there are
 plenty of options.
 
 * Github: http://github.com/aspidites/ViCE
-* IRC: irc://freenode.net/%23wtactics
+* IRC: `#wtactics on freenode.net <irc://freenode.net/%23wtactics>`_
 * Forums: http://wtactics.org/forums
 * email: mailto:aspidites@wtactics.org
