@@ -18,13 +18,36 @@
 # along with ViCE.  If not, see <http://www.gnu.org/licenses/>.
 
 from copy import deepcopy
-
-from sqlobject import SQLObject
-from sqlobject.col import UnicodeCol
-
 from vice.plugins import Plugin
 
 class Item(Plugin):
+    """ Plugin that represents a games tangible objects.
+
+        An item is any object within a card game that can be interacted
+        with. The most obvious example of this would be the game's cards,
+        but things such as tokens and dice would be implemented as items
+        as well.
+
+        To create a new item, define a new Item subclass, override the NAME
+        attribute (by convention, uppercase for items), and finally override
+        ATTRIBUTES with a tuple of strings::
+
+            class Dice(Item):
+                NAME = 'Dice'
+                ATTRIBUTES = 'sides',
+
+        Alternatively, you may pass an appropriate name and attributes to
+        Item.new::
+
+            Item.new("Dice", ('sides',))
+
+        On instantiation, the values of ATTRIBUTES are converted to properties
+        of the plugin instance. These properties are semi-immutable. That is,
+        on instantiating of an item plugin, you may change the value of existing
+        attributes, but you may not create new ones. If you whish to do so, you
+        should add the new attribute to ATTRIBUTES when defining the class.
+    """
+
     ATTRIBUTES = None
 
     def __init__(self):
@@ -33,23 +56,9 @@ class Item(Plugin):
 
     @classmethod
     def new(cls, name, attributes):
+        """ Convenience method used to help simplify the creation of new items."""
         return type(name, (cls,),
                     dict(NAME=name, ATTRIBUTES=tuple(set(attributes))))
-
-    @classmethod
-    def toSQLObject(cls, *col_list, **col_dict):
-        attrs = deepcopy(cls.__dict__['ATTRIBUTES'])
-        col_list = list(col_list)
-
-        for attr in attrs:
-            if not col_dict.get(attr):
-                try:
-                    col_dict[attr] = col_list.pop(0)
-                except IndexError:
-                    col_dict[attr] = UnicodeCol()
-
-
-        return type(cls.__name__, (SQLObject,), col_dict)
 
     def __setattr__(self, name, value):
         if self.__dict__.get(name):

@@ -21,15 +21,14 @@ from vice import PropertyDict
 from vice.plugins import Plugin
 
 class Action(Plugin):
-    """ Callable plugin intended to provide general operations for Item plugins.
+    """ Callable plugin that provides general operations for Item plugins.
 
         An action is a class which acts like a generic function that operates
         on Item plugins. This approach is more flexible, extensible, and less
         repetitious than implementing methods directly within a subclass.
 
-        To create a new action, simply define an Action subclass, ovewrite the
-        NAME class attribute (by convention, lower-case), and finally overwrite
-        the __call__ special method::
+        To create a new action, define an Action subclass, override NAME (by
+        convention, lowercase for actions), and finally override __call__::
 
             class Foo(Action):
                 NAME = 'foo'
@@ -37,8 +36,8 @@ class Action(Plugin):
                 def __call__(cls):
                     return 'bar'
 
-        Alternatively, you can define a simple  function and pass that to the
-        Action.new class method::
+        Alternatively, you may define a simple function and pass that to
+        Action.new::
 
             def foo(cls):
                 return 'bar'
@@ -48,7 +47,7 @@ class Action(Plugin):
 
     @classmethod
     def new(cls, function):
-        """ Convenience method used to help simply creation of new Actions.
+        """ Convenience method used to help simply creation of new actions.
 
             The function's name is converted to title case and used as the name
             of the class, and it's original form is used as the Plugin's NAME.

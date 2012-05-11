@@ -1,8 +1,7 @@
-from unittest import TestCase, main
-
+import unittest
 from vice.plugins import Plugin
 
-class TestPlugin(TestCase):
+class TestPlugin(unittest.TestCase):
 
     def setUp(self):
         class FooPlugin(Plugin):
@@ -16,8 +15,8 @@ class TestPlugin(TestCase):
 
         plugins = sorted(Plugin.plugins().keys())
 
-        assert plugins == ['bar', 'foo']
+        assert plugins == ['bar', 'foo'], plugins
 
 
 if __name__ == '__main__':
-    main()
+    unittest.main()
