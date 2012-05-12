@@ -42,7 +42,7 @@ class Action(Plugin):
             def foo(cls):
                 return 'bar'
 
-            Action.foo(foo)
+            Action.new(foo)
     """
 
     @classmethod
