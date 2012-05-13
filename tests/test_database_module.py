@@ -17,7 +17,7 @@ class TestDatabase(unittest.TestCase):
         column_names = [column.name for column in self.db.cards.columns]
 
         assert 'cards' in self.db.tables, self.db.tables
-        assert sorted(column_names) == ['atk', 'def', 'id', 'name']
+        assert sorted(column_names) == ['atk', 'def', 'id', 'name'], sorted(column_names)
 
     def test_table_insertion(self):
         self.test_table_creation()

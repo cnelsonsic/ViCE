@@ -15,7 +15,7 @@ class TestPlugin(unittest.TestCase):
 
         plugins = Plugin.plugins().keys()
 
-        assert 'foo' in plugins and 'bar' in plugins
+        assert 'foo' in plugins and 'bar' in plugins, plugins
 
 
 if __name__ == '__main__':
