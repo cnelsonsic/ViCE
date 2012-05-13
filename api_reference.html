@@ -166,7 +166,8 @@ Item.new:</p>
 </div>
 <p>As another alternative, you may pass an appropriate name, valid
 database table and an optional exclude sequence to Item.fromTable:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">Card</span> <span class="o">=</span> <span class="n">Item</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s">&#39;Card&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">cards</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">])</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">db</span> <span class="o">=</span> <span class="n">vice</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">Database</span><span class="p">(</span><span class="s">&#39;sqlite:///wtactics.sqlite&#39;</span><span class="p">)</span>
+<span class="n">Card</span> <span class="o">=</span> <span class="n">Item</span><span class="o">.</span><span class="n">fromTable</span><span class="p">(</span><span class="s">&#39;Card&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">cards</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>On instantiation, the values of ATTRIBUTES are converted to properties
