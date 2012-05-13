@@ -26,7 +26,7 @@ class testAction(unittest.TestCase):
         assert self.source == [1, 3], self.source
         assert self.destination == [7, 8, 9, 2], self.destination
 
-    def test_new(self):
+    def test_creation_from_new(self):
         def shuffle(cls, item):
             random.shuffle(item)
 

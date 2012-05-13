@@ -60,6 +60,15 @@ class Item(Plugin):
         return type(name, (cls,),
                     dict(NAME=name, ATTRIBUTES=tuple(set(attributes))))
 
+    @classmethod
+    def fromTable(cls, name, table, exclude=None):
+        attributes = [
+            column.name for column in table.columns
+            if column.name not in exclude
+        ]
+
+        return cls.new(name, attributes)
+
     def __setattr__(self, name, value):
         if self.__dict__.get(name):
             self.__dict__[name] = value
