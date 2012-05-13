@@ -30,7 +30,7 @@ class Item(Plugin):
 
         To create a new item, define a new Item subclass, override the NAME
         attribute (by convention, uppercase for items), and finally override
-        ATTRIBUTES with a tuple of strings::
+        ATTRIBUTES with a sequence of strings::
 
             class Dice(Item):
                 NAME = 'Dice'

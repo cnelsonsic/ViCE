@@ -17,6 +17,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with ViCE.  If not, see <http://www.gnu.org/licenses/>.
 
+import sqlalchemy
+
 class PropertyDict(dict):
     """ A dict subclass that allows values to be retrieved by accessing their
         keys as properties.
@@ -33,3 +35,47 @@ class PropertyDict(dict):
 
     def __getattr__(self, name):
         return self.get(name, None)
+
+class Database(object):
+    def __init__(self, URI=None, verbose=False):
+        self.metadata = sqlalchemy.MetaData()
+        if URI:
+            self.engine = self.connect(URI, verbose)
+        else:
+            self.engine = None
+
+    @property
+    def tables(self):
+        return self.metadata.tables.keys()
+
+    def connect(self, URI, verbose=False):
+        return sqlalchemy.create_engine(URI, echo=verbose)
+
+    def create_table(self, name, column_names, column_attrs):
+        column_names = list(column_names)
+        columns = []
+
+        for attr in column_attrs.keys():
+            columns.append(sqlalchemy.Column(attr, **column_attrs[attr]))
+
+        for column in column_names:
+            if column not in column_attrs.keys():
+                columns.append(sqlalchemy.Column(name, sqlalchemy.String))
+
+        self.setattr(self, name, sqlalchemy.Table(name, self.metadata, *columns))
+        self.metadata.create_all(self.engine)
+
+    def insert(name, **kwargs):
+        insert = getattr(self, name).insert().values(**kwargs)
+        connection = engine.connect()
+        return connection.execute(insert)
+
+    def string(self, **kwargs):
+        kwargs.update({'type_': sqlalchemy.String})
+
+        return kwargs
+
+    def integer(self, **kwargs):
+        kwargs.update({'type_': sqlalchemy.Integer})
+
+        return kwargs
