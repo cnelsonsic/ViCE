@@ -13,9 +13,9 @@ class TestPlugin(unittest.TestCase):
         class BarPlugin(self.FooPlugin):
             NAME = 'bar'
 
-        plugins = sorted(Plugin.plugins().keys())
+        plugins = Plugin.plugins().keys()
 
-        assert plugins == ['bar', 'foo'], plugins
+        assert 'foo' in plugins and 'bar' in plugins
 
 
 if __name__ == '__main__':
