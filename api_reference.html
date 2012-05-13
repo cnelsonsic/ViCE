@@ -166,8 +166,9 @@ Item.new:</p>
 </div>
 <p>As another alternative, you may pass an appropriate name, valid
 database table and an optional exclude sequence to Item.fromTable:</p>
-<blockquote>
-<div>Card = Item.new(&#8216;Card&#8217;, db.cards, exclude=[&#8216;id&#8217;])</div></blockquote>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Card</span> <span class="o">=</span> <span class="n">Item</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s">&#39;Card&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">cards</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
 <p>On instantiation, the values of ATTRIBUTES are converted to properties
 of the plugin instance. These properties are semi-immutable. That is,
 on instantiating of an item plugin, you may change the value of existing
