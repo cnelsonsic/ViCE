@@ -2,12 +2,13 @@ import os
 import unittest
 from vice.database import integer, string, Database
 
-class TestDatabase(unittest.TestCase):
+class TestSQLiteDatabase(unittest.TestCase):
     def setUp(self):
-        self.db = Database('sqlite:///:memory:')
+        self.db = Database('sqlite:///wtactics.sqlite')
+        self.test_table_creation()
 
     def test_table_creation(self):
-        self.db.create_table('cards', {
+        result = self.db.create_table('cards', {
             'id': integer(primary_key=True),
             'name': string(),
             'def': integer(),
@@ -20,12 +21,17 @@ class TestDatabase(unittest.TestCase):
         assert sorted(column_names) == ['atk', 'def', 'id', 'name'], sorted(column_names)
 
     def test_table_insertion(self):
-        self.test_table_creation()
         self.db.insert('cards',
             name = 'Imp',
             atk = 4,
             def_ = 4
         )
+
+    def test_simple_table_selection(self):
+        self.test_table_insertion()
+        results = self.db.select('cards')
+
+        assert results, results
 
 
 if __name__ == '__main__':
