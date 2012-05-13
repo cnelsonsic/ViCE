@@ -17,7 +17,6 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with ViCE.  If not, see <http://www.gnu.org/licenses/>.
 
-from copy import deepcopy
 from vice.plugins import Plugin
 
 class Item(Plugin):
@@ -30,16 +29,21 @@ class Item(Plugin):
 
         To create a new item, define a new Item subclass, override the NAME
         attribute (by convention, uppercase for items), and finally override
-        ATTRIBUTES with a tuple of strings::
+        ATTRIBUTES with a sequence of strings::
 
-            class Dice(Item):
-                NAME = 'Dice'
-                ATTRIBUTES = 'sides',
+            class Card(Item):
+                NAME = 'Card'
+                ATTRIBUTES = 'name', 'atk', 'def'
 
         Alternatively, you may pass an appropriate name and attributes to
         Item.new::
 
-            Item.new("Dice", ('sides',))
+            Dice = Item.new('Dice', ('name', 'atk', 'def'))
+
+        As another alternative, you may pass an appropriate name, valid
+        database table and an optional exclude sequence to Item.fromTable:
+
+            Card = Item.new('Card', db.cards, exclude=['id'])
 
         On instantiation, the values of ATTRIBUTES are converted to properties
         of the plugin instance. These properties are semi-immutable. That is,
@@ -59,6 +63,16 @@ class Item(Plugin):
         """ Convenience method used to help simplify the creation of new items."""
         return type(name, (cls,),
                     dict(NAME=name, ATTRIBUTES=tuple(set(attributes))))
+
+    @classmethod
+    def fromTable(cls, name, table, exclude=None):
+        """ Convenience method used to create new items from database tables """
+        attributes = [
+            column.name for column in table.columns
+            if column.name not in exclude
+        ]
+
+        return cls.new(name, attributes)
 
     def __setattr__(self, name, value):
         if self.__dict__.get(name):

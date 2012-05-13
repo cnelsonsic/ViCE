@@ -106,7 +106,9 @@ gh-pages:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)
 	@echo "Build finished. The html pages are in the gh-pages branch's root."
 	git add ..
-	git commit -am "Docmentation published @ $(GITHUB_REPO)"
+	git commit -am "Updated documentation."
+	git push origin gh-pages
+	@echo "Documentation published: https://aspidites.github.com/ViCE"
 	@echo "Switching back to master branch..."
 	git checkout master
 

@@ -153,22 +153,32 @@ but things such as tokens and dice would be implemented as items
 as well.</p>
 <p>To create a new item, define a new Item subclass, override the NAME
 attribute (by convention, uppercase for items), and finally override
-ATTRIBUTES with a tuple of strings:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Dice</span><span class="p">(</span><span class="n">Item</span><span class="p">):</span>
-    <span class="n">NAME</span> <span class="o">=</span> <span class="s">&#39;Dice&#39;</span>
-    <span class="n">ATTRIBUTES</span> <span class="o">=</span> <span class="s">&#39;sides&#39;</span><span class="p">,</span>
+ATTRIBUTES with a sequence of strings:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Card</span><span class="p">(</span><span class="n">Item</span><span class="p">):</span>
+    <span class="n">NAME</span> <span class="o">=</span> <span class="s">&#39;Card&#39;</span>
+    <span class="n">ATTRIBUTES</span> <span class="o">=</span> <span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;atk&#39;</span><span class="p">,</span> <span class="s">&#39;def&#39;</span>
 </pre></div>
 </div>
 <p>Alternatively, you may pass an appropriate name and attributes to
 Item.new:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">Item</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s">&quot;Dice&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s">&#39;sides&#39;</span><span class="p">,))</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Dice</span> <span class="o">=</span> <span class="n">Item</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s">&#39;Dice&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;atk&#39;</span><span class="p">,</span> <span class="s">&#39;def&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
+<p>As another alternative, you may pass an appropriate name, valid
+database table and an optional exclude sequence to Item.fromTable:</p>
+<blockquote>
+<div>Card = Item.new(&#8216;Card&#8217;, db.cards, exclude=[&#8216;id&#8217;])</div></blockquote>
 <p>On instantiation, the values of ATTRIBUTES are converted to properties
 of the plugin instance. These properties are semi-immutable. That is,
 on instantiating of an item plugin, you may change the value of existing
 attributes, but you may not create new ones. If you whish to do so, you
 should add the new attribute to ATTRIBUTES when defining the class.</p>
+<dl class="classmethod">
+<dt id="vice.plugins.items.Item.fromTable">
+<em class="property">classmethod </em><tt class="descname">fromTable</tt><big>(</big><em>name</em>, <em>table</em>, <em>exclude=None</em><big>)</big><a class="headerlink" href="#vice.plugins.items.Item.fromTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenience method used to create new items from database tables</p>
+</dd></dl>
+
 <dl class="classmethod">
 <dt id="vice.plugins.items.Item.new">
 <em class="property">classmethod </em><tt class="descname">new</tt><big>(</big><em>name</em>, <em>attributes</em><big>)</big><a class="reference internal" href="_modules/vice/plugins/items.html#Item.new"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.plugins.items.Item.new" title="Permalink to this definition">¶</a></dt>
