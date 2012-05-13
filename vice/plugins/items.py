@@ -60,13 +60,13 @@ class Item(Plugin):
 
     @classmethod
     def new(cls, name, attributes):
-        """ Convenience method used to help simplify the creation of new items."""
+        """ Convenience method used to help simplify the creation of new items. """
         return type(name, (cls,),
                     dict(NAME=name, ATTRIBUTES=tuple(set(attributes))))
 
     @classmethod
     def fromTable(cls, name, table, exclude=None):
-        """ Convenience method used to create new items from database tables """
+        """ Convenience method used to create new items from database tables. """
         attributes = [
             column.name for column in table.columns
             if column.name not in exclude
