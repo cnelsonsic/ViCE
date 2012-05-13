@@ -43,7 +43,8 @@ class Item(Plugin):
         As another alternative, you may pass an appropriate name, valid
         database table and an optional exclude sequence to Item.fromTable::
 
-            Card = Item.new('Card', db.cards, exclude=['id'])
+            db = vice.database.Database('sqlite:///wtactics.sqlite')
+            Card = Item.fromTable('Card', db.cards, exclude=['id'])
 
         On instantiation, the values of ATTRIBUTES are converted to properties
         of the plugin instance. These properties are semi-immutable. That is,
