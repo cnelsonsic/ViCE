@@ -51,31 +51,36 @@ class Database(object):
     def connect(self, URI, verbose=False):
         return sqlalchemy.create_engine(URI, echo=verbose)
 
-    def create_table(self, name, column_names, column_attrs):
-        column_names = list(column_names)
+    def create_table(self, table_name, column_names, column_attrs):
+        column_names = [column.rstrip('_') for column in column_names]
         columns = []
-
-        for attr in column_attrs.keys():
-            columns.append(sqlalchemy.Column(attr, **column_attrs[attr]))
 
         for column in column_names:
             if column not in column_attrs.keys():
-                columns.append(sqlalchemy.Column(name, sqlalchemy.String))
+                columns.append(sqlalchemy.Column(column, sqlalchemy.String))
 
-        self.setattr(self, name, sqlalchemy.Table(name, self.metadata, *columns))
+        for attr in column_attrs.keys():
+            columns.append(sqlalchemy.Column(attr.rstrip('_'),
+                **column_attrs[attr]
+            ))
+
+        setattr(self, table_name,
+            sqlalchemy.Table(table_name, self.metadata, *columns
+        ))
         self.metadata.create_all(self.engine)
 
-    def insert(name, **kwargs):
-        insert = getattr(self, name).insert().values(**kwargs)
-        connection = engine.connect()
+    def insert(self, table_name, **kwargs):
+        values = {key.rstrip('_'): value for key, value in kwargs.items()}
+        insert = getattr(self, table_name).insert().values(**values)
+        connection = self.engine.connect()
         return connection.execute(insert)
 
-    def string(self, **kwargs):
+    def string(**kwargs):
         kwargs.update({'type_': sqlalchemy.String})
 
         return kwargs
 
-    def integer(self, **kwargs):
+    def integer(**kwargs):
         kwargs.update({'type_': sqlalchemy.Integer})
 
         return kwargs

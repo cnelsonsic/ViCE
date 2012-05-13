@@ -17,20 +17,23 @@ class TestDatabase(unittest.TestCase):
     def setUp(self):
         self.db = Database('sqlite:///wtactics.sqlite')
 
-    def tearDown(self):
-        if os.path.exists('wtactics.sqlite'):
-            os.remove('wtactics.sqlite')
-
     def test_table_creation_from_item(self):
-        Card = Item.new('Card', ('name', 'atk', 'def', 'set'))
-
+        Card = Item.new('Card', ('name', 'atk', 'def_'))
         self.db.create_table('cards', Card.ATTRIBUTES, {
+            'id': self.db.integer(primary_key=True),
             'atk': self.db.integer(),
             'def': self.db.integer(),
-            'set': self.db.string(primary_key=True),
         })
 
         assert 'cards' in self.db.tables, self.db.tables
+
+    def test_table_insertion(self):
+        self.test_table_creation_from_item()
+        self.db.insert('cards',
+            name = 'Imp',
+            atk = 4,
+            def_ = 4
+        )
 
 
 if __name__ == '__main__':
