@@ -4,7 +4,7 @@ from vice.database import integer, string, Database
 
 class TestDatabase(unittest.TestCase):
     def setUp(self):
-        self.db = Database('sqlite:///wtactics.sqlite')
+        self.db = Database('sqlite:///:memory:')
 
     def test_table_creation(self):
         self.db.create_table('cards', {

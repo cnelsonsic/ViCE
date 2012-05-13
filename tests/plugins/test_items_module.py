@@ -19,7 +19,7 @@ class TestItem(unittest.TestCase):
         assert 'Dice' in Item.plugins(), Item.plugins().keys()
 
     def test_creation_from_db(self):
-        db = Database('sqlite:///wtactics.sqlite')
+        db = Database('sqlite:///:memory:')
         db.create_table('cards', {
             'id': integer(primary_key=True),
             'name': string(),

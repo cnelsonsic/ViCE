@@ -33,7 +33,7 @@ class Database(object):
     def __init__(self, URI=None, verbose=False):
         self.metadata = sqlalchemy.MetaData()
         if URI:
-            self.engine = self.connect(URI, verbose)
+            self.connect(URI, verbose)
         else:
             self.engine = None
 
@@ -42,9 +42,16 @@ class Database(object):
         return self.metadata.tables.keys()
 
     def connect(self, URI, verbose=False):
-        return sqlalchemy.create_engine(URI, echo=verbose)
+        self.engine = sqlalchemy.create_engine(URI, echo=verbose)
+        self.metadata.reflect(bind=self.engine)
+
+        for table in self.tables:
+            setattr(self, table, self.metadata.tables[table])
 
     def create_table(self, table_name, column_attrs):
+        if table_name in self.tables:
+            return
+
         columns = []
 
         for attr in column_attrs.keys():
