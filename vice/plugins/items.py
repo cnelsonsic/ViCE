@@ -41,7 +41,7 @@ class Item(Plugin):
             Dice = Item.new('Dice', ('name', 'atk', 'def'))
 
         As another alternative, you may pass an appropriate name, valid
-        database table and an optional exclude sequence to Item.fromTable:
+        database table and an optional exclude sequence to Item.fromTable::
 
             Card = Item.new('Card', db.cards, exclude=['id'])
 
