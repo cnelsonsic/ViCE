@@ -18,7 +18,7 @@ In it's current state, ViCE has few dependencies:
 
 In the future, the following depenencies will also be required:
     * `PySide >= 1.1.1 <http://www.pyside.org>`_
-    * `gevent >= 1.0b2 <http://www.gevent.org>`_
+    * `gevent = 0.13.7 <http://www.gevent.org>`_
 
 Download
 ========
