@@ -48,7 +48,7 @@ class Database(object):
         for table in self.tables:
             setattr(self, table, self.metadata.tables[table])
 
-    def create_table(self, table_name, column_attrs):
+    def create_table(self, table_name, **column_attrs):
         if table_name in self.tables:
             return
 
@@ -56,7 +56,7 @@ class Database(object):
 
         for attr in column_attrs.keys():
             columns.append(sqlalchemy.Column(attr.rstrip('_'),
-                **column_attrs[attr.rstrip('_')]
+                **column_attrs[attr]
             ))
 
         setattr(self, table_name,

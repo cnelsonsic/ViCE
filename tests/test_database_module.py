@@ -8,12 +8,12 @@ class TestSQLiteDatabase(unittest.TestCase):
         self.test_table_creation()
 
     def test_table_creation(self):
-        result = self.db.create_table('cards', {
-            'id': integer(primary_key=True),
-            'name': string(),
-            'def': integer(),
-            'atk': integer(),
-        })
+        result = self.db.create_table('cards',
+            id = integer(primary_key=True),
+            name = string(),
+            def_ = integer(),
+            atk = integer()
+        )
 
         column_names = [column.name for column in self.db.cards.columns]
 
