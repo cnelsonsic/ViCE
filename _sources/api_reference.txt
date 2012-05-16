@@ -1,5 +1,5 @@
-API Reference
-#############
+Part IV. API Reference
+######################
 
 vice
 ====
