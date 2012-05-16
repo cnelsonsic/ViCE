@@ -1,7 +1,7 @@
 Preface
 ########
-:abbr:`Virtual Cardgame Engine (ViCE)` is an open source, portable, modular 
-framework for playing and creating :abbr:`Trading Card Games (TCGs)`. This 
+:abbr:`ViCE (Virtual Cardgame Engine)` is an open source, portable, modular 
+framework for playing and creating :abbr:`TCGs (Trading Card Games)`. This 
 manual outlines ViCE's design principles, describes its various features from 
 three perspectives (which we roles), and even includes reference documentation 
 for the public API.
