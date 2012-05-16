@@ -11,7 +11,7 @@ Contents:
 .. toctree::
     :glob:
 
-    foreward
+    preface
     player_guide/*
     designer_guide/*
     developer_guide/*
