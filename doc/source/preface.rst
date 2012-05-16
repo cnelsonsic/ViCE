@@ -10,8 +10,8 @@ three user perspectives, and also includes reference material for ViCE's API.
     Collectible Card Games, in the interest of simplicity, this manual refers
     to them collectively (no pun intended) as TCGs. 
 
-The Roles
-=========
+User Roles
+==========
 ViCE is a framework suitable for use by users of varying interests and 
 technical backgrounds. In an effort to help facilitate learning, three key
 user roles have been identified, as follows:
@@ -41,7 +41,7 @@ How This Manual is Organized
 This book is organized into four parts, the first three of which being guides
 modelled after the roles identified above:
 
-    * player_guide/intro.rst
-    * designer_guide/intro.rst
-    * developer_guide/intro.rst
-    * api_reference.rst 
+    * :doc: `player_guide/intro`
+    * :doc: `designer_guide/intro`
+    * :doc: `developer_guide/intro`
+    * :doc: `api_reference`
