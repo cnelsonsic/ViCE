@@ -41,8 +41,7 @@ How This Manual is Organized
 This book is organized into four parts, the first three of which being guides
 modelled after the roles identified above:
 
-.. toctree::
-    Part I: player_guide/intro.rst
-    Part II: designer_guide/intro.rst
-    Part III: developer_guide/intro.rst
-    Part IV: api_reference.rst 
+    * player_guide/intro.rst
+    * designer_guide/intro.rst
+    * developer_guide/intro.rst
+    * api_reference.rst 
