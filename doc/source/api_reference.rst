@@ -1,15 +1,12 @@
 Part IV. API Reference
 ######################
-
 vice
 ====
-
 .. autoclass:: vice.PropertyDict
 
 
 vice.plugins -- Provides infrastructure for imlementing plugins
 ===============================================================
-
 .. automodule:: vice.plugins
     :members:
 

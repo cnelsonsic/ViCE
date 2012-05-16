@@ -56,15 +56,45 @@
             
   <div class="section" id="preface">
 <h1>Preface<a class="headerlink" href="#preface" title="Permalink to this headline">¶</a></h1>
-<p>ViCE is an open source, modular framework for playing and creating Trading
-Card Games (TCGs). This manual describes the various parts of the framework from
-three user perspectives (roles), and also includes reference material for
-ViCE&#8217;s API.</p>
+<p>ViCE is an open source, portable, modular framework for playing and creating
+Trading Card Games (TCGs). This manual outlines ViCE&#8217;s design principles,
+describes its various features from three perspectives (which we roles), and
+even includes reference documentation for the public API.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">While there are subtle differences between the Trading Card Games and
 Collectible Card Games, in the interest of simplicity, this manual refers
 to them collectively (no pun intended) as TCGs.</p>
+</div>
+<div class="section" id="design-principles">
+<h2>Design Principles<a class="headerlink" href="#design-principles" title="Permalink to this headline">¶</a></h2>
+<p>In this section, we&#8217;ll talk about the core principles that we adhere to when
+developing, designing, and playing ViCE.</p>
+<div class="section" id="openness">
+<h3>Openness<a class="headerlink" href="#openness" title="Permalink to this headline">¶</a></h3>
+<p>Vice is open source software licensed undner the
+<a class="reference external" href="http://www.gnu.org/licenses/agpl-3.0.html">Affero General Public License</a>,
+which means that you can use it, redistribute it, and even modify it without
+any legal ramifications, so long as you abide by the terms of the license.
+This also guarantees that as improvements are made, whether it be to ViCE&#8217;s
+upstream code base or to a fork, that if those improvements are made public,
+they are made without any monetary obligation. That is, you should never have
+to pay for new features or corrected defects.</p>
+</div>
+<div class="section" id="portability">
+<h3>Portability<a class="headerlink" href="#portability" title="Permalink to this headline">¶</a></h3>
+<p>ViCE is written using a variety of cross-platform technologies, and as such,
+every effort is made to ensure that ViCE runs <strong>natively</strong> on at least Linux,
+Mac OS, and Windows.</p>
+</div>
+<div class="section" id="modularity">
+<h3>Modularity<a class="headerlink" href="#modularity" title="Permalink to this headline">¶</a></h3>
+<p>Most of ViCE&#8217;s features are implemented ontop of its plugin architecture to
+allow for maximum extensibility. Not only does this imply that new features
+can be added rather easlily, but also that features may be used a la carte:
+if a feature isn&#8217;t required for you to finish a plugin, it doesn&#8217;t need to be
+used.</p>
+</div>
 </div>
 <div class="section" id="user-roles">
 <h2>User Roles<a class="headerlink" href="#user-roles" title="Permalink to this headline">¶</a></h2>
@@ -113,6 +143,12 @@ modelled after the roles identified above:</p>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Preface</a><ul>
+<li><a class="reference internal" href="#design-principles">Design Principles</a><ul>
+<li><a class="reference internal" href="#openness">Openness</a></li>
+<li><a class="reference internal" href="#portability">Portability</a></li>
+<li><a class="reference internal" href="#modularity">Modularity</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#user-roles">User Roles</a></li>
 <li><a class="reference internal" href="#how-this-manual-is-organized">How This Manual is Organized</a></li>
 </ul>

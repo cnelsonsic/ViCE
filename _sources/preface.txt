@@ -1,15 +1,44 @@
 Preface
 ########
-
-ViCE is an open source, modular framework for playing and creating Trading 
-Card Games (TCGs). This manual describes the various parts of the framework from
-three user perspectives (roles), and also includes reference material for 
-ViCE's API.
+ViCE is an open source, portable, modular framework for playing and creating 
+Trading Card Games (TCGs). This manual outlines ViCE's design principles, 
+describes its various features from three perspectives (which we roles), and 
+even includes reference documentation for the public API.
 
 .. note::
     While there are subtle differences between the Trading Card Games and
     Collectible Card Games, in the interest of simplicity, this manual refers
     to them collectively (no pun intended) as TCGs. 
+
+Design Principles
+=================
+In this section, we'll talk about the core principles that we adhere to when
+developing, designing, and playing ViCE.
+
+Openness
+--------
+Vice is open source software licensed undner the 
+`Affero General Public License <http://www.gnu.org/licenses/agpl-3.0.html>`_,
+which means that you can use it, redistribute it, and even modify it without
+any legal ramifications, so long as you abide by the terms of the license. 
+This also guarantees that as improvements are made, whether it be to ViCE's 
+upstream code base or to a fork, that if those improvements are made public,
+they are made without any monetary obligation. That is, you should never have
+to pay for new features or corrected defects.
+
+Portability
+-----------
+ViCE is written using a variety of cross-platform technologies, and as such,
+every effort is made to ensure that ViCE runs **natively** on at least Linux, 
+Mac OS, and Windows. 
+
+Modularity
+----------
+Most of ViCE's features are implemented ontop of its plugin architecture to
+allow for maximum extensibility. Not only does this imply that new features
+can be added rather easlily, but also that features may be used a la carte:
+if a feature isn't required for you to finish a plugin, it doesn't need to be
+used.
 
 User Roles
 ==========
@@ -38,7 +67,6 @@ designer and player.
 
 How This Manual is Organized
 ============================
-
 This book is organized into four parts, the first three of which being guides
 modelled after the roles identified above:
 
