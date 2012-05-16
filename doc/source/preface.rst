@@ -3,7 +3,8 @@ Preface
 
 ViCE is an open source, modular framework for playing and creating Trading 
 Card Games (TCGs). This manual describes the various parts of the framework from
-three user perspectives, and also includes reference material for ViCE's API.
+three user perspectives (roles), and also includes reference material for 
+ViCE's API.
 
 .. note::
     While there are subtle differences between the Trading Card Games and
@@ -41,7 +42,7 @@ How This Manual is Organized
 This book is organized into four parts, the first three of which being guides
 modelled after the roles identified above:
 
-    * :doc: `player_guide/intro`
-    * :doc: `designer_guide/intro`
-    * :doc: `developer_guide/intro`
-    * :doc: `api_reference`
+    * :doc:`player_guide/intro`
+    * :doc:`designer_guide/intro`
+    * :doc:`developer_guide/intro`
+    * :doc:`api_reference`
