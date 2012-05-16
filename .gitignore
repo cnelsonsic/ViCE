@@ -1,0 +1,6 @@
+*.pyc
+__pycache__
+doc/output
+*.png
+MANIFEST
+.ropeproject
