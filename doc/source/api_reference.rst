@@ -4,6 +4,10 @@ vice
 ====
 .. autoclass:: vice.PropertyDict
 
+vice.database -- Database abstraction and integration
+=====================================================
+.. automodule:: vice.database
+    :members:
 
 vice.plugins -- Provides infrastructure for imlementing plugins
 ===============================================================
