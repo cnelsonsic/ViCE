@@ -20,7 +20,7 @@
 import sqlalchemy
 
 def string(**kwargs):
-    """ Returns a kwargs dictionary suitable for creating an sqlalchemy
+    """ Returns a kwargs dictionary suitable for creating an SQLAlchemy
         String column.
     """
 
@@ -29,7 +29,7 @@ def string(**kwargs):
     return kwargs
 
 def integer(**kwargs):
-    """ Returns a kwargs dictionary suitable for creating an sqlalchemy
+    """ Returns a kwargs dictionary suitable for creating an SQLAlchemy
         Integer column.
     """
 
