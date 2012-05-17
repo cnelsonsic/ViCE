@@ -88,7 +88,7 @@ class Database(object):
 
     def create_table(self, table_name, **column_attrs):
         """ Creates a table in the database named table_name, with columns
-            whose attributes match **column_attrs.
+            whose attributes match column_attrs.
 
             table_name may be anything you wish, but if it so happens to be a
             reserved word in Python (eg. 'def'), then you must suffix it with
