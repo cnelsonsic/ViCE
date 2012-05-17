@@ -69,9 +69,11 @@ class Database(object):
 
             URI may be any URI recognized by SQLAlchemy, and generally follows
             the form::
+
                 "<protocol>:///<location>"
 
             For example::
+
                 "sqlite:///wtactics.db"
 
             echo determines whether or not SQL statements are echoed to stdout
@@ -107,7 +109,8 @@ class Database(object):
             Valid arguments are currently:
                 primary_key=True -- Marks the column as the primary key.
 
-            Example:
+            Example::
+
                 db.create_table('cards',
                     id = integer(primary_key=True),
                     name = string(),
@@ -140,7 +143,8 @@ class Database(object):
     def create_record(self, table_name, **parameters):
         """ Creates a record in table_name, using parameters.
 
-            Example:
+            Example::
+
                 db.create_record('cards',
                     # note that id is autoincremented, so isn't specified
                     name = 'Imp',
