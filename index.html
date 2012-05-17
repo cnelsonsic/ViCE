@@ -63,6 +63,28 @@ for the public API.</p>
 Collectible Card Games, in the interest of simplicity, this manual refers
 to them collectively (no pun intended) as TCGs.</p>
 </div>
+<div class="section" id="how-this-manual-is-organized">
+<h2>How This Manual is Organized<a class="headerlink" href="#how-this-manual-is-organized" title="Permalink to this headline">¶</a></h2>
+<p>This book is organized into four parts, the first three of which being guides
+modelled after the roles identified above:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="player_guide/intro.html">Part I. Player Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="designer_guide/intro.html">Part II. Designer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developer_guide/intro.html">Part III. Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_reference.html">Part IV. API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#vice">vice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#module-vice.database">vice.database &#8211; Database abstraction and integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#module-vice.plugins">vice.plugins &#8211; Provides infrastructure for imlementing plugins</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#module-vice.plugins.actions">vice.plugins.actions &#8211; ViCE&#8217;s builtin action plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#module-vice.plugins.items">vice.plugins.items &#8211; ViCE&#8217;s builtin item plugins</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
 <div class="section" id="design-principles">
 <h2>Design Principles<a class="headerlink" href="#design-principles" title="Permalink to this headline">¶</a></h2>
 <p>In this section, we&#8217;ll talk about the core principles that we adhere to when
@@ -119,28 +141,6 @@ exclusive, and can be viewed as somewhat hierarchial. That is, an individual
 who categorizes himself as a developer may also categorize himself as a
 designer and player.</p>
 </div>
-<div class="section" id="how-this-manual-is-organized">
-<h2>How This Manual is Organized<a class="headerlink" href="#how-this-manual-is-organized" title="Permalink to this headline">¶</a></h2>
-<p>This book is organized into four parts, the first three of which being guides
-modelled after the roles identified above:</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="player_guide/intro.html">Part I. Player Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="designer_guide/intro.html">Part II. Designer Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="developer_guide/intro.html">Part III. Developer Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api_reference.html">Part IV. API Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api_reference.html#vice">vice</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api_reference.html#module-vice.database">vice.database &#8211; Database abstraction and integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api_reference.html#module-vice.plugins">vice.plugins &#8211; Provides infrastructure for imlementing plugins</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api_reference.html#module-vice.plugins.actions">vice.plugins.actions &#8211; ViCE&#8217;s builtin action plugins</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api_reference.html#module-vice.plugins.items">vice.plugins.items &#8211; ViCE&#8217;s builtin item plugins</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
 </div>
 
 
@@ -152,6 +152,9 @@ modelled after the roles identified above:</p>
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Introduction</a><ul>
+<li><a class="reference internal" href="#how-this-manual-is-organized">How This Manual is Organized</a><ul>
+</ul>
+</li>
 <li><a class="reference internal" href="#design-principles">Design Principles</a><ul>
 <li><a class="reference internal" href="#openness">Openness</a></li>
 <li><a class="reference internal" href="#portability">Portability</a></li>
@@ -159,9 +162,6 @@ modelled after the roles identified above:</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#user-roles">User Roles</a></li>
-<li><a class="reference internal" href="#how-this-manual-is-organized">How This Manual is Organized</a><ul>
-</ul>
-</li>
 </ul>
 </li>
 </ul>

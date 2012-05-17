@@ -11,6 +11,19 @@ for the public API.
     Collectible Card Games, in the interest of simplicity, this manual refers
     to them collectively (no pun intended) as TCGs. 
 
+How This Manual is Organized
+============================
+This book is organized into four parts, the first three of which being guides
+modelled after the roles identified above:
+
+.. toctree::
+    :glob:
+
+    player_guide/*
+    designer_guide/*
+    developer_guide/*
+    api_reference
+
 Design Principles
 =================
 In this section, we'll talk about the core principles that we adhere to when
@@ -69,15 +82,3 @@ exclusive, and can be viewed as somewhat hierarchial. That is, an individual
 who categorizes himself as a developer may also categorize himself as a
 designer and player.
 
-How This Manual is Organized
-============================
-This book is organized into four parts, the first three of which being guides
-modelled after the roles identified above:
-
-.. toctree::
-    :glob:
-
-    player_guide/*
-    designer_guide/*
-    developer_guide/*
-    api_reference
