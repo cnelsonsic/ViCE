@@ -67,6 +67,131 @@ dictionaries.</p>
 </dd></dl>
 
 </div>
+<div class="section" id="module-vice.database">
+<span id="vice-database-database-abstraction-and-integration"></span><h2>vice.database &#8211; Database abstraction and integration<a class="headerlink" href="#module-vice.database" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="vice.database.Database">
+<em class="property">class </em><tt class="descclassname">vice.database.</tt><tt class="descname">Database</tt><big>(</big><em>URI=None</em>, <em>echo=False</em><big>)</big><a class="reference internal" href="_modules/vice/database.html#Database"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.database.Database" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstraction layer on top of SQLAlchemy&#8217;s interface.</p>
+<p>While SQLAlchemy abstracts the particulars of different
+databse backends and the subtile ways SQL may differ within them,
+this Database class abstracts the SQLAlchemy API into something more
+simple, meanwhile adding facilities that make it integrate better with
+ViCE&#8217;s plugin architecture.</p>
+<dl class="method">
+<dt id="vice.database.Database.connect">
+<tt class="descname">connect</tt><big>(</big><em>URI</em>, <em>echo=False</em><big>)</big><a class="reference internal" href="_modules/vice/database.html#Database.connect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.database.Database.connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connects to an existing database, or creates a new one if one
+isn&#8217;t found.</p>
+<p>URI may be any URI recognized by SQLAlchemy, and generally follows
+the form:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="s">&quot;&lt;protocol&gt;:///&lt;location&gt;&quot;</span>
+</pre></div>
+</div>
+<p>For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="s">&quot;sqlite:///wtactics.db&quot;</span>
+</pre></div>
+</div>
+<p>echo determines whether or not SQL statements are echoed to stdout
+after each operation.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vice.database.Database.create_record">
+<tt class="descname">create_record</tt><big>(</big><em>table_name</em>, <em>**parameters</em><big>)</big><a class="reference internal" href="_modules/vice/database.html#Database.create_record"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.database.Database.create_record" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a record in table_name, using parameters.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">db</span><span class="o">.</span><span class="n">create_record</span><span class="p">(</span><span class="s">&#39;cards&#39;</span><span class="p">,</span>
+    <span class="c"># note that id is autoincremented, so isn&#39;t specified</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;Imp&#39;</span><span class="p">,</span>
+    <span class="n">atk</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="n">def_</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="vice.database.Database.create_table">
+<tt class="descname">create_table</tt><big>(</big><em>table_name</em>, <em>**column_attrs</em><big>)</big><a class="reference internal" href="_modules/vice/database.html#Database.create_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.database.Database.create_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a table in the database named table_name, with columns
+whose attributes match column_attrs.</p>
+<p>table_name may be anything you wish, but if it so happens to be a
+reserved word in Python (eg. &#8216;def&#8217;), then you must suffix it with
+an underscore (&#8216;_&#8217;). You needn&#8217;t worry, however, since the
+trailing underscore is removed inside the actual database.</p>
+<p>All remaining keyword arguments will be processed as column
+attributes where the keys should be valid column names, and the values
+should be arguments to column types.</p>
+<dl class="docutils">
+<dt>Valid column types are currently:</dt>
+<dd><ul class="first last simple">
+<li>string() &#8211; Represents an string column.</li>
+<li>integer() &#8211; Represents an integer column .</li>
+</ul>
+</dd>
+</dl>
+<p>Arguments may be passed to these column types to further specify
+restrictions on data or relationships.</p>
+<dl class="docutils">
+<dt>Valid arguments are currently:</dt>
+<dd>primary_key=True &#8211; Marks the column as the primary key.</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">db</span><span class="o">.</span><span class="n">create_table</span><span class="p">(</span><span class="s">&#39;cards&#39;</span><span class="p">,</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">integer</span><span class="p">(</span><span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">string</span><span class="p">(),</span>
+    <span class="n">atk</span> <span class="o">=</span> <span class="n">integer</span><span class="p">(),</span>
+    <span class="n">def_</span> <span class="o">=</span> <span class="n">integer</span><span class="p">()</span> <span class="c"># notice the trailing underscore</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Since column_attrs is a dictionary, definition order is
+arbitrary, and thus the order in which the columns is
+specified may differ from what you expect when examining the
+resulting database.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="vice.database.Database.select">
+<tt class="descname">select</tt><big>(</big><em>tables</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/vice/database.html#Database.select"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.database.Database.select" title="Permalink to this definition">¶</a></dt>
+<dd><p>Selects all records of the given tables.</p>
+<p>tables is a list of table names.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The interface is mostly ported directly from SQLAlchemy. In
+the future, a simpler interface will be implemented, most
+probably named &#8220;find&#8221;, and this one will be deprecated for
+immediate removal.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vice.database.Database.tables">
+<tt class="descname">tables</tt><a class="reference internal" href="_modules/vice/database.html#Database.tables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.database.Database.tables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of table names for the current database object.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="vice.database.integer">
+<tt class="descclassname">vice.database.</tt><tt class="descname">integer</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/vice/database.html#integer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.database.integer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a kwargs dictionary suitable for creating an SQLAlchemy
+Integer column.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vice.database.string">
+<tt class="descclassname">vice.database.</tt><tt class="descname">string</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/vice/database.html#string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.database.string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a kwargs dictionary suitable for creating an SQLAlchemy
+String column.</p>
+</dd></dl>
+
+</div>
 <div class="section" id="module-vice.plugins">
 <span id="vice-plugins-provides-infrastructure-for-imlementing-plugins"></span><h2>vice.plugins &#8211; Provides infrastructure for imlementing plugins<a class="headerlink" href="#module-vice.plugins" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
@@ -203,6 +328,7 @@ should add the new attribute to ATTRIBUTES when defining the class.</p>
   <ul>
 <li><a class="reference internal" href="#">Part IV. API Reference</a><ul>
 <li><a class="reference internal" href="#vice">vice</a></li>
+<li><a class="reference internal" href="#module-vice.database">vice.database &#8211; Database abstraction and integration</a></li>
 <li><a class="reference internal" href="#module-vice.plugins">vice.plugins &#8211; Provides infrastructure for imlementing plugins</a><ul>
 <li><a class="reference internal" href="#module-vice.plugins.actions">vice.plugins.actions &#8211; ViCE&#8217;s builtin action plugins</a></li>
 <li><a class="reference internal" href="#module-vice.plugins.items">vice.plugins.items &#8211; ViCE&#8217;s builtin item plugins</a></li>
