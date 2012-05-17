@@ -9,7 +9,7 @@ Welcome to ViCE's documentation!
 Contents:
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
     :glob:
 
     preface
