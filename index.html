@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Welcome to ViCE’s documentation! &mdash; ViCE 0.0.1 documentation</title>
+    <title>Introduction &mdash; ViCE 0.0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="ViCE 0.0.1 documentation" href="#" />
-    <link rel="next" title="Preface" href="preface.html" /> 
+    <link rel="next" title="Part I. Player Guide" href="player_guide/intro.html" /> 
   </head>
   <body>
     <div class="related">
@@ -39,7 +39,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="preface.html" title="Preface"
+          <a href="player_guide/intro.html" title="Part I. Player Guide"
              accesskey="N">next</a> |</li>
         <li><a href="#">ViCE 0.0.1 documentation</a> &raquo;</li> 
       </ul>
@@ -50,26 +50,97 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="welcome-to-vice-s-documentation">
-<h1>Welcome to ViCE&#8217;s documentation!<a class="headerlink" href="#welcome-to-vice-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p>Contents:</p>
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p><abbr title="Virtual Cardgame Engine">ViCE</abbr> is an open source, portable, modular
+framework for playing and creating <abbr title="Trading Card Games">TCGs</abbr>. This
+manual outlines ViCE&#8217;s design principles, describes its various features from
+three perspectives (which we roles), and even includes reference documentation
+for the public API.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">While there are subtle differences between the Trading Card Games and
+Collectible Card Games, in the interest of simplicity, this manual refers
+to them collectively (no pun intended) as TCGs.</p>
+</div>
+<div class="section" id="design-principles">
+<h2>Design Principles<a class="headerlink" href="#design-principles" title="Permalink to this headline">¶</a></h2>
+<p>In this section, we&#8217;ll talk about the core principles that we adhere to when
+developing, designing, and playing <abbr title="Virtual Cardgame Engine">ViCE</abbr>.</p>
+<div class="section" id="openness">
+<h3>Openness<a class="headerlink" href="#openness" title="Permalink to this headline">¶</a></h3>
+<p><abbr title="Virtual Cardgame Engine">ViCE</abbr> is open source software licensed under
+the <a class="reference external" href="http://www.gnu.org/licenses/agpl-3.0.html">Affero General Public License</a>,
+which means that you can use it, redistribute it, and even modify it without
+any legal ramifications, so long as you abide by the terms of the license.
+This also guarantees that as improvements are made, whether it be to
+<abbr title="Virtual Cardgame Engine">ViCE</abbr>&#8216;s upstream code base or to a fork, that
+if those improvements are made public, they are made without any monetary
+obligation. That is, you should never have to pay for new features or corrected defects.</p>
+</div>
+<div class="section" id="portability">
+<h3>Portability<a class="headerlink" href="#portability" title="Permalink to this headline">¶</a></h3>
+<p><abbr title="Virtual Cardgame Engine">ViCE</abbr> is written using a variety of
+cross-platform technologies, and as such, every effort is made to ensure that
+<abbr title="Virtual Cardgame Engine">ViCE</abbr> runs <strong>natively</strong> on at least Linux,
+Mac OS, and Windows.</p>
+</div>
+<div class="section" id="modularity">
+<h3>Modularity<a class="headerlink" href="#modularity" title="Permalink to this headline">¶</a></h3>
+<p>Most of <abbr title="Virtual Cardgame Engine">ViCE</abbr>&#8216;s features are implemented ontop
+of its plugin architecture to allow for maximum extensibility. Not only does
+this imply that new features can be added rather easlily, but also that features
+may be used a la carte: if a feature isn&#8217;t required for you to finish a plugin,
+it doesn&#8217;t need to be used.</p>
+</div>
+</div>
+<div class="section" id="user-roles">
+<h2>User Roles<a class="headerlink" href="#user-roles" title="Permalink to this headline">¶</a></h2>
+<p><abbr title="Virtual Cardgame Engine">ViCE</abbr> is a framework suitable for use by users
+of varying interests and technical backgrounds. In an effort to help facilitate
+learning, three key user roles have been identified, as follows:</p>
+<ul class="simple">
+<li>Players: These are the individuals who aren&#8217;t concerned with how
+<abbr title="Virtual Cardgame Engine">ViCE</abbr>&#8216;s internals work, and could care less
+about creating new or porting existing <abbr title="Trading Card Games">TCGs</abbr> to
+the framework. There sole reason for using
+<abbr title="Virtual Cardgame Engine">ViCE</abbr> is to play whatever games <em>do</em>
+exist for <abbr title="Virtual Cardgame Engine">ViCE</abbr>.</li>
+<li>Designers: These are the individuals who are not interested in the
+implementation details of <abbr title="Virtual Cardgame Engine">ViCE</abbr>&#8216;s internals,
+but would like to learn enough to enable them to either create new TCGs or
+port existing ones to <abbr title="Virtual Cardgame Engine">ViCE</abbr> .</li>
+<li>Developers: These are the individuals who are interested in <em>how</em>
+<abbr title="Virtual Cardgame Engine">ViCE</abbr> works, for the sake of implementing
+new features not possible through the currently available API or fixing bugs.</li>
+</ul>
+<p>While we have defined three distinct roles, these roles are not mutually
+exclusive, and can be viewed as somewhat hierarchial. That is, an individual
+who categorizes himself as a developer may also categorize himself as a
+designer and player.</p>
+</div>
+<div class="section" id="how-this-manual-is-organized">
+<h2>How This Manual is Organized<a class="headerlink" href="#how-this-manual-is-organized" title="Permalink to this headline">¶</a></h2>
+<p>This book is organized into four parts, the first three of which being guides
+modelled after the roles identified above:</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="preface.html">Preface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="player_guide/intro.html">Part I. Player Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="designer_guide/intro.html">Part II. Designer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="developer_guide/intro.html">Part III. Developer Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api_reference.html">Part IV. API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_reference.html">Part IV. API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#vice">vice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#module-vice.database">vice.database &#8211; Database abstraction and integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#module-vice.plugins">vice.plugins &#8211; Provides infrastructure for imlementing plugins</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#module-vice.plugins.actions">vice.plugins.actions &#8211; ViCE&#8217;s builtin action plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#module-vice.plugins.items">vice.plugins.items &#8211; ViCE&#8217;s builtin item plugins</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
-<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
-<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
-</ul>
 </div>
 
 
@@ -80,15 +151,24 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Welcome to ViCE&#8217;s documentation!</a><ul>
+<li><a class="reference internal" href="#">Introduction</a><ul>
+<li><a class="reference internal" href="#design-principles">Design Principles</a><ul>
+<li><a class="reference internal" href="#openness">Openness</a></li>
+<li><a class="reference internal" href="#portability">Portability</a></li>
+<li><a class="reference internal" href="#modularity">Modularity</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+<li><a class="reference internal" href="#user-roles">User Roles</a></li>
+<li><a class="reference internal" href="#how-this-manual-is-organized">How This Manual is Organized</a><ul>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
   <h4>Next topic</h4>
-  <p class="topless"><a href="preface.html"
-                        title="next chapter">Preface</a></p>
+  <p class="topless"><a href="player_guide/intro.html"
+                        title="next chapter">Part I. Player Guide</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/index.txt"
@@ -121,7 +201,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="preface.html" title="Preface"
+          <a href="player_guide/intro.html" title="Part I. Player Guide"
              >next</a> |</li>
         <li><a href="#">ViCE 0.0.1 documentation</a> &raquo;</li> 
       </ul>
