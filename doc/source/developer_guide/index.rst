@@ -5,5 +5,5 @@ This guide discusses the underlying patterns and idioms used when developing
 
 Architecture
 ============
-.. image:: _images/stack_diagram.svg
+.. image:: /_images/stack_diagram.png
 
