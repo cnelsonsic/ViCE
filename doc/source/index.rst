@@ -17,6 +17,7 @@ This book is organized into four parts, the first three of which being guides
 modelled after their respective roles:
 
 .. toctree::
+    :maxdepth: 2
     :glob:
 
     player_guide/*
