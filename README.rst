@@ -26,9 +26,9 @@ Download
 ViCE may downloaded from the command line::
     git clone git://github.com/aspidites/ViCE.git
 
-If git isn't installed, the repository is also available as
-`zip https://github.com/aspidites/ViCE/zipball/master`_ and
-`tar.gz https://github.com/aspidites/ViCE/tarball/master`_ archives.
+If git isn't installed, the repository is also available as a compresed archive:
+    * zip: https://github.com/aspidites/ViCE/zipball/master
+    * tar.gz: https://github.com/aspidites/ViCE/tarball/master 
   
 Install
 =======
