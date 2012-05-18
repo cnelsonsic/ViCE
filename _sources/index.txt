@@ -17,12 +17,10 @@ This book is organized into four parts, the first three of which being guides
 modelled after their respective roles:
 
 .. toctree::
-    :maxdepth: 2
-    :glob:
 
-    player_guide/*
-    designer_guide/*
-    developer_guide/*
+    player_guide/index
+    designer_guide/index
+    developer_guide/index
     api_reference
 
 Design Principles
