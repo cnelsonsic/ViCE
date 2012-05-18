@@ -3,8 +3,8 @@ Introduction
 :abbr:`ViCE (Virtual Cardgame Engine)` is an open source, portable, modular 
 framework for playing and creating :abbr:`TCGs (Trading Card Games)`. This 
 manual outlines ViCE's design principles, describes its various features from 
-three perspectives (which we roles), and even includes reference documentation 
-for the public API.
+three perspectives (which we refer to as roles), and even includes reference 
+documentation for the public API.
 
 .. note::
     While there are subtle differences between the Trading Card Games and
@@ -14,7 +14,7 @@ for the public API.
 How This Manual is Organized
 ============================
 This book is organized into four parts, the first three of which being guides
-modelled after the roles identified above:
+modelled after their respective roles:
 
 .. toctree::
     :glob:
