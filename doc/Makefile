@@ -114,12 +114,10 @@ gh-pages:
 	@echo
 	@echo "Switching to gh-pages branch..."
 	git checkout gh-pages
-	cd ..
-	rm -r doc vice
 	git checkout master ../doc ../vice
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)
 	@echo "Build finished. The html pages are in the gh-pages branch's root."
-	git add .
+	git add ..
 	git commit -am "Updated documentation."
 	git push origin gh-pages
 	@echo "Documentation published: https://aspidites.github.com/ViCE"
