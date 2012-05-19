@@ -1,5 +1,5 @@
-Part IV. API Reference
-######################
+API Reference
+#############
 vice
 ====
 .. autoclass:: vice.PropertyDict
