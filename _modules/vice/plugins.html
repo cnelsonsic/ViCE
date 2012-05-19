@@ -117,7 +117,9 @@
         <span class="n">find_subclasses</span><span class="p">(</span><span class="n">cls</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">PropertyDict</span><span class="p">((</span><span class="n">plugin</span><span class="o">.</span><span class="n">NAME</span><span class="p">,</span> <span class="n">plugin</span><span class="p">)</span>
-                    <span class="k">for</span> <span class="n">plugin</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">_plugins</span> <span class="k">if</span> <span class="n">plugin</span><span class="o">.</span><span class="n">NAME</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">)</span></div></div>
+            <span class="k">for</span> <span class="n">plugin</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">_plugins</span>
+            <span class="k">if</span> <span class="n">plugin</span><span class="o">.</span><span class="n">NAME</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">plugin</span><span class="o">.</span><span class="n">NAME</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span>
+        <span class="p">)</span></div></div>
 </pre></div>
 
           </div>
