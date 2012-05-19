@@ -62,24 +62,26 @@
   <div class="section" id="architecture">
 <h1>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h1>
 <img alt="../_images/stack_diagram.png" src="../_images/stack_diagram.png" />
-<p>As can be seen from the architecture stack diagram above, ViCE&#8217;s core is
-composed of the plugin framework and database layer. Item, Action, and other,
+<p>As you can see from the architecture stack diagram above, ViCE&#8217;s core is
+composed of the plugin framework and database layer[#]_. Item, Action, and other,
 yet to be developed plugin types sit directly on these components. While not
 yet started, other features and abstractions suitable for designers and
 players will then be built on top of these.</p>
-<div class="admonition-todo admonition" id="index-0">
-<p class="first admonition-title">Todo</p>
-<ul class="last simple">
-<li>explain opacity&#8217;s role in this chart</li>
-</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The opacity of each box represents an approximation of how complete the
+represented component is.</p>
 </div>
 <div class="section" id="plugin-framework">
 <h2>Plugin Framework<a class="headerlink" href="#plugin-framework" title="Permalink to this headline">¶</a></h2>
-<div class="admonition-todo admonition" id="index-1">
+<p>ViCE&#8217;s plugin framework is based on the simpole fact that all new-style
+classes[#]_ in python know about their subclasses. All plugins[#]_ must
+be given a name by assigning the class attribute NAME. It is through this
+name that plugins are identified, and without it, a plugin won&#8217;t be
+discoverable.</p>
+<div class="admonition-todo admonition" id="index-0">
 <p class="first admonition-title">Todo</p>
 <ul class="last simple">
-<li>Explain the plugin framework, including the python features that make it
-possible, how NAME is used for registration, etc.</li>
 <li>defer to designer documentation for discussion of the differnt plugin
 types (this documentation being made available after 0.1.0 release</li>
 </ul>
@@ -87,7 +89,7 @@ types (this documentation being made available after 0.1.0 release</li>
 </div>
 <div class="section" id="database-layer">
 <h2>Database Layer<a class="headerlink" href="#database-layer" title="Permalink to this headline">¶</a></h2>
-<div class="admonition-todo admonition" id="index-2">
+<div class="admonition-todo admonition" id="index-1">
 <p class="first admonition-title">Todo</p>
 <ul class="last simple">
 <li>Discuss the database layer and why it wasn&#8217;t implemented as a plugin.</li>
@@ -95,22 +97,14 @@ types (this documentation being made available after 0.1.0 release</li>
 statement, joins, and edit/deletion facilities</li>
 </ul>
 </div>
-</div>
-<div class="section" id="propertydict">
-<h2>PropertyDict<a class="headerlink" href="#propertydict" title="Permalink to this headline">¶</a></h2>
-<div class="admonition-todo admonition" id="index-3">
+<div class="admonition-todo admonition" id="index-2">
 <p class="first admonition-title">Todo</p>
-<ul class="last simple">
-<li>Explain why such a dictionary is needed</li>
-<li>give credit for origin</li>
-</ul>
-</div>
-<div class="admonition-todo admonition" id="index-4">
-<p class="first admonition-title">Todo</p>
-<ul class="last simple">
+<blockquote class="last">
+<div><ul class="simple">
 <li>link to relevant sections in the API documentation (perhaps as a
 see also directive?)</li>
 </ul>
+</div></blockquote>
 </div>
 </div>
 </div>
@@ -139,7 +133,6 @@ see also directive?)</li>
 <li><a class="reference internal" href="#">Architecture</a><ul>
 <li><a class="reference internal" href="#plugin-framework">Plugin Framework</a></li>
 <li><a class="reference internal" href="#database-layer">Database Layer</a></li>
-<li><a class="reference internal" href="#propertydict">PropertyDict</a></li>
 </ul>
 </li>
 </ul>
