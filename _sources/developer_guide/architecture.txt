@@ -21,7 +21,7 @@ name that plugins are identified, and without it, a plugin won't be
 discoverable. 
 
 For information on the different plugin types and their roles, please 
-refer to the :doc:`/dsigner_guide/designer_index`.
+refer to the :doc:`/designer_guide/designer_index`.
 
 Database Layer
 --------------
