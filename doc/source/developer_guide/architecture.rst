@@ -15,7 +15,7 @@ players will then be built on top of these.
 Plugin Framework
 ----------------
 ViCE's plugin framework is based on the simpole fact that all new-style
-classes[#]_ in python know about their subclasses. All plugins[#]_ must
+classes [#]_ in python know about their subclasses. All plugins [#]_ must
 be given a name by assigning the class attribute NAME. It is through this
 name that plugins are identified, and without it, a plugin won't be
 discoverable. 
@@ -34,6 +34,8 @@ Database Layer
 .. todo::
     * link to relevant sections in the API documentation (perhaps as a 
       see also directive?)
+
+.. rubric:: Footnotes
 
  .. [#] Custom data types such as the PropertyDict are also part of ViCE's
          core, but they were left out of the chart for the sake of simplicity.
