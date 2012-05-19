@@ -62,4 +62,6 @@ class Plugin(object):
         find_subclasses(cls)
 
         return PropertyDict((plugin.NAME, plugin)
-                    for plugin in cls._plugins if plugin.NAME is not None)
+            for plugin in cls._plugins
+            if plugin.NAME is not None and plugin.NAME.strip() != ""
+        )
