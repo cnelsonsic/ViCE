@@ -119,7 +119,7 @@ gh-pages:
 	git add ..
 	git commit -am "Updated documentation."
 	git push origin gh-pages
-	@echo "Documentation published: https://aspidites.github.com/ViCE"
+	@echo "Documentation published: http://aspidites.github.com/ViCE"
 	@echo "Switching back to master branch..."
 	git checkout master
 

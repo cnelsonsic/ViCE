@@ -3,7 +3,7 @@ Architecture
 .. image:: /_static/stack_diagram.png
 
 As you can see from the architecture stack diagram above, ViCE's core is
-composed of the plugin framework and database layer[#]_. Item, Action, and other,
+composed of the plugin framework and database layer [#]_. Item, Action, and other,
 yet to be developed plugin types sit directly on these components. While not
 yet started, other features and abstractions suitable for designers and
 players will then be built on top of these.
