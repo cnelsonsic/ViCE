@@ -30,25 +30,25 @@ developing, designing, and playing :abbr:`ViCE (Virtual Cardgame Engine)`.
 
 Openness
 --------
-:abbr:`ViCE (Virtual Cardgame Engine)` is open source software licensed under 
+ViCE is open source software licensed under 
 the `Affero General Public License <http://www.gnu.org/licenses/agpl-3.0.html>`_,
 which means that you can use it, redistribute it, and even modify it without
 any legal ramifications, so long as you abide by the terms of the license. 
 This also guarantees that as improvements are made, whether it be to 
-:abbr:`ViCE (Virtual Cardgame Engine)`'s upstream code base or to a fork, that 
+ViCE's upstream code base or to a fork, that 
 if those improvements are made public, they are made without any monetary 
 obligation. That is, you should never have to pay for new features or corrected defects.
 
 Portability
 -----------
-:abbr:`ViCE (Virtual Cardgame Engine)` is written using a variety of 
+ViCE is written using a variety of 
 cross-platform technologies, and as such, every effort is made to ensure that 
-:abbr:`ViCE (Virtual Cardgame Engine)` runs **natively** on at least Linux, 
+ViCE runs **natively** on at least Linux, 
 Mac OS, and Windows. 
 
 Modularity
 ----------
-Most of :abbr:`ViCE (Virtual Cardgame Engine)`'s features are implemented ontop 
+Most of ViCE's features are implemented ontop 
 of its plugin architecture to allow for maximum extensibility. Not only does 
 this imply that new features can be added rather easlily, but also that features 
 may be used a la carte: if a feature isn't required for you to finish a plugin, 
@@ -56,24 +56,24 @@ it doesn't need to be used.
 
 User Roles
 ==========
-:abbr:`ViCE (Virtual Cardgame Engine)` is a framework suitable for use by users 
+ViCE is a framework suitable for use by users 
 of varying interests and technical backgrounds. In an effort to help facilitate 
 learning, three key user roles have been identified, as follows:
 
 * Players: These are the individuals who aren't concerned with how 
-  :abbr:`ViCE (Virtual Cardgame Engine)`'s internals work, and could care less 
-  about creating new or porting existing :abbr:`TCGs (Trading Card Games)` to 
+  ViCE's internals work, and could care less 
+  about creating new or porting existing :abbr:TCGs to 
   the framework. There sole reason for using 
-  :abbr:`ViCE (Virtual Cardgame Engine)` is to play whatever games *do* 
-  exist for :abbr:`ViCE (Virtual Cardgame Engine)`.
+  ViCE is to play whatever games *do* 
+  exist for ViCE.
 
 * Designers: These are the individuals who are not interested in the
-  implementation details of :abbr:`ViCE (Virtual Cardgame Engine)`'s internals, 
+  implementation details of ViCE's internals, 
   but would like to learn enough to enable them to either create new TCGs or 
-  port existing ones to :abbr:`ViCE (Virtual Cardgame Engine)` .
+  port existing ones to ViCE.
  
 * Developers: These are the individuals who are interested in *how* 
-  :abbr:`ViCE (Virtual Cardgame Engine)` works, for the sake of implementing 
+  ViCE works, for the sake of implementing 
   new features not possible through the currently available API or fixing bugs.
 
 While we have defined three distinct roles, these roles are not mutually
