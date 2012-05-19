@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-IMGDIR="source/images"
+IMGDIR="source/_static"
 
 for SVG in ls $IMGDIR/*.svg
 do
