@@ -1,7 +1,3 @@
-######
-FOOBAR
-######
-JUST TESTING CACHING!
 Introduction
 ############
 :abbr:`ViCE (Virtual Cardgame Engine)` is an open source, portable, modular 
