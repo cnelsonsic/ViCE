@@ -17,6 +17,7 @@ This book is organized into four parts, the first three of which being guides
 modelled after their respective roles:
 
 .. toctree::
+    :numbered:
 
     player_guide/index
     designer_guide/index
