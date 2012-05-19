@@ -2,7 +2,7 @@
 #
 
 # You can set these variables from the command line.
-SWITCH_BRANCH = echo "Switching to gh-pages branch..."; git checkout gh-pages; git checkout master -- ../doc ../vice
+SWITCH_BRANCH = echo "Switching to gh-pages branch..." && git checkout gh-pages && git checkout master -- ../doc ../vice
 SPHINXOPTS    = -W
 SPHINXBUILD   = sphinx-build2
 PAPER         =
