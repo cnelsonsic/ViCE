@@ -48,12 +48,14 @@ clean:
 
 html:
 	./convert_svgs.sh
+	$(SWITCHBRANCH)
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
 epub:
 	./convert_svgs.sh
+	$(SWITCHBRANCH)
 	$(SPHINXBUILD) -b epub $(ALLSPHINXOPTS) $(BUILDDIR)/epub
 	@echo
 	@echo "Build finished. The epub file is in $(BUILDDIR)/epub."
@@ -73,6 +75,7 @@ gh-pages:
 
 latexpdf:
 	./convert_svgs.sh
+	$(SWITCHBRANCH)
 	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex
 	@echo "Running LaTeX files through pdflatex..."
 	$(MAKE) -C $(BUILDDIR)/latex all-pdf
@@ -80,6 +83,7 @@ latexpdf:
 
 linkcheck:
 	./convert_svgs.sh
+	$(SWITCHBRANCH)
 	$(SPHINXBUILD) -b linkcheck $(ALLSPHINXOPTS) $(BUILDDIR)/linkcheck
 	@echo
 	@echo "Link check complete; look for any errors in the above output " \
@@ -87,12 +91,14 @@ linkcheck:
 
 doctest:
 	./convert_svgs.sh
+	$(SWITCHBRANCH)
 	$(SPHINXBUILD) -b doctest $(ALLSPHINXOPTS) $(BUILDDIR)/doctest
 	@echo "Testing of doctests in the sources finished, look at the " \
 	      "results in $(BUILDDIR)/doctest/output.txt."
 
 coverage:
 	./convert_svgs.sh
+	$(SWITCHBRANCH)
 	$(SPHINXBUILD) -b coverage $(ALLSPHINXOPTS) $(BUILDDIR)/coverage
 	@echo
 	@echo "Coverage check finished, results in $(BUIDDIR)/coverage/."
