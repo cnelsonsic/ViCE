@@ -1,6 +1,6 @@
 Architecture
 ============
-.. image:: _static/stack_diagram.png
+.. image:: /images/stack_diagram.png
 
 As can be seen from the architecture stack diagram above, ViCE's core is
 composed of the plugin framework and database layer. Item, Action, and other,
