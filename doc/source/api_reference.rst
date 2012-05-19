@@ -1,31 +1,45 @@
 API Reference
 #############
+.. _vice:
+
 vice
 ====
 .. autoclass:: vice.PropertyDict
+
+.. _vice.database:
 
 vice.database -- Database abstraction and integration
 =====================================================
 .. automodule:: vice.database
     :members:
 
-vice.plugins -- Provides infrastructure for implementing plugins
-================================================================
+.. _vice.plugins:
+
+vice.plugins -- Infrastructure for implementing plugins
+=======================================================
 .. automodule:: vice.plugins
     :members:
 
-vice.plugins.actions -- ViCE's builtin action plugins
------------------------------------------------------
+.. _vice.plugins.actions:
+
+vice.plugins.actions -- Builtin action plugins
+----------------------------------------------
 .. automodule:: vice.plugins.actions
     :members:
+
+.. .. _vice.plugins.containers:
 
 .. .. automodule:: vice.plugins.containers
 ..     :members:
 
-vice.plugins.items -- ViCE's builtin item plugins
--------------------------------------------------
+.. _vice.plugins.items:
+
+vice.plugins.items -- Builtin item plugins
+------------------------------------------
 .. automodule:: vice.plugins.items
     :members:
+
+.. .. _vice.plugins.rules:
 
 .. vice.plugins.rules -- provides complete rule implementations
 .. ------------------------------------------------------------
