@@ -47,22 +47,22 @@ clean:
 	find $(BUILDDIR)/* -maxdepth 0 -name 'vice' -o -name 'doc' -prune -o -exec rm -rf '{}' ';'
 
 html:
-	./convert_svgs.sh
 	$(SWITCHBRANCH)
+	./convert_svgs.sh
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
 epub:
-	./convert_svgs.sh
 	$(SWITCHBRANCH)
+	./convert_svgs.sh
 	$(SPHINXBUILD) -b epub $(ALLSPHINXOPTS) $(BUILDDIR)/epub
 	@echo
 	@echo "Build finished. The epub file is in $(BUILDDIR)/epub."
 
 gh-pages:
-	./convert_svgs.sh
 	$(SWITCHBRANCH)
+	./convert_svgs.sh
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)
 	@echo "Build finished. The html pages are in the gh-pages branch's root."
 	git add ..
@@ -74,31 +74,24 @@ gh-pages:
 
 
 latexpdf:
-	./convert_svgs.sh
 	$(SWITCHBRANCH)
+	./convert_svgs.sh
 	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex
 	@echo "Running LaTeX files through pdflatex..."
 	$(MAKE) -C $(BUILDDIR)/latex all-pdf
 	@echo "pdflatex finished; the PDF files are in $(BUILDDIR)/latex."
 
 linkcheck:
-	./convert_svgs.sh
 	$(SWITCHBRANCH)
+	./convert_svgs.sh
 	$(SPHINXBUILD) -b linkcheck $(ALLSPHINXOPTS) $(BUILDDIR)/linkcheck
 	@echo
 	@echo "Link check complete; look for any errors in the above output " \
 	      "or in $(BUILDDIR)/linkcheck/output.txt."
 
-doctest:
-	./convert_svgs.sh
-	$(SWITCHBRANCH)
-	$(SPHINXBUILD) -b doctest $(ALLSPHINXOPTS) $(BUILDDIR)/doctest
-	@echo "Testing of doctests in the sources finished, look at the " \
-	      "results in $(BUILDDIR)/doctest/output.txt."
-
 coverage:
-	./convert_svgs.sh
 	$(SWITCHBRANCH)
+	./convert_svgs.sh
 	$(SPHINXBUILD) -b coverage $(ALLSPHINXOPTS) $(BUILDDIR)/coverage
 	@echo
 	@echo "Coverage check finished, results in $(BUIDDIR)/coverage/."
