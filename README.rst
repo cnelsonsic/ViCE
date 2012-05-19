@@ -14,15 +14,12 @@ Dependencies
 In it's current state, ViCE has few dependencies:
 
 * `python >= 2.7 (including 3.x) <http://python.org>`_
-
 * `sqlalchemy >= 0.7 <http://www.sqlalchemy.org>`_
-
 * `sqlite >= 3.7.11 <http://www.sqlite.org>`_
 
 In the future, the following depenencies will also be required:
 
 * `PySide >= 1.1.1 <http://www.pyside.org>`_
-
 * `gevent = 0.13.7 <http://www.gevent.org>`_
 
 Download
@@ -34,7 +31,6 @@ ViCE may downloaded from the command line::
 If git isn't installed, the repository is also available as a compresed archive:
 
 * zip: https://github.com/aspidites/ViCE/zipball/master
-
 * tar.gz: https://github.com/aspidites/ViCE/tarball/master 
   
 Install
@@ -62,9 +58,6 @@ If you have any questions about ViCE, or would like to contribute, there are
 plenty of options.
 
 * Github: http://github.com/aspidites/ViCE
-
 * IRC: `#wtactics on freenode.net <irc://freenode.net/%23wtactics>`_
-
 * Forums: http://wtactics.org/forums
-
 * email: mailto:aspidites@wtactics.org
