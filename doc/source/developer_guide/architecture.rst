@@ -35,11 +35,11 @@ Database Layer
     * link to relevant sections in the API documentation (perhaps as a 
       see also directive?)
 
-.. rubric:: Footnotes
-
  .. [#] Custom data types such as the PropertyDict are also part of ViCE's
          core, but they were left out of the chart for the sake of simplicity.
+
  .. [#] http://www.python.org/doc/newstyle/
+
  .. [#] Only plugins which are meant to be instanciated need assign the NAME 
          class attribute. That is, plugin base classes should *not* assign
          this attribute.
