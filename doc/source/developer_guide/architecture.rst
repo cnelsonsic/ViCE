@@ -25,8 +25,13 @@ refer to the :doc:`/designer_guide/designer_index`.
 
 Database Layer
 --------------
+The database layer is an abstraction ontop of 
+the already excellent abstraction layer `SQLAlchemy <http://sqlalchemy.org>`_.
+While this might seem excessive, it is necessary for two reasons:
+
 .. todo::
     * Discuss the database layer and why it wasn't implemented as a plugin.
+
     * Explain that some abstractions do not exist (such as a better select
       statement, joins, and edit/deletion facilities
 

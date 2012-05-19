@@ -81,4 +81,3 @@ While we have defined three distinct roles, these roles are not mutually
 exclusive, and can be viewed as somewhat hierarchial. That is, an individual
 who categorizes himself as a developer may also categorize himself as a
 designer and player.
-
