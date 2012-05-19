@@ -20,9 +20,8 @@ be given a name by assigning the class attribute NAME. It is through this
 name that plugins are identified, and without it, a plugin won't be
 discoverable. 
 
-.. todo::
-    * defer to designer documentation for discussion of the differnt plugin
-      types (this documentation being made available after 0.1.0 release
+For information on the different plugin types and their roles, please 
+refer to the :doc:`/dsigner_guide/designer_index`.
 
 Database Layer
 --------------
