@@ -9,8 +9,8 @@ vice.database -- Database abstraction and integration
 .. automodule:: vice.database
     :members:
 
-vice.plugins -- Provides infrastructure for imlementing plugins
-===============================================================
+vice.plugins -- Provides infrastructure for implementing plugins
+================================================================
 .. automodule:: vice.plugins
     :members:
 
