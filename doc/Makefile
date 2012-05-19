@@ -43,8 +43,7 @@ help:
 	@echo "  coverage   to collect documentation coverage stats"
 
 clean:
-	-rm -rf $(BUILDDIR)/*
-	-rm -rf source/_images/*.png
+	find $(BUILDDIR)/* -maxdepth 0 -name 'vice' -o -name 'doc' -prune -o -exec rm -rf '{}' ';'
 
 html:
 	./process_images.sh
