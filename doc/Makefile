@@ -2,7 +2,6 @@
 #
 
 # You can set these variables from the command line.
-SWITCH_BRANCH = echo "Switching to gh-pages branch..." && git checkout gh-pages && git checkout master -- ../doc ../vice
 SPHINXOPTS    = -W
 SPHINXBUILD   = sphinx-build2
 PAPER         =
@@ -47,21 +46,27 @@ clean:
 	find $(BUILDDIR)/* -maxdepth 0 -name 'vice' -o -name 'doc' -prune -o -exec rm -rf '{}' ';'
 
 html:
-	$(SWITCHBRANCH)
+	@echo "Switching to gh-pages branch..."
+	git checkout gh-pages
+	git checkout master -- ../doc ../vice
 	./convert_svgs.sh
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
 epub:
-	$(SWITCHBRANCH)
+	@echo "Switching to gh-pages branch..."
+	git checkout gh-pages
+	git checkout master -- ../doc ../vice
 	./convert_svgs.sh
 	$(SPHINXBUILD) -b epub $(ALLSPHINXOPTS) $(BUILDDIR)/epub
 	@echo
 	@echo "Build finished. The epub file is in $(BUILDDIR)/epub."
 
 gh-pages:
-	$(SWITCHBRANCH)
+	@echo "Switching to gh-pages branch..."
+	git checkout gh-pages
+	git checkout master -- ../doc ../vice
 	./convert_svgs.sh
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)
 	@echo "Build finished. The html pages are in the gh-pages branch's root."
@@ -74,7 +79,9 @@ gh-pages:
 
 
 latexpdf:
-	$(SWITCHBRANCH)
+	@echo "Switching to gh-pages branch..."
+	git checkout gh-pages
+	git checkout master -- ../doc ../vice
 	./convert_svgs.sh
 	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex
 	@echo "Running LaTeX files through pdflatex..."
@@ -82,7 +89,9 @@ latexpdf:
 	@echo "pdflatex finished; the PDF files are in $(BUILDDIR)/latex."
 
 linkcheck:
-	$(SWITCHBRANCH)
+	@echo "Switching to gh-pages branch..."
+	git checkout gh-pages
+	git checkout master -- ../doc ../vice
 	./convert_svgs.sh
 	$(SPHINXBUILD) -b linkcheck $(ALLSPHINXOPTS) $(BUILDDIR)/linkcheck
 	@echo
@@ -90,7 +99,9 @@ linkcheck:
 	      "or in $(BUILDDIR)/linkcheck/output.txt."
 
 coverage:
-	$(SWITCHBRANCH)
+	@echo "Switching to gh-pages branch..."
+	git checkout gh-pages
+	git checkout master -- ../doc ../vice
 	./convert_svgs.sh
 	$(SPHINXBUILD) -b coverage $(ALLSPHINXOPTS) $(BUILDDIR)/coverage
 	@echo
