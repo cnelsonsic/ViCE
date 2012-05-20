@@ -1,19 +1,20 @@
 API Reference
 #############
-.. _vice:
+
+.. _api.vice:
 
 vice
 ====
 .. autoclass:: vice.PropertyDict
 
-.. _vice.database:
+.. _api.vice.database:
 
 vice.database -- Database abstraction and integration
 =====================================================
 .. automodule:: vice.database
     :members:
 
-.. _vice.plugins:
+.. _api.vice.plugins:
 
 vice.plugins -- Infrastructure for implementing plugins
 =======================================================
