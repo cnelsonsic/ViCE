@@ -63,7 +63,7 @@
 <h1>3.1. Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h1>
 <img alt="../_images/stack_diagram.png" src="../_images/stack_diagram.png" />
 <p>As you can see from the architecture stack diagram above, ViCE&#8217;s core is
-composed of the plugin framework and database layer <a class="footnote-reference" href="#id4" id="id1">[1]</a>. Item, Action, and other,
+composed of the plugin framework and database layer <a class="footnote-reference" href="#id5" id="id1">[1]</a>. Item, Action, and other,
 yet to be developed plugin types sit directly on these components. While not
 yet started, other features and abstractions suitable for designers and
 players will then be built on top of these.</p>
@@ -75,7 +75,7 @@ represented component is.</p>
 <div class="section" id="plugin-framework">
 <h2>3.1.1. Plugin Framework<a class="headerlink" href="#plugin-framework" title="Permalink to this headline">¶</a></h2>
 <p>ViCE&#8217;s plugin framework is based on the simpole fact that all new-style
-classes <a class="footnote-reference" href="#id5" id="id2">[2]</a> in python know about their subclasses. All plugins <a class="footnote-reference" href="#id6" id="id3">[3]</a> must
+classes <a class="footnote-reference" href="#id6" id="id2">[2]</a> in python know about their subclasses. All plugins <a class="footnote-reference" href="#id7" id="id3">[3]</a> must
 be given a name by assigning the class attribute NAME. It is through this
 name that plugins are identified, and without it, a plugin won&#8217;t be
 discoverable.</p>
@@ -84,41 +84,63 @@ refer to the <a class="reference internal" href="../designer_guide/designer_inde
 </div>
 <div class="section" id="database-layer">
 <h2>3.1.2. Database Layer<a class="headerlink" href="#database-layer" title="Permalink to this headline">¶</a></h2>
-<div class="admonition-todo admonition" id="index-0">
-<p class="first admonition-title">Todo</p>
-<ul class="last simple">
-<li>Discuss the database layer and why it wasn&#8217;t implemented as a plugin.</li>
-<li>Explain that some abstractions do not exist (such as a better select
-statement, joins, and edit/deletion facilities</li>
-</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Not all of SQLAlchemy&#8217;s API has been abstracted, so some things are
+not yet possible. For more information, consult the <a class="reference internal" href="../api_reference.html"><em>API Reference</em></a>.</p>
 </div>
-<div class="admonition-todo admonition" id="index-1">
-<p class="first admonition-title">Todo</p>
+<p>The database layer is an abstraction ontop of
+the already excellent abstraction layer <a class="reference external" href="http://sqlalchemy.org">SQLAlchemy</a>.
+While this might seem excessive, it is necessary for three reasons:</p>
+<ol class="arabic simple">
+<li>Flexibility: Tucking the implementation details behind a simple API allows
+us to not only change the underlying module used if we ever decide to, but
+also selectivelly reimplement features that we feel aren&#8217;t covered well by
+the underlying module.</li>
+<li>Brevity: ViCE&#8217;s database API is much more concise than SQLAlchemy alone,
+serves to simplify code, as well as the learning of the API itself.</li>
+<li>Seemless Integration: Since the database layer sits next to the plugin
+framework and beneath all other components, it&#8217;s tightly integrated <a class="footnote-reference" href="#id8" id="id4">[4]</a>
+with the rest of the framework.</li>
+</ol>
+<p>Currently, the database layer is not implemented as a plugin because
+SQLAlchemy provides a unified API on top of many
+<abbr title="Relational Database Management Systems">RDBMSs</abbr>.</p>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p>* <em class="xref std std-ref">_vice</em></p>
 <blockquote>
 <div><ul class="simple">
-<li>link to relevant sections in the API documentation (perhaps as a
-see also directive?)</li>
+<li><em class="xref std std-ref">_vice.database</em></li>
+<li><em class="xref std std-ref">_vice.plugins</em></li>
 </ul>
 </div></blockquote>
-<table class="docutils footnote" frame="void" id="id4" rules="none">
+<table class="docutils footnote" frame="void" id="id5" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Custom data types such as the PropertyDict are also part of ViCE&#8217;s
 core, but they were left out of the chart for the sake of simplicity.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id5" rules="none">
+<table class="docutils footnote" frame="void" id="id6" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td><a class="reference external" href="http://www.python.org/doc/newstyle/">http://www.python.org/doc/newstyle/</a></td></tr>
 </tbody>
 </table>
-<table class="last docutils footnote" frame="void" id="id6" rules="none">
+<table class="docutils footnote" frame="void" id="id7" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>Only plugins which are meant to be instanciated need assign the NAME
 class attribute. That is, plugin base classes should <em>not</em> assign
 this attribute.</td></tr>
+</tbody>
+</table>
+<table class="last docutils footnote" frame="void" id="id8" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[4]</a></td><td>Note that we did not say &#8220;tightly coupled&#8221;. As such, it is possible
+for alternate implementations to be used.</td></tr>
 </tbody>
 </table>
 </div>

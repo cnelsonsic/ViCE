@@ -85,9 +85,9 @@ modelled after their respective roles:</p>
 <li class="toctree-l1"><a class="reference internal" href="api_reference.html">4. API Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api_reference.html#vice">4.1. vice</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api_reference.html#module-vice.database">4.2. vice.database &#8211; Database abstraction and integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api_reference.html#module-vice.plugins">4.3. vice.plugins &#8211; Provides infrastructure for implementing plugins</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api_reference.html#module-vice.plugins.actions">4.3.1. vice.plugins.actions &#8211; ViCE&#8217;s builtin action plugins</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api_reference.html#module-vice.plugins.items">4.3.2. vice.plugins.items &#8211; ViCE&#8217;s builtin item plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_reference.html#module-vice.plugins">4.3. vice.plugins &#8211; Infrastructure for implementing plugins</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#module-vice.plugins.actions">4.3.1. vice.plugins.actions &#8211; Builtin action plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_reference.html#module-vice.plugins.items">4.3.2. vice.plugins.items &#8211; Builtin item plugins</a></li>
 </ul>
 </li>
 </ul>
@@ -131,21 +131,24 @@ it doesn&#8217;t need to be used.</p>
 <p>ViCE is a framework suitable for use by users
 of varying interests and technical backgrounds. In an effort to help facilitate
 learning, three key user roles have been identified, as follows:</p>
-<ul class="simple">
-<li><strong>Players</strong>: These are the individuals who aren&#8217;t concerned with how
+<dl class="docutils">
+<dt>Players</dt>
+<dd>These are the individuals who aren&#8217;t concerned with how
 ViCE&#8217;s internals work, and could care less
 about creating new or porting existing :abbr:TCGs to
 the framework. There sole reason for using
 ViCE is to play whatever games <em>do</em>
-exist for ViCE.</li>
-<li><strong>Designers</strong>: These are the individuals who are not interested in the
+exist for ViCE.</dd>
+<dt>Designers</dt>
+<dd>These are the individuals who are not interested in the
 implementation details of ViCE&#8217;s internals,
 but would like to learn enough to enable them to either create new TCGs or
-port existing ones to ViCE.</li>
-<li><strong>Developers</strong>: These are the individuals who are interested in <em>how</em>
+port existing ones to ViCE.</dd>
+<dt>Developers</dt>
+<dd>These are the individuals who are interested in <em>how</em>
 ViCE works, for the sake of implementing
-new features not possible through the currently available API or fixing bugs.</li>
-</ul>
+new features not possible through the currently available API or fixing bugs.</dd>
+</dl>
 <p>While we have defined three distinct roles, these roles are not mutually
 exclusive, and can be viewed as somewhat hierarchial. That is, an individual
 who categorizes himself as a developer may also categorize himself as a

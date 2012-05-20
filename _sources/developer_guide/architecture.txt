@@ -25,14 +25,36 @@ refer to the :doc:`/designer_guide/designer_index`.
 
 Database Layer
 --------------
-.. todo::
-    * Discuss the database layer and why it wasn't implemented as a plugin.
-    * Explain that some abstractions do not exist (such as a better select
-      statement, joins, and edit/deletion facilities
+.. note::
+    Not all of SQLAlchemy's API has been abstracted, so some things are 
+    not yet possible. For more information, consult the :doc:`/api_reference`.    
 
-.. todo::
-    * link to relevant sections in the API documentation (perhaps as a 
-      see also directive?)
+The database layer is an abstraction ontop of 
+the already excellent abstraction layer `SQLAlchemy <http://sqlalchemy.org>`_.
+While this might seem excessive, it is necessary for three reasons:
+
+#. Flexibility: Tucking the implementation details behind a simple API allows 
+   us to not only change the underlying module used if we ever decide to, but 
+   also selectivelly reimplement features that we feel aren't covered well by
+   the underlying module.
+
+#. Brevity: ViCE's database API is much more concise than SQLAlchemy alone,
+   serves to simplify code, as well as the learning of the API itself. 
+
+#. Seemless Integration: Since the database layer sits next to the plugin
+   framework and beneath all other components, it's tightly integrated [#]_ 
+   with the rest of the framework. 
+
+Currently, the database layer is not implemented as a plugin because
+SQLAlchemy provides a unified API on top of many 
+:abbr:`RDBMSs (Relational Database Management Systems)`.
+
+.. seealso::
+    * :ref:`_vice`
+
+    * :ref:`_vice.database`
+
+    * :ref:`_vice.plugins`
 
  .. [#] Custom data types such as the PropertyDict are also part of ViCE's
          core, but they were left out of the chart for the sake of simplicity.
@@ -42,3 +64,6 @@ Database Layer
  .. [#] Only plugins which are meant to be instanciated need assign the NAME 
          class attribute. That is, plugin base classes should *not* assign
          this attribute.
+
+ .. [#] Note that we did not say "tightly coupled". As such, it is possible 
+        for alternate implementations to be used.
