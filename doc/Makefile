@@ -24,6 +24,7 @@ help:
 	@echo "  gh-pages   to make standalone HTML files and push them to github"
 	@echo "  html       to make standalone HTML files"
 	@echo "  latexpdf   to make LaTeX files and run them through pdflatex"
+	@echo "  pdf        to make a pdf file directly from source"
 	@echo "  coverage   to collect documentation coverage stats"
 
 clean:
@@ -68,6 +69,14 @@ latexpdf:
 	@echo "Running LaTeX files through pdflatex..."
 	$(MAKE) -C $(BUILDDIR)/latex all-pdf
 	@echo "pdflatex finished; the PDF files are in $(BUILDDIR)/latex."
+
+pdf:
+	@echo "Switching to gh-pages branch..."
+	git checkout gh-pages
+	git checkout master -- ../doc ../vice
+	./convert_svgs.sh
+	$(SPHINXBUILD -b pdf $(ALLSPHINXOPTS) $(BUILDDIR)/pdf
+	@echo "Build finished. The PDF files are in $(BUILDDIR)/pdf."
 
 coverage:
 	@echo "Switching to gh-pages branch..."
