@@ -1,7 +1,9 @@
-Table of Contents
-#################
+ViCE User Manual
+################
 
-Welcome to ViCE's official user manual!
+
+Table of Contents
+=================
 
 .. toctree::
     :numbered:
