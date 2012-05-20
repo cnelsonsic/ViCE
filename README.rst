@@ -27,8 +27,21 @@ In the future, the following depenencies will also be required:
 
 Download
 ========
+ViCE is made available through stable and unstable releases. For those wanting
+to experiment with new features, feel free to try the unstable release with 
+the understanding that things are expected to break. For those who are 
+patient enough to wait until such features are complete, it is recommended
+that you stick to the stable versions.
 
-ViCE may downloaded from the command line::
+Stable Version
+--------------
+* zip: https://github.com/downloads/aspidites/ViCE/ViCE-0.0.1.zip 
+
+* tar.gz: https://github.com/downloads/aspidites/ViCE/ViCE-0.0.1.tar.gz 
+
+Unstable Version
+----------------
+The unstable version of ViCE may downloaded from the command line::
     git clone git://github.com/aspidites/ViCE.git
 
 If git isn't installed, the repository is also available as a compresed archive:
