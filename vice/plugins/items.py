@@ -49,7 +49,7 @@ class Item(Plugin):
         On instantiation, the values of ATTRIBUTES are converted to properties
         of the plugin instance. These properties are semi-immutable. That is,
         on instantiating of an item plugin, you may change the value of existing
-        attributes, but you may not create new ones. If you whish to do so, you
+        attributes, but you may not create new ones. If you wish to do so, you
         should add the new attribute to ATTRIBUTES when defining the class.
     """
 

@@ -1,6 +1,6 @@
 Introduction
 ############
-:abbr:`ViCE (Virtual Cardgame Engine)` is an open source, portable, modular 
+:abbr:`ViCE (Virtual Card-game Engine)` is an open source, portable, modular 
 framework for playing and creating :abbr:`TCGs (Trading Card Games)`. This 
 manual outlines ViCE's design principles, describes its various features from 
 three perspectives (which we refer to as roles), and even includes reference 
@@ -14,7 +14,7 @@ documentation for the public API.
 How This Manual is Organized
 ============================
 This book is organized into four parts, the first three of which being guides
-modelled after their respective roles:
+modeled after their respective roles:
 
 .. toctree::
     :numbered:
@@ -49,9 +49,9 @@ Mac OS, and Windows.
 
 Modularity
 ----------
-Most of ViCE's features are implemented ontop 
+Most of ViCE's features are implemented on top 
 of its plugin architecture to allow for maximum extensibility. Not only does 
-this imply that new features can be added rather easlily, but also that features 
+this imply that new features can be added rather easily, but also that features 
 may be used a la carte: if a feature isn't required for you to finish a plugin, 
 it doesn't need to be used.
 
@@ -81,6 +81,6 @@ Developers
     new features not possible through the currently available API or fixing bugs.
 
 While we have defined three distinct roles, these roles are not mutually
-exclusive, and can be viewed as somewhat hierarchial. That is, an individual
+exclusive, and can be viewed as somewhat hierarchical. That is, an individual
 who categorizes himself as a developer may also categorize himself as a
 designer and player.

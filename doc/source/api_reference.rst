@@ -22,8 +22,8 @@ vice.plugins -- Infrastructure for implementing plugins
 
 .. _vice.plugins.actions:
 
-vice.plugins.actions -- Builtin action plugins
-----------------------------------------------
+vice.plugins.actions -- Built-in action plugins
+-----------------------------------------------
 .. automodule:: vice.plugins.actions
     :members:
 
@@ -32,8 +32,8 @@ vice.plugins.actions -- Builtin action plugins
 
 .. _vice.plugins.items:
 
-vice.plugins.items -- Builtin item plugins
-------------------------------------------
+vice.plugins.items -- Built-in item plugins
+-------------------------------------------
 .. automodule:: vice.plugins.items
     :members:
 
