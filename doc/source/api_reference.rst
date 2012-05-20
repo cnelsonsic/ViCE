@@ -1,6 +1,5 @@
 API Reference
 #############
-
 .. _vice:
 
 vice
