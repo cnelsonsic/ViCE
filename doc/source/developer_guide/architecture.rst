@@ -53,14 +53,18 @@ SQLAlchemy provides a unified API on top of many
 
     * :ref:`vice`    
 
- .. [#] Custom data types such as the PropertyDict are also part of ViCE's
+    * :ref:`vice.database`
+
+    * :ref:`vice.plugins`
+
+.. [#] Custom data types such as the PropertyDict are also part of ViCE's
          core, but they were left out of the chart for the sake of simplicity.
 
- .. [#] http://www.python.org/doc/newstyle/
+.. [#] http://www.python.org/doc/newstyle/
 
- .. [#] Only plugins which are meant to be instanciated need assign the NAME 
-         class attribute. That is, plugin base classes should *not* assign
-         this attribute.
+.. [#] Only plugins which are meant to be instanciated need assign the NAME 
+       class attribute. That is, plugin base classes should *not* assign
+       this attribute.
 
- .. [#] Note that we did not say "tightly coupled". As such, it is possible 
+.. [#] Note that we did not say "tightly coupled". As such, it is possible 
         for alternate implementations to be used.
