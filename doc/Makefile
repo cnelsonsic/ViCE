@@ -20,30 +20,21 @@ I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) source
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
+	@echo "  clean      to clean the working tree for a fresh build"
 	@echo "  gh-pages   to make standalone HTML files and push them to github"
 	@echo "  html       to make standalone HTML files"
-	@echo "  dirhtml    to make HTML files named index.html in directories"
-	@echo "  singlehtml to make a single large HTML file"
-	@echo "  pickle     to make pickle files"
-	@echo "  json       to make JSON files"
-	@echo "  htmlhelp   to make HTML files and a HTML help project"
-	@echo "  qthelp     to make HTML files and a qthelp project"
-	@echo "  devhelp    to make HTML files and a Devhelp project"
-	@echo "  epub       to make an epub"
-	@echo "  latex      to make LaTeX files, you can set PAPER=a4 or PAPER=letter"
 	@echo "  latexpdf   to make LaTeX files and run them through pdflatex"
-	@echo "  text       to make text files"
-	@echo "  man        to make manual pages"
-	@echo "  texinfo    to make Texinfo files"
-	@echo "  info       to make Texinfo files and run them through makeinfo"
-	@echo "  gettext    to make PO message catalogs"
-	@echo "  changes    to make an overview of all changed/added/deprecated items"
-	@echo "  linkcheck  to check all external links for integrity"
-	@echo "  doctest    to run all doctests embedded in the documentation (if enabled)"
 	@echo "  coverage   to collect documentation coverage stats"
 
 clean:
+	@echo "Switching to gh-pages branch..."
+	git checkout gh-pages
 	find $(BUILDDIR)/* -maxdepth 0 -name 'vice' -o -name 'doc' -prune -o -exec rm -rf '{}' ';'
+	git add ..
+	git commit -am "cleaning tree for fresh upload."
+	git push origin gh-pages
+	git checkout master
+	echo "Clean finished. Please run 'make gh-pages'"
 
 html:
 	@echo "Switching to gh-pages branch..."
@@ -53,15 +44,6 @@ html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
-
-epub:
-	@echo "Switching to gh-pages branch..."
-	git checkout gh-pages
-	git checkout master -- ../doc ../vice
-	./convert_svgs.sh
-	$(SPHINXBUILD) -b epub $(ALLSPHINXOPTS) $(BUILDDIR)/epub
-	@echo
-	@echo "Build finished. The epub file is in $(BUILDDIR)/epub."
 
 gh-pages:
 	@echo "Switching to gh-pages branch..."
@@ -87,16 +69,6 @@ latexpdf:
 	@echo "Running LaTeX files through pdflatex..."
 	$(MAKE) -C $(BUILDDIR)/latex all-pdf
 	@echo "pdflatex finished; the PDF files are in $(BUILDDIR)/latex."
-
-linkcheck:
-	@echo "Switching to gh-pages branch..."
-	git checkout gh-pages
-	git checkout master -- ../doc ../vice
-	./convert_svgs.sh
-	$(SPHINXBUILD) -b linkcheck $(ALLSPHINXOPTS) $(BUILDDIR)/linkcheck
-	@echo
-	@echo "Link check complete; look for any errors in the above output " \
-	      "or in $(BUILDDIR)/linkcheck/output.txt."
 
 coverage:
 	@echo "Switching to gh-pages branch..."
