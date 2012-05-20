@@ -75,7 +75,7 @@ pdf:
 	git checkout gh-pages
 	git checkout master -- ../doc ../vice
 	./convert_svgs.sh
-	$(SPHINXBUILD -b pdf $(ALLSPHINXOPTS) $(BUILDDIR)/pdf
+	$(SPHINXBUILD) -b pdf $(ALLSPHINXOPTS) $(BUILDDIR)/pdf
 	@echo "Build finished. The PDF files are in $(BUILDDIR)/pdf."
 
 coverage:

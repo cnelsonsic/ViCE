@@ -12,7 +12,7 @@ documentation for the public API.
     to them collectively (no pun intended) as TCGs. 
 
 User Roles
-==========
+----------
 ViCE is a framework suitable for use by users 
 of varying interests and technical backgrounds. In an effort to help facilitate 
 learning, three key user roles have been identified, as follows:
@@ -42,7 +42,7 @@ who categorizes himself as a developer may also categorize himself as a
 designer and player.
 
 How This Manual is Organized
-============================
+----------------------------
 This book is organized into four parts, the first three of which being guides
 modeled after their respective roles:
 
@@ -52,7 +52,7 @@ modeled after their respective roles:
 #. API Reference
 
 Design Principles
-=================
+-----------------
 In this section, we'll talk about the core principles that we adhere to when
 developing, designing, and playing ViCE.
 
