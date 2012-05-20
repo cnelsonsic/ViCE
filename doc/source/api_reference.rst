@@ -23,7 +23,7 @@ vice.plugins -- Infrastructure for implementing plugins
 .. _vice.plugins.actions:
 
 vice.plugins.actions -- Built-in action plugins
-----------------------------------------------
+-----------------------------------------------
 .. automodule:: vice.plugins.actions
     :members:
 
