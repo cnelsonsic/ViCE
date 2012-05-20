@@ -1,3 +1,8 @@
+Table of Contents
+#################
+
+Welcome to ViCE's official user manual!
+
 .. toctree::
     :numbered:
 
