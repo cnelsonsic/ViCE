@@ -34,7 +34,7 @@ clean:
 	git commit -am "cleaning tree for fresh upload."
 	git push origin gh-pages
 	git checkout master
-	echo "Clean finished. Please run 'make gh-pages'
+	echo "Clean finished. Please run 'make gh-pages'"
 
 html:
 	@echo "Switching to gh-pages branch..."
