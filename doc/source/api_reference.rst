@@ -33,7 +33,7 @@ vice.plugins.actions -- Built-in action plugins
 .. _vice.plugins.items:
 
 vice.plugins.items -- Built-in item plugins
-------------------------------------------
+-------------------------------------------
 .. automodule:: vice.plugins.items
     :members:
 
