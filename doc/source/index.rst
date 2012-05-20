@@ -1,3 +1,12 @@
+.. toctree::
+    :numbered:
+    :hidden:
+
+    player_guide/player_index
+    designer_guide/designer_index
+    developer_guide/developer_index
+    api_reference
+
 Introduction
 ############
 :abbr:`ViCE (Virtual Card-game Engine)` is an open source, portable, modular 
@@ -16,13 +25,14 @@ How This Manual is Organized
 This book is organized into four parts, the first three of which being guides
 modeled after their respective roles:
 
-.. toctree::
-    :numbered:
+* :doc:`player_guide/player_index`
 
-    player_guide/player_index
-    designer_guide/designer_index
-    developer_guide/developer_index
-    api_reference
+* :doc:`designer_guide/designer_index`
+
+* :doc:`developer_guide/developer_index`
+
+* :doc:`api_reference`
+
 
 Design Principles
 =================
