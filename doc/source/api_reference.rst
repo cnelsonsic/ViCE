@@ -1,7 +1,7 @@
 API Reference
 #############
 
-.. _api.vice:
+.. _vice:
 
 vice
 ====
