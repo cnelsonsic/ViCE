@@ -14,7 +14,7 @@ players will then be built on top of these.
 
 Plugin Framework
 ----------------
-ViCE's plugin framework is based on the simpole fact that all new-style
+ViCE's plugin framework is based on the simple fact that all new-style
 classes [#]_ in python know about their subclasses. All plugins [#]_ must
 be given a name by assigning the class attribute NAME. It is through this
 name that plugins are identified, and without it, a plugin won't be
@@ -29,19 +29,19 @@ Database Layer
     Not all of SQLAlchemy's API has been abstracted, so some things are 
     not yet possible. For more information, consult the :doc:`/api_reference`.    
 
-The database layer is an abstraction ontop of 
+The database layer is an abstraction on top of 
 the already excellent abstraction layer `SQLAlchemy <http://sqlalchemy.org>`_.
 While this might seem excessive, it is necessary for three reasons:
 
 #. Flexibility: Tucking the implementation details behind a simple API allows 
    us to not only change the underlying module used if we ever decide to, but 
-   also selectivelly reimplement features that we feel aren't covered well by
+   also selectively reimplement features that we feel aren't covered well by
    the underlying module.
 
 #. Brevity: ViCE's database API is much more concise than SQLAlchemy alone,
    serves to simplify code, as well as the learning of the API itself. 
 
-#. Seemless Integration: Since the database layer sits next to the plugin
+#. Seamless Integration: Since the database layer sits next to the plugin
    framework and beneath all other components, it's tightly integrated [#]_ 
    with the rest of the framework. 
 
@@ -62,7 +62,7 @@ SQLAlchemy provides a unified API on top of many
 
 .. [#] http://www.python.org/doc/newstyle/
 
-.. [#] Only plugins which are meant to be instanciated need assign the NAME 
+.. [#] Only plugins which are meant to be instantiated need assign the NAME 
        class attribute. That is, plugin base classes should *not* assign
        this attribute.
 
