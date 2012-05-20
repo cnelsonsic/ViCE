@@ -26,7 +26,7 @@ class Plugin(object):
 
         All new plugin types are created by subclassing Plugin. In
         most cases, you will want to inherit from a Plugin subclass
-        rather than directly from Plugin iteself.
+        rather than directly from Plugin itself.
 
         All new plugins must have a NAME class attribute, which is used mainly
         for plugin discovery.

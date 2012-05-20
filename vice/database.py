@@ -41,7 +41,7 @@ class Database(object):
     """ Abstraction layer on top of SQLAlchemy's interface.
 
         While SQLAlchemy abstracts the particulars of different
-        databse backends and the subtile ways SQL may differ within them,
+        database backends and the subtle ways SQL may differ within them,
         this Database class abstracts the SQLAlchemy API into something more
         simple, meanwhile adding facilities that make it integrate better with
         ViCE's plugin architecture.
@@ -146,7 +146,7 @@ class Database(object):
             Example::
 
                 db.create_record('cards',
-                    # note that id is autoincremented, so isn't specified
+                    # note that id is auto-incremented, so isn't specified
                     name = 'Imp',
                     atk = 2,
                     def_ = 2
