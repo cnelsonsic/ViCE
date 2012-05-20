@@ -1,11 +1,10 @@
 .. toctree::
     :numbered:
     :hidden:
-    :glob:
 
-    player_guide/*
-    designer_guide/*
-    developer_guide/*
+    player_guide/player_index
+    designer_guide/designer_index
+    developer_guide/developer_index
     api_reference
 
 Introduction
@@ -56,11 +55,11 @@ How This Manual is Organized
 This book is organized into four parts, the first three of which being guides
 modeled after their respective roles:
 
-* :doc:`player_guide/player_index`
+#. :doc:`player_guide/player_index`
 
-* :doc:`designer_guide/designer_index`
+#. :doc:`designer_guide/designer_index`
 
-* :doc:`developer_guide/developer_index`
+#. :doc:`developer_guide/developer_index`
 
 * :doc:`api_reference`
 
