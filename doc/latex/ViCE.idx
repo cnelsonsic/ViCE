@@ -1,0 +1,21 @@
+\indexentry{PropertyDict (class in vice)|hyperpage}{35}
+\indexentry{vice.database (module)|hyperpage}{37}
+\indexentry{Database (class in vice.database)|hyperpage}{37}
+\indexentry{connect() (vice.database.Database method)|hyperpage}{37}
+\indexentry{create\_record() (vice.database.Database method)|hyperpage}{37}
+\indexentry{create\_table() (vice.database.Database method)|hyperpage}{37}
+\indexentry{select() (vice.database.Database method)|hyperpage}{38}
+\indexentry{tables (vice.database.Database attribute)|hyperpage}{38}
+\indexentry{integer() (in module vice.database)|hyperpage}{38}
+\indexentry{string() (in module vice.database)|hyperpage}{38}
+\indexentry{vice.plugins (module)|hyperpage}{39}
+\indexentry{Plugin (class in vice.plugins)|hyperpage}{39}
+\indexentry{plugins() (vice.plugins.Plugin class method)|hyperpage}{39}
+\indexentry{vice.plugins.actions (module)|hyperpage}{39}
+\indexentry{Action (class in vice.plugins.actions)|hyperpage}{39}
+\indexentry{new() (vice.plugins.actions.Action class method)|hyperpage}{39}
+\indexentry{plugins() (vice.plugins.actions.Action class method)|hyperpage}{40}
+\indexentry{vice.plugins.items (module)|hyperpage}{40}
+\indexentry{Item (class in vice.plugins.items)|hyperpage}{40}
+\indexentry{fromTable() (vice.plugins.items.Item class method)|hyperpage}{40}
+\indexentry{new() (vice.plugins.items.Item class method)|hyperpage}{40}

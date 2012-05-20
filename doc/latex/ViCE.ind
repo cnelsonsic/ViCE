@@ -1,0 +1,54 @@
+\begin{theindex}
+\def\bigletter#1{{\Large\sffamily#1}\nopagebreak\vspace{1mm}}
+
+  \bigletter A
+  \item Action (class in vice.plugins.actions), \hyperpage{39}
+
+  \indexspace
+  \bigletter C
+  \item connect() (vice.database.Database method), \hyperpage{37}
+  \item create\_record() (vice.database.Database method), \hyperpage{37}
+  \item create\_table() (vice.database.Database method), \hyperpage{37}
+
+  \indexspace
+  \bigletter D
+  \item Database (class in vice.database), \hyperpage{37}
+
+  \indexspace
+  \bigletter F
+  \item fromTable() (vice.plugins.items.Item class method), \hyperpage{40}
+
+  \indexspace
+  \bigletter I
+  \item integer() (in module vice.database), \hyperpage{38}
+  \item Item (class in vice.plugins.items), \hyperpage{40}
+
+  \indexspace
+  \bigletter N
+  \item new() (vice.plugins.actions.Action class method), \hyperpage{39}
+  \item new() (vice.plugins.items.Item class method), \hyperpage{40}
+
+  \indexspace
+  \bigletter P
+  \item Plugin (class in vice.plugins), \hyperpage{39}
+  \item plugins() (vice.plugins.actions.Action class method), \hyperpage{40}
+  \item plugins() (vice.plugins.Plugin class method), \hyperpage{39}
+  \item PropertyDict (class in vice), \hyperpage{35}
+
+  \indexspace
+  \bigletter S
+  \item select() (vice.database.Database method), \hyperpage{38}
+  \item string() (in module vice.database), \hyperpage{38}
+
+  \indexspace
+  \bigletter T
+  \item tables (vice.database.Database attribute), \hyperpage{38}
+
+  \indexspace
+  \bigletter V
+  \item vice.database (module), \hyperpage{37}
+  \item vice.plugins (module), \hyperpage{39}
+  \item vice.plugins.actions (module), \hyperpage{39}
+  \item vice.plugins.items (module), \hyperpage{40}
+
+\end{theindex}
