@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>3.1. Architecture &mdash; ViCE 0.0.1 documentation</title>
+    <title>4.1. Architecture &mdash; ViCE 0.0.1 documentation</title>
     
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -26,9 +26,9 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="ViCE 0.0.1 documentation" href="../index.html" />
-    <link rel="up" title="3. Developer Guide" href="developer_index.html" />
-    <link rel="next" title="4. API Reference" href="../api_reference.html" />
-    <link rel="prev" title="3. Developer Guide" href="developer_index.html" /> 
+    <link rel="up" title="4. Developer Guide" href="developer_index.html" />
+    <link rel="next" title="5. API Reference" href="../api_reference.html" />
+    <link rel="prev" title="4. Developer Guide" href="developer_index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -41,16 +41,16 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../api_reference.html" title="4. API Reference"
+          <a href="../api_reference.html" title="5. API Reference"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="developer_index.html" title="3. Developer Guide"
+          <a href="developer_index.html" title="4. Developer Guide"
              accesskey="P">previous</a> |</li>
     <li><a href="https://github.com/aspidites/ViCE">Project Homepage</a> &raquo;</li>
     
         <li><a href="../index.html">ViCE 0.0.1 documentation</a> &raquo;</li>
 
-          <li><a href="developer_index.html" accesskey="U">3. Developer Guide</a> &raquo;</li> 
+          <li><a href="developer_index.html" accesskey="U">4. Developer Guide</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -60,7 +60,7 @@
           <div class="body">
             
   <div class="section" id="architecture">
-<h1>3.1. Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h1>
+<h1>4.1. Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h1>
 <img alt="../_images/stack_diagram.png" src="../_images/stack_diagram.png" />
 <p>As you can see from the architecture stack diagram above, ViCE&#8217;s core is
 composed of the plugin framework and database layer <a class="footnote-reference" href="#id5" id="id1">[1]</a>. Item, Action, and other,
@@ -73,7 +73,7 @@ players will then be built on top of these.</p>
 represented component is.</p>
 </div>
 <div class="section" id="plugin-framework">
-<h2>3.1.1. Plugin Framework<a class="headerlink" href="#plugin-framework" title="Permalink to this headline">¶</a></h2>
+<h2>4.1.1. Plugin Framework<a class="headerlink" href="#plugin-framework" title="Permalink to this headline">¶</a></h2>
 <p>ViCE&#8217;s plugin framework is based on the simple fact that all new-style
 classes <a class="footnote-reference" href="#id6" id="id2">[2]</a> in python know about their subclasses. All plugins <a class="footnote-reference" href="#id7" id="id3">[3]</a> must
 be given a name by assigning the class attribute NAME. It is through this
@@ -83,7 +83,7 @@ discoverable.</p>
 refer to the <a class="reference internal" href="../designer_guide/designer_index.html"><em>Designer Guide</em></a>.</p>
 </div>
 <div class="section" id="database-layer">
-<h2>3.1.2. Database Layer<a class="headerlink" href="#database-layer" title="Permalink to this headline">¶</a></h2>
+<h2>4.1.2. Database Layer<a class="headerlink" href="#database-layer" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Not all of SQLAlchemy&#8217;s API has been abstracted, so some things are
@@ -166,25 +166,26 @@ for alternate implementations to be used.</td></tr>
 <script type="text/javascript">$('#searchbox').show(0);</script>
 <h3><a href="../index.html">Table Of Contents</a></h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../player_guide/player_index.html">1. Player Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../designer_guide/designer_index.html">2. Designer Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="developer_index.html">3. Developer Guide</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="">3.1. Architecture</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#plugin-framework">3.1.1. Plugin Framework</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#database-layer">3.1.2. Database Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preface.html">1. Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../player_guide/player_index.html">2. Player Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../designer_guide/designer_index.html">3. Designer Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="developer_index.html">4. Developer Guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">4.1. Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#plugin-framework">4.1.1. Plugin Framework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#database-layer">4.1.2. Database Layer</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../api_reference.html">4. API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api_reference.html">5. API Reference</a></li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="developer_index.html"
-                        title="previous chapter">3. Developer Guide</a></p>
+                        title="previous chapter">4. Developer Guide</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="../api_reference.html"
-                        title="next chapter">4. API Reference</a></p>
+                        title="next chapter">5. API Reference</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/developer_guide/architecture.txt"
@@ -204,16 +205,16 @@ for alternate implementations to be used.</td></tr>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../api_reference.html" title="4. API Reference"
+          <a href="../api_reference.html" title="5. API Reference"
              >next</a> |</li>
         <li class="right" >
-          <a href="developer_index.html" title="3. Developer Guide"
+          <a href="developer_index.html" title="4. Developer Guide"
              >previous</a> |</li>
     <li><a href="https://github.com/aspidites/ViCE">Project Homepage</a> &raquo;</li>
     
         <li><a href="../index.html">ViCE 0.0.1 documentation</a> &raquo;</li>
 
-          <li><a href="developer_index.html" >3. Developer Guide</a> &raquo;</li> 
+          <li><a href="developer_index.html" >4. Developer Guide</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
