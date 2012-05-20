@@ -200,7 +200,7 @@ latex_documents = [
 
 # For "manual" documents, if this is true, then toplevel headings are parts,
 # not chapters.
-#latex_use_parts = True
+latex_use_parts = True
 
 # If true, show page references after internal links.
 #latex_show_pagerefs = False
@@ -293,10 +293,10 @@ epub_copyright = '2011-2012, Edwin Marshall'
 
 # -- Options for PDF output --------------------------------------------------
 pdf_documents = [
-    ('index', u'ViCE User Manual', u'Edwin Marshall')
+    ('index', u'ViCE', u'ViCE User Manual', u'Edwin Marshall')
 ]
 pdf_compressed = True
 pdf_fit_mode = "shrink"
-pdf_break_level = 1
 pdf_use_numbered_lins = True
 pdf_extensions = ['vectorpdf', 'inkscape_r2p']
+pdf_break_level = 1
