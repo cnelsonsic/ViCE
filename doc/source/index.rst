@@ -1,6 +1,5 @@
 .. toctree::
     :numbered:
-    :hidden:
 
     preface
     player_guide/player_index
