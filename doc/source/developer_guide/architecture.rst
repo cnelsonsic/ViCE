@@ -50,11 +50,7 @@ SQLAlchemy provides a unified API on top of many
 :abbr:`RDBMSs (Relational Database Management Systems)`.
 
 .. seealso::
-    * :ref:`vice`
-
-    * :ref:`vice.database`
-
-    * :ref:`vice.plugins`
+    :py:mod:`vice`
 
  .. [#] Custom data types such as the PropertyDict are also part of ViCE's
          core, but they were left out of the chart for the sake of simplicity.
