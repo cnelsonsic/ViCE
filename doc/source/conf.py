@@ -26,7 +26,7 @@ sys.path.insert(0, os.path.abspath('../..'))
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.coverage', 'sphinx.ext.viewcode',
-              'sphinx.ext.todo', 'sphinx.ext.doctest', 'rst2pdf.pdfbuilder']
+              'sphinx.ext.todo', 'sphinx.ext.doctest']
 
 # generate output for todo directives
 todo_include_todos = True
@@ -200,7 +200,7 @@ latex_documents = [
 
 # For "manual" documents, if this is true, then toplevel headings are parts,
 # not chapters.
-latex_use_parts = True
+#latex_use_parts = True
 
 # If true, show page references after internal links.
 #latex_show_pagerefs = False
@@ -290,13 +290,3 @@ epub_copyright = '2011-2012, Edwin Marshall'
 
 # Allow duplicate toc entries.
 #epub_tocdup = True
-
-# -- Options for PDF output --------------------------------------------------
-pdf_documents = [
-    ('index', u'ViCE', u'ViCE User Manual', u'Edwin Marshall')
-]
-pdf_compressed = True
-pdf_fit_mode = "shrink"
-pdf_use_numbered_lins = True
-pdf_extensions = ['vectorpdf', 'inkscape_r2p']
-pdf_break_level = 1
