@@ -51,7 +51,7 @@ SQLAlchemy provides a unified API on top of many
 
 .. seealso::
 
-    * :ref:`api.vice`    
+    * :ref:`vice`    
 
  .. [#] Custom data types such as the PropertyDict are also part of ViCE's
          core, but they were left out of the chart for the sake of simplicity.
