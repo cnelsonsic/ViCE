@@ -1,6 +1,7 @@
 .. toctree::
     :numbered:
     :hidden:
+    :glob:
 
     player_guide/*
     designer_guide/*
