@@ -6,7 +6,7 @@ setup(
     author_email='aspidites@wtactics.org',
     description=('Portable, open source, modular framework for both creating '
                  'and playing trading card games.'),
-    long_description=open('doc/source/preface.rst').read(),
+    long_description=open('README.rst').read(),
     license='AGPL',
     keywords='tcg ccg python wtactics',
     url='http://aspidites.github.com/ViCE',
