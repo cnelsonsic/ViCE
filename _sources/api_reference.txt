@@ -2,23 +2,25 @@ API Reference
 #############
 .. _vice:
 
-vice
-====
+vice -- Main package, also provides PropertyDict
+================================================
 .. autoclass:: vice.PropertyDict
 
-.. _api.vice.database:
+.. _vice.database:
 
 vice.database -- Database abstraction and integration
 =====================================================
 .. automodule:: vice.database
     :members:
 
-.. _api.vice.plugins:
+.. _vice.plugins:
 
 vice.plugins -- Infrastructure for implementing plugins
 =======================================================
 .. automodule:: vice.plugins
     :members:
+
+.. _vice.plugins.actions:
 
 vice.plugins.actions -- Builtin action plugins
 ----------------------------------------------
@@ -27,6 +29,8 @@ vice.plugins.actions -- Builtin action plugins
 
 .. .. automodule:: vice.plugins.containers
 ..     :members:
+
+.. _vice.plugins.items:
 
 vice.plugins.items -- Builtin item plugins
 ------------------------------------------
