@@ -32,7 +32,6 @@ clean:
 	find $(BUILDDIR)/* -maxdepth 0 -name 'vice' -o -name 'doc' -prune -o -exec rm -rf '{}' ';'
 	git add ..
 	git commit -am "cleaning tree for fresh upload."
-	git push origin gh-pages
 	git checkout master
 	echo "Clean finished. Please run 'make gh-pages'"
 
