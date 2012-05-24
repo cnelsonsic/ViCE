@@ -4,6 +4,7 @@ playing trading card games.
 Getting ViCE
 ############
 .. warning::
+
     The current version of ViCE is suitable for developers only. A version
     suitable for designers will be made available next, then finally, one
     that will cater to players. If you are unsure which category you belong
@@ -42,6 +43,7 @@ Stable Version
 Unstable Version
 ----------------
 The unstable version of ViCE may downloaded from the command line::
+
     git clone git://github.com/aspidites/ViCE.git
 
 If git isn't installed, the repository is also available as a compresed archive:
