@@ -76,5 +76,5 @@ class Item(Plugin):
         return cls.new(name, attributes)
 
     def __setattr__(self, name, value):
-        if self.__dict__.get(name):
-            self.__dict__[name] = value
+        if name in self.__dict__:
+            super(Item, self).__setattr__(name, value)

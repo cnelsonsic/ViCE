@@ -14,9 +14,9 @@ class TestItem(unittest.TestCase):
     def test_creation_from_new(self):
         item = Item.new("Dice", ('sides',))
 
-        assert item.__name__ == 'Dice', item.__name__
-        assert item.NAME == 'Dice', item.NAME
-        assert 'Dice' in Item.plugins(), Item.plugins().keys()
+        self.assertEqual(item.__name__, 'Dice')
+        self.assertEqual(item.NAME, 'Dice')
+        self.assertTrue('Dice' in Item.plugins())
 
     def test_creation_from_db(self):
         db = Database('sqlite:///:memory:')
@@ -29,15 +29,19 @@ class TestItem(unittest.TestCase):
 
         Card = Item.fromTable('Card', db.cards, exclude=['id'])
 
-        assert  Card.ATTRIBUTES == ('atk', 'def', 'name'), Card.ATTRIBUTES
+        self.assertEqual(Card.ATTRIBUTES, ('atk', 'def', 'name'))
 
     def test_attributes_created(self):
-        assert hasattr(self.counter, 'value'), dir(self.counter)
+        self.assertTrue(hasattr(self.counter, 'value'))
 
     def test_new_atttribute_creation_impossible(self):
         self.counter.owner = 'me'
 
-        assert not hasattr(self.counter, 'me'), self.counter.cost
+        self.assertFalse(hasattr(self.counter, 'owner'))
+
+    def test_attribute_assignable(self):
+        self.counter.value  = 7
+        self.assertEqual(self.counter.value, 7)
 
 
 if __name__ == '__main__':
