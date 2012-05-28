@@ -21,10 +21,12 @@ class testAction(unittest.TestCase):
     def test_plugins(self):
         actions = Action.plugins()
 
-        assert isinstance(actions.move, self.Move), type(actions.move)
+        self.assertIsInstance(actions.move, self.Move)
+
         actions.move(1, self.source, self.destination)
-        assert self.source == [1, 3], self.source
-        assert self.destination == [7, 8, 9, 2], self.destination
+        self.assertSequenceEqual(self.source, [1, 3])
+        self.assertSequenceEqual(self.destination, [7, 8, 9, 1])
+
 
     def test_creation_from_new(self):
         def shuffle(cls, item):
@@ -32,9 +34,9 @@ class testAction(unittest.TestCase):
 
         action = Action.new(shuffle)
 
-        assert action.__name__ == 'Shuffle', action.__name__
-        assert action.NAME == 'shuffle', action.NAME
-        assert 'shuffle' in Action.plugins(), Action.plugins().keys()
+        self.assertEqual(action.__name__, 'Shufle')
+        self.assertEqual(action.NAME, 'shuffle')
+        self.assertIn('shuffle', Action.plugins())
 
 
 if __name__ == '__main__':

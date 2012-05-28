@@ -1,4 +1,3 @@
-import os
 import unittest
 from vice.database import integer, string, Database
 
@@ -17,14 +16,14 @@ class TestSQLiteDatabase(unittest.TestCase):
 
         column_names = [column.name for column in self.db.cards.columns]
 
-        assert 'cards' in self.db.tables, self.db.tables
-        assert sorted(column_names) == ['atk', 'def', 'id', 'name'], sorted(column_names)
+        self.assertIn('cards', self.db.tables)
+        self.assertItemsEqual(column_names, ['atk', 'def', 'id', 'name'])
 
     def test_simple_table_selection(self):
         self.test_record_creation()
         result = self.db.select('cards')
 
-        assert result, result
+        self.assertIsNotNone(result)
 
     def test_record_creation(self):
         result = self.db.create_record('cards',
@@ -33,7 +32,7 @@ class TestSQLiteDatabase(unittest.TestCase):
             def_ = 2
         )
 
-        assert result, result
+        self.assertIsNotNone(result)
 
 if __name__ == '__main__':
     unittest.main()
