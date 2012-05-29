@@ -28,7 +28,10 @@ class ItemMeta(PluginMeta):
         return super(ItemMeta, cls).__new__(cls, name, bases, attrs)
 
 
-class Item(Plugin):
+ItemBase = ItemMeta('ItemBase', (Plugin,), {})
+
+
+class Item(ItemBase):
     """ Plugin that represents a games tangible objects.
 
         An item is any object within a card game that can be interacted
@@ -61,8 +64,6 @@ class Item(Plugin):
         attributes, but you may not create new ones. If you wish to do so, you
         should add the new attribute to ATTRIBUTES when defining the class.
     """
-
-    __metaclass__ = ItemMeta
 
     ATTRIBUTES = ()
 

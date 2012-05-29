@@ -29,7 +29,10 @@ class PluginMeta(type):
         return super(PluginMeta, cls).__new__(cls, name, bases, attrs)
 
 
-class Plugin(object):
+PluginBase = PluginMeta('Plugin', (object, ), {})
+
+
+class Plugin(PluginBase):
     """ Base class for all new plugin types.
 
         All new plugin types are created by subclassing Plugin. In
@@ -39,8 +42,6 @@ class Plugin(object):
         All new plugins must have a NAME class attribute, which is used mainly
         for plugin discovery.
     """
-
-    __metaclass__ = PluginMeta
 
     @classmethod
     def plugins(cls):

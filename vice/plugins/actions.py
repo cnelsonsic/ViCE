@@ -36,7 +36,10 @@ class ActionMeta(PluginMeta):
         return super(ActionMeta, cls).__new__(cls, name, bases, attrs)
 
 
-class Action(Plugin):
+ActionBase = ActionMeta('ActionBase', (Plugin,), {})
+
+
+class Action(ActionBase):
     """ Callable plugin that provides general operations for Item plugins.
 
         An action is a class which acts like a generic function that operates
@@ -60,8 +63,6 @@ class Action(Plugin):
 
             Action.new(foo)
     """
-
-    __metaclass__ = ActionMeta
 
     @classmethod
     def new(cls, function):
