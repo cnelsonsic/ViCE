@@ -17,7 +17,7 @@ class TestSQLiteDatabase(unittest.TestCase):
         column_names = [column.name for column in self.db.cards.columns]
 
         self.assertIn('cards', self.db.tables)
-        self.assertItemsEqual(column_names, ['atk', 'def', 'id', 'name'])
+        self.assertEqual(sorted(column_names), ['atk', 'def', 'id', 'name'])
 
     def test_simple_table_selection(self):
         self.test_record_creation()
