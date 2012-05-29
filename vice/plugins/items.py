@@ -17,7 +17,16 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with ViCE.  If not, see <http://www.gnu.org/licenses/>.
 
-from vice.plugins import Plugin
+from vice.plugins import Plugin, PluginMeta
+
+class ItemMeta(PluginMeta):
+    def __new__(cls, name, bases, attrs):
+        if attrs.get('ATTRIBUTES'):
+            for attribute in attrs['ATTRIBUTES']:
+                attrs[attribute] = None
+
+        return super(ItemMeta, cls).__new__(cls, name, bases, attrs)
+
 
 class Item(Plugin):
     """ Plugin that represents a games tangible objects.
@@ -53,17 +62,15 @@ class Item(Plugin):
         should add the new attribute to ATTRIBUTES when defining the class.
     """
 
-    ATTRIBUTES = None
+    __metaclass__ = ItemMeta
 
-    def __init__(self):
-        for attribute in self.ATTRIBUTES:
-            self.__dict__[attribute] = None
+    ATTRIBUTES = ()
 
     @classmethod
     def new(cls, name, attributes):
         """ Convenience method used to help simplify the creation of new items. """
-        return type(name, (cls,),
-                    dict(NAME=name, ATTRIBUTES=tuple(set(attributes))))
+        return type(name=name, bases=(cls,),
+                    attrs=dict(NAME=name, ATTRIBUTES=tuple(set(attributes))))
 
     @classmethod
     def fromTable(cls, name, table, exclude=None):

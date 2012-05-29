@@ -18,7 +18,23 @@
 # along with ViCE.  If not, see <http://www.gnu.org/licenses/>.
 
 from vice import PropertyDict
-from vice.plugins import Plugin
+from vice.plugins import Plugin, PluginMeta
+
+class ActionMeta(PluginMeta):
+
+    def __new__(cls, name, bases, attrs):
+        if not attrs.get('NAME'):
+            # find the indicies of all capital letters
+            caps = [i for i in range(len(name)) if name[i].isupper()]
+            # create list of words based on those indicies
+            words = [name[caps[i]:caps[i+1]] for i in range(len(caps)-1)]
+            # add last word to list
+            words.append(name[caps[-1]:])
+            # convert list of words to underscored string
+            attrs['NAME'] = '_'.join([word.lower() for word in words])
+
+        return super(ActionMeta, cls).__new__(cls, name, bases, attrs)
+
 
 class Action(Plugin):
     """ Callable plugin that provides general operations for Item plugins.
@@ -44,6 +60,8 @@ class Action(Plugin):
 
             Action.new(foo)
     """
+
+    __metaclass__ = ActionMeta
 
     @classmethod
     def new(cls, function):

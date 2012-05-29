@@ -20,6 +20,14 @@
 import os
 
 from vice import PropertyDict
+class PluginMeta(type):
+
+    def __new__(cls, name, bases, attrs):
+        if not attrs.get('NAME'):
+            attrs['NAME'] = name
+
+        return super(PluginMeta, cls).__new__(cls, name, bases, attrs)
+
 
 class Plugin(object):
     """ Base class for all new plugin types.
@@ -32,7 +40,7 @@ class Plugin(object):
         for plugin discovery.
     """
 
-    NAME = None
+    __metaclass__ = PluginMeta
 
     @classmethod
     def plugins(cls):
