@@ -25,7 +25,7 @@ class testAction(unittest.TestCase):
 
         actions.move(1, self.source, self.destination)
         self.assertSequenceEqual(self.source, [1, 3])
-        self.assertSequenceEqual(self.destination, [7, 8, 9, 1])
+        self.assertSequenceEqual(self.destination, [7, 8, 9, 2])
 
 
     def test_creation_from_new(self):
@@ -34,7 +34,7 @@ class testAction(unittest.TestCase):
 
         action = Action.new(shuffle)
 
-        self.assertEqual(action.__name__, 'Shufle')
+        self.assertEqual(action.__name__, 'Shuffle')
         self.assertEqual(action.NAME, 'shuffle')
         self.assertIn('shuffle', Action.plugins())
 
