@@ -74,8 +74,10 @@ class Action(ActionBase):
 
         class_name = function.__name__.title().replace('_', '')
 
-        return type(class_name, (cls,),
-                    PropertyDict(NAME=function.__name__, __call__=function))
+        return ActionMeta(class_name, (cls,), PropertyDict(
+            NAME=function.__name__,
+            __call__=function
+        ))
 
     @classmethod
     def plugins(cls, *args, **kwargs):

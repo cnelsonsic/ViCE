@@ -70,8 +70,10 @@ class Item(ItemBase):
     @classmethod
     def new(cls, name, attributes):
         """ Convenience method used to help simplify the creation of new items. """
-        return type(name=name, bases=(cls,),
-                    attrs=dict(NAME=name, ATTRIBUTES=tuple(set(attributes))))
+        return ItemMeta(name, (cls,), dict(
+            NAME=name,
+            ATTRIBUTES=tuple(set(attributes))
+        ))
 
     @classmethod
     def fromTable(cls, name, table, exclude=None):
@@ -84,5 +86,5 @@ class Item(ItemBase):
         return cls.new(name, attributes)
 
     def __setattr__(self, name, value):
-        if name in self.__dict__:
+        if hasattr(self, name):
             super(Item, self).__setattr__(name, value)
