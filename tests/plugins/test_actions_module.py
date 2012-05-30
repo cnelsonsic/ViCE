@@ -3,7 +3,7 @@ import unittest
 from vice.plugins.actions import Action
 
 
-class testAction(unittest.TestCase):
+class TestAction(unittest.TestCase):
 
     def setUp(self):
         class Move(Action):
