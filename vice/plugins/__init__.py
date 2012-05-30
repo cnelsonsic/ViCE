@@ -39,8 +39,8 @@ class Plugin(PluginBase):
         most cases, you will want to inherit from a Plugin subclass
         rather than directly from Plugin itself.
 
-        All new plugins must have a NAME class attribute, which is used mainly
-        for plugin discovery.
+        The NAME attribute is used to identify the plugin during discovery. If
+        not specified, the class name is used.
     """
 
     @classmethod
@@ -52,8 +52,9 @@ class Plugin(PluginBase):
             assign the return value to a variable to ease the access to
             available plugins::
 
-                foo_plugins = Foo.plugins()
-                baz = foo_plugins.Baz(x, y)
+                class FooPlugin(Plugin): pass
+                plugins = Plugin.plugins()
+                foo = plugins.Foo()
         """
 
         cls._plugins = []

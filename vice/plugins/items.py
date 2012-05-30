@@ -39,12 +39,10 @@ class Item(ItemBase):
         but things such as tokens and dice would be implemented as items
         as well.
 
-        To create a new item, define a new Item subclass, override the NAME
-        attribute (by convention, uppercase for items), and finally override
+        To create a new item, define a new Item subclass and override
         ATTRIBUTES with a sequence of strings::
 
             class Card(Item):
-                NAME = 'Card'
                 ATTRIBUTES = 'name', 'atk', 'def'
 
         Alternatively, you may pass an appropriate name and attributes to
