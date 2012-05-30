@@ -57,6 +57,12 @@ Install
 ViCE is installed like most other python packages::
     python setup.py install 
 
+If you'd like to have the ability to easily uninstall, we recommend using pip:
+    pip install -e .
+
+Later, you can then uninstall as follows:
+    pip uninstall vice
+
 Testing
 =======
 ViCE's test suite can also be run using the setup.py script::
