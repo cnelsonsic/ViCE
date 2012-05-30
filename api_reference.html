@@ -204,8 +204,8 @@ String column.</p>
 <p>All new plugin types are created by subclassing Plugin. In
 most cases, you will want to inherit from a Plugin subclass
 rather than directly from Plugin itself.</p>
-<p>All new plugins must have a NAME class attribute, which is used mainly
-for plugin discovery.</p>
+<p>The NAME attribute is used to identify the plugin during discovery. If
+not specified, the class name is used.</p>
 <dl class="classmethod">
 <dt id="vice.plugins.Plugin.plugins">
 <em class="property">classmethod </em><tt class="descname">plugins</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vice/plugins.html#Plugin.plugins"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.plugins.Plugin.plugins" title="Permalink to this definition">¶</a></dt>
@@ -214,8 +214,9 @@ for plugin discovery.</p>
 classes that correspond with those names. A common idiom is to
 assign the return value to a variable to ease the access to
 available plugins:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">foo_plugins</span> <span class="o">=</span> <span class="n">Foo</span><span class="o">.</span><span class="n">plugins</span><span class="p">()</span>
-<span class="n">baz</span> <span class="o">=</span> <span class="n">foo_plugins</span><span class="o">.</span><span class="n">Baz</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">FooPlugin</span><span class="p">(</span><span class="n">Plugin</span><span class="p">):</span> <span class="k">pass</span>
+<span class="n">plugins</span> <span class="o">=</span> <span class="n">Plugin</span><span class="o">.</span><span class="n">plugins</span><span class="p">()</span>
+<span class="n">foo</span> <span class="o">=</span> <span class="n">plugins</span><span class="o">.</span><span class="n">Foo</span><span class="p">()</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -231,15 +232,15 @@ available plugins:</p>
 <p>An action is a class which acts like a generic function that operates
 on Item plugins. This approach is more flexible, extensible, and less
 repetitious than implementing methods directly within a subclass.</p>
-<p>To create a new action, define an Action subclass, override NAME (by
-convention, lowercase for actions), and finally override __call__:</p>
+<p>To create a new action, define an Action subclass and override the
+__call__ method:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Foo</span><span class="p">(</span><span class="n">Action</span><span class="p">):</span>
-    <span class="n">NAME</span> <span class="o">=</span> <span class="s">&#39;foo&#39;</span>
-
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
         <span class="k">return</span> <span class="s">&#39;bar&#39;</span>
 </pre></div>
 </div>
+<p>The NAME attribute, if not specified, is set to be the underscored
+version of the camel-case class name (eg.FooBar-&gt; foo_bar)</p>
 <p>Alternatively, you may define a simple function and pass that to
 Action.new:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
@@ -279,11 +280,9 @@ themselves.</p>
 with. The most obvious example of this would be the game&#8217;s cards,
 but things such as tokens and dice would be implemented as items
 as well.</p>
-<p>To create a new item, define a new Item subclass, override the NAME
-attribute (by convention, uppercase for items), and finally override
+<p>To create a new item, define a new Item subclass and override
 ATTRIBUTES with a sequence of strings:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Card</span><span class="p">(</span><span class="n">Item</span><span class="p">):</span>
-    <span class="n">NAME</span> <span class="o">=</span> <span class="s">&#39;Card&#39;</span>
     <span class="n">ATTRIBUTES</span> <span class="o">=</span> <span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;atk&#39;</span><span class="p">,</span> <span class="s">&#39;def&#39;</span>
 </pre></div>
 </div>

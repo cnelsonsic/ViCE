@@ -17,9 +17,21 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with ViCE.  If not, see <http://www.gnu.org/licenses/>.
 
-from vice.plugins import Plugin
+from vice.plugins import Plugin, PluginMeta
 
-class Item(Plugin):
+class ItemMeta(PluginMeta):
+    def __new__(cls, name, bases, attrs):
+        if attrs.get('ATTRIBUTES'):
+            for attribute in attrs['ATTRIBUTES']:
+                attrs[attribute] = None
+
+        return super(ItemMeta, cls).__new__(cls, name, bases, attrs)
+
+
+ItemBase = ItemMeta('ItemBase', (Plugin,), {})
+
+
+class Item(ItemBase):
     """ Plugin that represents a games tangible objects.
 
         An item is any object within a card game that can be interacted
@@ -27,12 +39,10 @@ class Item(Plugin):
         but things such as tokens and dice would be implemented as items
         as well.
 
-        To create a new item, define a new Item subclass, override the NAME
-        attribute (by convention, uppercase for items), and finally override
+        To create a new item, define a new Item subclass and override
         ATTRIBUTES with a sequence of strings::
 
             class Card(Item):
-                NAME = 'Card'
                 ATTRIBUTES = 'name', 'atk', 'def'
 
         Alternatively, you may pass an appropriate name and attributes to
@@ -53,17 +63,15 @@ class Item(Plugin):
         should add the new attribute to ATTRIBUTES when defining the class.
     """
 
-    ATTRIBUTES = None
-
-    def __init__(self):
-        for attribute in self.ATTRIBUTES:
-            self.__dict__[attribute] = None
+    ATTRIBUTES = ()
 
     @classmethod
     def new(cls, name, attributes):
         """ Convenience method used to help simplify the creation of new items. """
-        return type(name, (cls,),
-                    dict(NAME=name, ATTRIBUTES=tuple(set(attributes))))
+        return ItemMeta(name, (cls,), dict(
+            NAME=name,
+            ATTRIBUTES=tuple(set(attributes))
+        ))
 
     @classmethod
     def fromTable(cls, name, table, exclude=None):
@@ -76,5 +84,5 @@ class Item(Plugin):
         return cls.new(name, attributes)
 
     def __setattr__(self, name, value):
-        if self.__dict__.get(name):
-            self.__dict__[name] = value
+        if hasattr(self, name):
+            super(Item, self).__setattr__(name, value)

@@ -20,19 +20,28 @@
 import os
 
 from vice import PropertyDict
+class PluginMeta(type):
 
-class Plugin(object):
+    def __new__(cls, name, bases, attrs):
+        if not attrs.get('NAME'):
+            attrs['NAME'] = name
+
+        return super(PluginMeta, cls).__new__(cls, name, bases, attrs)
+
+
+PluginBase = PluginMeta('Plugin', (object, ), {})
+
+
+class Plugin(PluginBase):
     """ Base class for all new plugin types.
 
         All new plugin types are created by subclassing Plugin. In
         most cases, you will want to inherit from a Plugin subclass
         rather than directly from Plugin itself.
 
-        All new plugins must have a NAME class attribute, which is used mainly
-        for plugin discovery.
+        The NAME attribute is used to identify the plugin during discovery. If
+        not specified, the class name is used.
     """
-
-    NAME = None
 
     @classmethod
     def plugins(cls):
@@ -43,8 +52,9 @@ class Plugin(object):
             assign the return value to a variable to ease the access to
             available plugins::
 
-                foo_plugins = Foo.plugins()
-                baz = foo_plugins.Baz(x, y)
+                class FooPlugin(Plugin): pass
+                plugins = Plugin.plugins()
+                foo = plugins.Foo()
         """
 
         cls._plugins = []

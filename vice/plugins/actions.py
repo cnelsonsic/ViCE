@@ -18,23 +18,40 @@
 # along with ViCE.  If not, see <http://www.gnu.org/licenses/>.
 
 from vice import PropertyDict
-from vice.plugins import Plugin
+from vice.plugins import Plugin, PluginMeta
 
-class Action(Plugin):
+class ActionMeta(PluginMeta):
+
+    def __new__(cls, name, bases, attrs):
+        if not attrs.get('NAME'):
+            # convert camel-case to underscores
+            caps = [i for i in range(len(name)) if name[i].isupper()]
+            words = [name[caps[i]:caps[i+1]] for i in range(len(caps)-1)]
+            words.append(name[caps[-1]:])
+            attrs['NAME'] = '_'.join([word.lower() for word in words])
+
+        return super(ActionMeta, cls).__new__(cls, name, bases, attrs)
+
+
+ActionBase = ActionMeta('ActionBase', (Plugin,), {})
+
+
+class Action(ActionBase):
     """ Callable plugin that provides general operations for Item plugins.
 
         An action is a class which acts like a generic function that operates
         on Item plugins. This approach is more flexible, extensible, and less
         repetitious than implementing methods directly within a subclass.
 
-        To create a new action, define an Action subclass, override NAME (by
-        convention, lowercase for actions), and finally override __call__::
+        To create a new action, define an Action subclass and override the
+        __call__ method::
 
             class Foo(Action):
-                NAME = 'foo'
-
                 def __call__(cls):
                     return 'bar'
+
+        The NAME attribute, if not specified, is set to be the underscored
+        version of the camel-case class name (eg.FooBar-> foo_bar)
 
         Alternatively, you may define a simple function and pass that to
         Action.new::
@@ -58,8 +75,10 @@ class Action(Plugin):
 
         class_name = function.__name__.title().replace('_', '')
 
-        return type(class_name, (cls,),
-                    PropertyDict(NAME=function.__name__, __call__=function))
+        return ActionMeta(class_name, (cls,), PropertyDict(
+            NAME=function.__name__,
+            __call__=function
+        ))
 
     @classmethod
     def plugins(cls, *args, **kwargs):

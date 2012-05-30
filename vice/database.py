@@ -172,7 +172,7 @@ class Database(object):
 
         kwargs = {key.rstrip('_'): value for key, value in kwargs.items()}
 
-        if hasattr(tables, '__iter__'):
+        if not hasattr(tables, 'join'):
             tables = [getattr(self, table) for table in tables]
         else:
             tables = [getattr(self, tables)]
