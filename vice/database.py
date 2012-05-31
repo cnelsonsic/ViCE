@@ -127,12 +127,8 @@ class Database(object):
         if table_name in self.tables:
             return
 
-        columns = []
-
-        for attr in column_attrs.keys():
-            columns.append(sqlalchemy.Column(attr.rstrip('_'),
-                **column_attrs[attr]
-            ))
+        columns = (sqlalchemy.Column(attr.rstrip('_'), **column_attrs[attr])
+                   for attr in column_attrs.keys())
 
         setattr(self, table_name,
             sqlalchemy.Table(table_name.rstrip('_'), self.metadata, *columns
