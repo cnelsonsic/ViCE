@@ -28,7 +28,7 @@ class ActionMeta(PluginMeta):
             caps = [i for i in range(len(name)) if name[i].isupper()]
             words = [name[caps[i]:caps[i+1]] for i in range(len(caps)-1)]
             words.append(name[caps[-1]:])
-            attrs['NAME'] = '_'.join([word.lower() for word in words])
+            attrs['NAME'] = '_'.join((word.lower() for word in words))
 
         return super(ActionMeta, cls).__new__(cls, name, bases, attrs)
 
