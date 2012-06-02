@@ -13,8 +13,8 @@ to imply a more exact series of movements at any arbitrary spot. With
 motions, they would be simple (generally a line), and only concerned about
 the source and targets.
 
-Key Terms:
-==========
+Key Terms and Notation:
+======================
 
 Primary Cursor (*)
     On desktops, this is a left-click
@@ -37,5 +37,5 @@ Them (T)
 The Motions
 ===========
 
-* Our Card *=> Their Card
-* Our Card #=> Their Card
+* Our Card * => Their Card
+* Our Card # => Their Card
