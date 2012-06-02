@@ -10,5 +10,6 @@ ViCE Official User Manual
     designer_guide/designer_index
     developer_guide/developer_index
     api_reference
+    appendices/appendix_index
 
 
