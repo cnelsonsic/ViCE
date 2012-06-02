@@ -13,7 +13,7 @@ to imply a more exact series of movements at any arbitrary spot. With
 motions, they would be simple (generally a line), and only concerned about
 the source and targets.
 
-Key Terms and Notation:
+Key Terms and Notation
 ======================
 
 Primary Cursor (*)
