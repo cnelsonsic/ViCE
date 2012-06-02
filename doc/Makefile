@@ -39,7 +39,7 @@ html:
 	@echo "Switching to gh-pages branch..."
 	git checkout gh-pages
 	git checkout master -- ../doc ../vice
-	./convert_svgs.sh
+	./process_images.sh
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
@@ -48,7 +48,7 @@ gh-pages:
 	@echo "Switching to gh-pages branch..."
 	git checkout gh-pages
 	git checkout master -- ../doc ../vice
-	./convert_svgs.sh
+	./process_images.sh
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)
 	@echo "Build finished. The html pages are in the gh-pages branch's root."
 	git add ..
@@ -63,7 +63,7 @@ latexpdf:
 	@echo "Switching to gh-pages branch..."
 	git checkout gh-pages
 	git checkout master -- ../doc ../vice
-	./convert_svgs.sh
+	./process_images.sh
 	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex
 	@echo "Running LaTeX files through pdflatex..."
 	$(MAKE) -C $(BUILDDIR)/latex all-pdf
@@ -73,7 +73,7 @@ coverage:
 	@echo "Switching to gh-pages branch..."
 	git checkout gh-pages
 	git checkout master -- ../doc ../vice
-	./convert_svgs.sh
+	./process_images.sh
 	$(SPHINXBUILD) -b coverage $(ALLSPHINXOPTS) $(BUILDDIR)/coverage
 	@echo
 	@echo "Coverage check finished, results in $(BUIDDIR)/coverage/."
