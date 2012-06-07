@@ -74,6 +74,7 @@ class Action(ActionBase):
         """
 
         class_name = function.__name__.title().replace('_', '')
+        print cls
 
         return ActionMeta(class_name, (cls,), PropertyDict(
             NAME=function.__name__,
@@ -93,4 +94,6 @@ class Action(ActionBase):
         )
 
     def __call__(self):
-        raise NotImplementedError('All actions should implement a __call__ method!')
+        raise NotImplementedError(
+            'All actions should implement a __call__ method!'
+        )

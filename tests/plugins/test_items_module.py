@@ -12,7 +12,7 @@ class TestItem(unittest.TestCase):
         self.counter = Counter()
 
     def test_creation_from_new(self):
-        item = Item.new("Dice", ('sides',))
+        item = Item.new('Dice', ('sides',))
 
         self.assertEqual(item.__name__, 'Dice')
         self.assertEqual(item.NAME, 'Dice')

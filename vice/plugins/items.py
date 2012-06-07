@@ -68,6 +68,7 @@ class Item(ItemBase):
     @classmethod
     def new(cls, name, attributes):
         """ Convenience method used to help simplify the creation of new items. """
+
         return ItemMeta(name, (cls,), dict(
             NAME=name,
             ATTRIBUTES=tuple(set(attributes))
