@@ -21,6 +21,12 @@ from vice import PropertyDict
 from vice.plugins import Plugin, PluginMeta
 
 class ActionMeta(PluginMeta):
+    """ Action metaclass.
+
+        This metaclass automatically sets the NAME attribute to an underscore
+        version of the class name if one wasn't already provided in the class
+        declaration.
+    """
 
     def __new__(cls, name, bases, attrs):
         if not attrs.get('NAME'):
@@ -53,13 +59,6 @@ class Action(ActionBase):
         The NAME attribute, if not specified, is set to be the underscored
         version of the camel-case class name (eg.FooBar-> foo_bar)
 
-        Alternatively, you may define a simple function and pass that to
-        Action.new::
-
-            def foo(cls):
-                return 'bar'
-
-            Action.new(foo)
     """
 
     @classmethod
@@ -70,7 +69,12 @@ class Action(ActionBase):
             of the class, and it's original form is used as the Plugin's NAME.
 
             When defining the function, make sure the first argument is cls,
-            since this will be used as the class's __call__ special method
+            since this will be used as the class's __call__ special method::
+
+                def foo(cls):
+                    return 'bar'
+
+                Action.new(foo)
         """
 
         class_name = function.__name__.title().replace('_', '')
@@ -82,9 +86,15 @@ class Action(ActionBase):
 
     @classmethod
     def plugins(cls, *args, **kwargs):
-        """ Acts similarly to Plugin.plugins(), except that it returns
+        """ Returns a vice.PropertyDict of available action plugins
+
+            Acts similarly to Plugin.plugins(), except that it returns
             instances of the plugin classes, rather than the classes
-            themselves.
+            themselves::
+
+                class FooAction(Action): pass
+                actions = Action.plugins()
+                foo = actions.foo_action()
         """
 
         return PropertyDict(
@@ -93,4 +103,6 @@ class Action(ActionBase):
         )
 
     def __call__(self):
-        raise NotImplementedError('All actions should implement a __call__ method!')
+        raise NotImplementedError(
+            'All actions should implement a __call__ method!'
+        )
