@@ -20,6 +20,12 @@
 from vice.plugins import Plugin, PluginMeta
 
 class ItemMeta(PluginMeta):
+    """ Item metaclass.
+
+        This metaclass automatically creates class attributes for
+        each attribute defined in ATTRIBUTES.
+    """
+
     def __new__(cls, name, bases, attrs):
         if attrs.get('ATTRIBUTES'):
             for attribute in attrs['ATTRIBUTES']:
@@ -45,29 +51,25 @@ class Item(ItemBase):
             class Card(Item):
                 ATTRIBUTES = 'name', 'atk', 'def'
 
-        Alternatively, you may pass an appropriate name and attributes to
-        Item.new::
-
-            Dice = Item.new('Dice', ('name', 'atk', 'def'))
-
-        As another alternative, you may pass an appropriate name, valid
-        database table and an optional exclude sequence to Item.fromTable::
-
-            db = vice.database.Database('sqlite:///wtactics.sqlite')
-            Card = Item.fromTable('Card', db.cards, exclude=['id'])
-
-        On instantiation, the values of ATTRIBUTES are converted to properties
-        of the plugin instance. These properties are semi-immutable. That is,
-        on instantiating of an item plugin, you may change the value of existing
-        attributes, but you may not create new ones. If you wish to do so, you
-        should add the new attribute to ATTRIBUTES when defining the class.
+        The values of ATTRIBUTES are converted to class attributes. These
+        attributes are semi-immutable. That is, on instantiating of an item
+        plugin, you may change the value of existing attributes, but you may
+        not create new ones. If you wish to do so, you should add the new
+        attribute to ATTRIBUTES when defining the class.
     """
 
     ATTRIBUTES = ()
 
     @classmethod
     def new(cls, name, attributes):
-        """ Convenience method used to help simplify the creation of new items. """
+        """ Convenience method used to help simplify the creation of new items.
+
+            Simply pass an appropriate item name and a sequence of attribute
+            names::
+
+                Dice = Item.new('Dice', ('name', 'atk', 'def'))
+        """
+
         return ItemMeta(name, (cls,), dict(
             NAME=name,
             ATTRIBUTES=tuple(set(attributes))
@@ -75,7 +77,17 @@ class Item(ItemBase):
 
     @classmethod
     def fromTable(cls, name, table, exclude=None):
-        """ Convenience method used to create new items from database tables. """
+        """ Convenience method used to create new items from database tables.
+
+            Simply pass an appropriate name, valid database table and an optional
+            exclude sequence to Item.fromTable::
+
+                db = vice.database.Database('sqlite:///wtactics.sqlite')
+                Card = Item.fromTable('Card', db.cards, exclude=['id'])
+
+           Any columns that match those in the exclude sequence will be ignored.
+        """
+
         attributes = [
             column.name for column in table.columns
             if column.name not in exclude

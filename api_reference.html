@@ -60,7 +60,7 @@
   <div class="section" id="api-reference">
 <h1>5. API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="vice-main-package-also-provides-propertydict">
-<span id="vice"></span><h2>5.1. vice &#8211; Main package, also provides PropertyDict<a class="headerlink" href="#vice-main-package-also-provides-propertydict" title="Permalink to this headline">¶</a></h2>
+<span id="vice"></span><h2>5.1. vice &#8211; main package, also provides PropertyDict<a class="headerlink" href="#vice-main-package-also-provides-propertydict" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="vice.PropertyDict">
 <em class="property">class </em><tt class="descclassname">vice.</tt><tt class="descname">PropertyDict</tt><a class="reference internal" href="_modules/vice.html#PropertyDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.PropertyDict" title="Permalink to this definition">¶</a></dt>
@@ -75,7 +75,7 @@ dictionaries.</p>
 
 </div>
 <div class="section" id="module-vice.database">
-<span id="vice-database-database-abstraction-and-integration"></span><span id="vice-database"></span><h2>5.2. vice.database &#8211; Database abstraction and integration<a class="headerlink" href="#module-vice.database" title="Permalink to this headline">¶</a></h2>
+<span id="vice-database-database-abstraction-and-integration"></span><span id="vice-database"></span><h2>5.2. vice.database &#8211; database abstraction and integration<a class="headerlink" href="#module-vice.database" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="vice.database.Database">
 <em class="property">class </em><tt class="descclassname">vice.database.</tt><tt class="descname">Database</tt><big>(</big><em>URI=None</em>, <em>echo=False</em><big>)</big><a class="reference internal" href="_modules/vice/database.html#Database"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.database.Database" title="Permalink to this definition">¶</a></dt>
@@ -200,7 +200,7 @@ String column.</p>
 
 </div>
 <div class="section" id="module-vice.plugins">
-<span id="vice-plugins-infrastructure-for-implementing-plugins"></span><span id="vice-plugins"></span><h2>5.3. vice.plugins &#8211; Infrastructure for implementing plugins<a class="headerlink" href="#module-vice.plugins" title="Permalink to this headline">¶</a></h2>
+<span id="vice-plugins-infrastructure-for-implementing-plugins"></span><span id="vice-plugins"></span><h2>5.3. vice.plugins &#8211; infrastructure for implementing plugins<a class="headerlink" href="#module-vice.plugins" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="vice.plugins.Plugin">
 <em class="property">class </em><tt class="descclassname">vice.plugins.</tt><tt class="descname">Plugin</tt><a class="reference internal" href="_modules/vice/plugins.html#Plugin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.plugins.Plugin" title="Permalink to this definition">¶</a></dt>
@@ -213,7 +213,7 @@ not specified, the class name is used.</p>
 <dl class="classmethod">
 <dt id="vice.plugins.Plugin.plugins">
 <em class="property">classmethod </em><tt class="descname">plugins</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/vice/plugins.html#Plugin.plugins"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.plugins.Plugin.plugins" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a plugin&#8217;s subclasses as a vice.PropertyDict.</p>
+<dd><p>Returns a vice.PropertyDict of available plugins.</p>
 <p>This PropertyDict&#8217;s keys are plugin names and values are the plugin
 classes that correspond with those names. A common idiom is to
 assign the return value to a variable to ease the access to
@@ -228,7 +228,7 @@ available plugins:</p>
 </dd></dl>
 
 <div class="section" id="module-vice.plugins.actions">
-<span id="vice-plugins-actions-built-in-action-plugins"></span><span id="vice-plugins-actions"></span><h3>5.3.1. vice.plugins.actions &#8211; Built-in action plugins<a class="headerlink" href="#module-vice.plugins.actions" title="Permalink to this headline">¶</a></h3>
+<span id="vice-plugins-actions-built-in-action-plugins"></span><span id="vice-plugins-actions"></span><h3>5.3.1. vice.plugins.actions &#8211; built-in action plugins<a class="headerlink" href="#module-vice.plugins.actions" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="vice.plugins.actions.Action">
 <em class="property">class </em><tt class="descclassname">vice.plugins.actions.</tt><tt class="descname">Action</tt><a class="reference internal" href="_modules/vice/plugins/actions.html#Action"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.plugins.actions.Action" title="Permalink to this definition">¶</a></dt>
@@ -245,14 +245,6 @@ __call__ method:</p>
 </div>
 <p>The NAME attribute, if not specified, is set to be the underscored
 version of the camel-case class name (eg.FooBar-&gt; foo_bar)</p>
-<p>Alternatively, you may define a simple function and pass that to
-Action.new:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
-    <span class="k">return</span> <span class="s">&#39;bar&#39;</span>
-
-<span class="n">Action</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">foo</span><span class="p">)</span>
-</pre></div>
-</div>
 <dl class="classmethod">
 <dt id="vice.plugins.actions.Action.new">
 <em class="property">classmethod </em><tt class="descname">new</tt><big>(</big><em>function</em><big>)</big><a class="reference internal" href="_modules/vice/plugins/actions.html#Action.new"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.plugins.actions.Action.new" title="Permalink to this definition">¶</a></dt>
@@ -260,22 +252,101 @@ Action.new:</p>
 <p>The function&#8217;s name is converted to title case and used as the name
 of the class, and it&#8217;s original form is used as the Plugin&#8217;s NAME.</p>
 <p>When defining the function, make sure the first argument is cls,
-since this will be used as the class&#8217;s __call__ special method</p>
+since this will be used as the class&#8217;s __call__ special method:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s">&#39;bar&#39;</span>
+
+<span class="n">Action</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">foo</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="classmethod">
 <dt id="vice.plugins.actions.Action.plugins">
 <em class="property">classmethod </em><tt class="descname">plugins</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/vice/plugins/actions.html#Action.plugins"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.plugins.actions.Action.plugins" title="Permalink to this definition">¶</a></dt>
-<dd><p>Acts similarly to Plugin.plugins(), except that it returns
+<dd><p>Returns a vice.PropertyDict of available action plugins</p>
+<p>Acts similarly to Plugin.plugins(), except that it returns
 instances of the plugin classes, rather than the classes
-themselves.</p>
+themselves:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">FooAction</span><span class="p">(</span><span class="n">Action</span><span class="p">):</span> <span class="k">pass</span>
+<span class="n">actions</span> <span class="o">=</span> <span class="n">Action</span><span class="o">.</span><span class="n">plugins</span><span class="p">()</span>
+<span class="n">foo</span> <span class="o">=</span> <span class="n">actions</span><span class="o">.</span><span class="n">foo_action</span><span class="p">()</span>
+</pre></div>
+</div>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="class">
+<dt id="vice.plugins.actions.ActionMeta">
+<em class="property">class </em><tt class="descclassname">vice.plugins.actions.</tt><tt class="descname">ActionMeta</tt><a class="headerlink" href="#vice.plugins.actions.ActionMeta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Action metaclass.</p>
+<p>This metaclass automatically sets the NAME attribute to an underscore
+version of the class name if one wasn&#8217;t already provided in the class
+declaration.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-vice.plugins.containers">
+<span id="vice-plugins-containers-built-in-container-plugins"></span><span id="vice-plugins-containers"></span><h3>5.3.2. vice.plugins.containers &#8211; built-in container plugins<a class="headerlink" href="#module-vice.plugins.containers" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="vice.plugins.containers.Container">
+<em class="property">class </em><tt class="descclassname">vice.plugins.containers.</tt><tt class="descname">Container</tt><a class="reference internal" href="_modules/vice/plugins/containers.html#Container"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.plugins.containers.Container" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plugin that represents an object that is able to hold other objects.</p>
+<p>A container is any object within a card game that can contain other
+objects, optionally placing arbitrary restrictions on its contents.
+Examples of containers include a decks (container of cards with a
+maximum and minumum count requirement), a questing
+zone (contains only quest cards), or a hand (container of cards).</p>
+<dl class="method">
+<dt id="vice.plugins.containers.Container.constraints">
+<tt class="descname">constraints</tt><big>(</big><em>item</em><big>)</big><a class="reference internal" href="_modules/vice/plugins/containers.html#Container.constraints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.plugins.containers.Container.constraints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of constraints to be applied toward items.</p>
+<p>This method should return a list of comparison expressions used to
+validate the item before an action may be committed on it with
+respect to the container. If any of the comparisons evaluates to
+False, the action is aborted.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vice.plugins.containers.Container.insert">
+<tt class="descname">insert</tt><big>(</big><em>item</em>, <em>position=-1</em><big>)</big><a class="reference internal" href="_modules/vice/plugins/containers.html#Container.insert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.plugins.containers.Container.insert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert&#8217;s an item into the container at position.</p>
+<p>If the item is valid, it is inserted into the container at the
+given position and True is returned to signal success. If the item
+is invalid, nothing is inserted, and False is returned.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="vice.plugins.containers.Container.new">
+<em class="property">classmethod </em><tt class="descname">new</tt><big>(</big><em>name</em>, <em>function</em><big>)</big><a class="reference internal" href="_modules/vice/plugins/containers.html#Container.new"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.plugins.containers.Container.new" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenience method used to help simplify the creation of new
+containers.</p>
+<p>Simply pass an appropriate container name and a consraints
+function:</p>
+<div class="highlight-python"><pre>def contraints(self, item):
+    return [
+        item.NAME = 'Card' # container holds cards
+        40 &lt;= len(self) &lt;= 60 # between 40 and 60 cards
+    ]
+
+Deck = Container.new('Deck', constraints)</pre>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vice.plugins.containers.ContainerMeta">
+<em class="property">class </em><tt class="descclassname">vice.plugins.containers.</tt><tt class="descname">ContainerMeta</tt><a class="reference internal" href="_modules/vice/plugins/containers.html#ContainerMeta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.plugins.containers.ContainerMeta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Container metaclass.</p>
+<p>This metaclass automatically adds an items attribute to the container
+to be used by the constraints method.</p>
 </dd></dl>
 
 </div>
 <div class="section" id="module-vice.plugins.items">
-<span id="vice-plugins-items-built-in-item-plugins"></span><span id="vice-plugins-items"></span><h3>5.3.2. vice.plugins.items &#8211; Built-in item plugins<a class="headerlink" href="#module-vice.plugins.items" title="Permalink to this headline">¶</a></h3>
+<span id="vice-plugins-items-built-in-item-plugins"></span><span id="vice-plugins-items"></span><h3>5.3.3. vice.plugins.items &#8211; built-in item plugins<a class="headerlink" href="#module-vice.plugins.items" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="vice.plugins.items.Item">
 <em class="property">class </em><tt class="descclassname">vice.plugins.items.</tt><tt class="descname">Item</tt><a class="reference internal" href="_modules/vice/plugins/items.html#Item"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.plugins.items.Item" title="Permalink to this definition">¶</a></dt>
@@ -290,34 +361,45 @@ ATTRIBUTES with a sequence of strings:</p>
     <span class="n">ATTRIBUTES</span> <span class="o">=</span> <span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;atk&#39;</span><span class="p">,</span> <span class="s">&#39;def&#39;</span>
 </pre></div>
 </div>
-<p>Alternatively, you may pass an appropriate name and attributes to
-Item.new:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">Dice</span> <span class="o">=</span> <span class="n">Item</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s">&#39;Dice&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;atk&#39;</span><span class="p">,</span> <span class="s">&#39;def&#39;</span><span class="p">))</span>
-</pre></div>
-</div>
-<p>As another alternative, you may pass an appropriate name, valid
-database table and an optional exclude sequence to Item.fromTable:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">db</span> <span class="o">=</span> <span class="n">vice</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">Database</span><span class="p">(</span><span class="s">&#39;sqlite:///wtactics.sqlite&#39;</span><span class="p">)</span>
-<span class="n">Card</span> <span class="o">=</span> <span class="n">Item</span><span class="o">.</span><span class="n">fromTable</span><span class="p">(</span><span class="s">&#39;Card&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">cards</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">])</span>
-</pre></div>
-</div>
-<p>On instantiation, the values of ATTRIBUTES are converted to properties
-of the plugin instance. These properties are semi-immutable. That is,
-on instantiating of an item plugin, you may change the value of existing
-attributes, but you may not create new ones. If you wish to do so, you
-should add the new attribute to ATTRIBUTES when defining the class.</p>
+<p>The values of ATTRIBUTES are converted to class attributes. These
+attributes are semi-immutable. That is, on instantiating of an item
+plugin, you may change the value of existing attributes, but you may
+not create new ones. If you wish to do so, you should add the new
+attribute to ATTRIBUTES when defining the class.</p>
 <dl class="classmethod">
 <dt id="vice.plugins.items.Item.fromTable">
 <em class="property">classmethod </em><tt class="descname">fromTable</tt><big>(</big><em>name</em>, <em>table</em>, <em>exclude=None</em><big>)</big><a class="reference internal" href="_modules/vice/plugins/items.html#Item.fromTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.plugins.items.Item.fromTable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convenience method used to create new items from database tables.</p>
+<blockquote>
+<div><p>Simply pass an appropriate name, valid database table and an optional
+exclude sequence to Item.fromTable:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">db</span> <span class="o">=</span> <span class="n">vice</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">Database</span><span class="p">(</span><span class="s">&#39;sqlite:///wtactics.sqlite&#39;</span><span class="p">)</span>
+<span class="n">Card</span> <span class="o">=</span> <span class="n">Item</span><span class="o">.</span><span class="n">fromTable</span><span class="p">(</span><span class="s">&#39;Card&#39;</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">cards</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Any columns that match those in the exclude sequence will be ignored.</p>
 </dd></dl>
 
 <dl class="classmethod">
 <dt id="vice.plugins.items.Item.new">
 <em class="property">classmethod </em><tt class="descname">new</tt><big>(</big><em>name</em>, <em>attributes</em><big>)</big><a class="reference internal" href="_modules/vice/plugins/items.html#Item.new"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.plugins.items.Item.new" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convenience method used to help simplify the creation of new items.</p>
+<p>Simply pass an appropriate item name and a sequence of attribute
+names:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Dice</span> <span class="o">=</span> <span class="n">Item</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s">&#39;Dice&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;atk&#39;</span><span class="p">,</span> <span class="s">&#39;def&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="class">
+<dt id="vice.plugins.items.ItemMeta">
+<em class="property">class </em><tt class="descclassname">vice.plugins.items.</tt><tt class="descname">ItemMeta</tt><a class="headerlink" href="#vice.plugins.items.ItemMeta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Item metaclass.</p>
+<p>This metaclass automatically creates class attributes for
+each attribute defined in ATTRIBUTES.</p>
 </dd></dl>
 
 </div>
@@ -350,11 +432,12 @@ should add the new attribute to ATTRIBUTES when defining the class.</p>
 <li class="toctree-l1"><a class="reference internal" href="designer_guide/designer_index.html">3. Designer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="developer_guide/developer_index.html">4. Developer Guide</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">5. API Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#vice-main-package-also-provides-propertydict">5.1. vice &#8211; Main package, also provides PropertyDict</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-vice.database">5.2. vice.database &#8211; Database abstraction and integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-vice.plugins">5.3. vice.plugins &#8211; Infrastructure for implementing plugins</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-vice.plugins.actions">5.3.1. vice.plugins.actions &#8211; Built-in action plugins</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-vice.plugins.items">5.3.2. vice.plugins.items &#8211; Built-in item plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vice-main-package-also-provides-propertydict">5.1. vice &#8211; main package, also provides PropertyDict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-vice.database">5.2. vice.database &#8211; database abstraction and integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-vice.plugins">5.3. vice.plugins &#8211; infrastructure for implementing plugins</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-vice.plugins.actions">5.3.1. vice.plugins.actions &#8211; built-in action plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-vice.plugins.containers">5.3.2. vice.plugins.containers &#8211; built-in container plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-vice.plugins.items">5.3.3. vice.plugins.items &#8211; built-in item plugins</a></li>
 </ul>
 </li>
 </ul>

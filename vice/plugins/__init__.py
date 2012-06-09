@@ -45,7 +45,7 @@ class Plugin(PluginBase):
 
     @classmethod
     def plugins(cls):
-        """ Returns a plugin's subclasses as a vice.PropertyDict.
+        """ Returns a vice.PropertyDict of available plugins.
 
             This PropertyDict's keys are plugin names and values are the plugin
             classes that correspond with those names. A common idiom is to
@@ -73,5 +73,4 @@ class Plugin(PluginBase):
 
         return PropertyDict((plugin.NAME, plugin)
             for plugin in cls._plugins
-            if plugin.NAME is not None and plugin.NAME.strip() != ""
         )

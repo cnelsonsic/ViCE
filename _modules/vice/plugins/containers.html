@@ -1,0 +1,193 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vice.plugins.containers &mdash; ViCE 0.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="ViCE 0.0.1 documentation" href="../../../index.html" />
+    <link rel="up" title="vice.plugins" href="../plugins.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+    <li><a href="https://github.com/aspidites/ViCE">Project Homepage</a> &raquo;</li>
+    
+        <li><a href="../../../index.html">ViCE 0.0.1 documentation</a> &raquo;</li>
+
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../vice.html" >vice</a> &raquo;</li>
+          <li><a href="../plugins.html" accesskey="U">vice.plugins</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vice.plugins.containers</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">vice.plugins</span> <span class="kn">import</span> <span class="n">Plugin</span><span class="p">,</span> <span class="n">PluginMeta</span>
+
+<div class="viewcode-block" id="ContainerMeta"><a class="viewcode-back" href="../../../api_reference.html#vice.plugins.containers.ContainerMeta">[docs]</a><span class="k">class</span> <span class="nc">ContainerMeta</span><span class="p">(</span><span class="n">PluginMeta</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Container metaclass.</span>
+
+<span class="sd">        This metaclass automatically adds an items attribute to the container</span>
+<span class="sd">        to be used by the constraints method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">attrs</span><span class="p">):</span>
+        <span class="n">attrs</span><span class="p">[</span><span class="s">&#39;items&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">ContainerMeta</span><span class="p">,</span> <span class="n">cls</span><span class="p">)</span><span class="o">.</span><span class="n">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span>
+
+</div>
+<span class="n">ContainerBase</span> <span class="o">=</span> <span class="n">ContainerMeta</span><span class="p">(</span><span class="s">&#39;ContainerBase&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">Plugin</span><span class="p">,),</span> <span class="p">{})</span>
+
+
+<div class="viewcode-block" id="Container"><a class="viewcode-back" href="../../../api_reference.html#vice.plugins.containers.Container">[docs]</a><span class="k">class</span> <span class="nc">Container</span><span class="p">(</span><span class="n">ContainerBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Plugin that represents an object that is able to hold other objects.</span>
+
+<span class="sd">        A container is any object within a card game that can contain other</span>
+<span class="sd">        objects, optionally placing arbitrary restrictions on its contents.</span>
+<span class="sd">        Examples of containers include a decks (container of cards with a</span>
+<span class="sd">        maximum and minumum count requirement), a questing</span>
+<span class="sd">        zone (contains only quest cards), or a hand (container of cards).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Container.new"><a class="viewcode-back" href="../../../api_reference.html#vice.plugins.containers.Container.new">[docs]</a>    <span class="k">def</span> <span class="nf">new</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">function</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Convenience method used to help simplify the creation of new</span>
+<span class="sd">            containers.</span>
+
+<span class="sd">            Simply pass an appropriate container name and a consraints</span>
+<span class="sd">            function::</span>
+
+<span class="sd">                def contraints(self, item):</span>
+<span class="sd">                    return [</span>
+<span class="sd">                        item.NAME = &#39;Card&#39; # container holds cards</span>
+<span class="sd">                        40 &lt;= len(self) &lt;= 60 # between 40 and 60 cards</span>
+<span class="sd">                    ]</span>
+
+<span class="sd">                Deck = Container.new(&#39;Deck&#39;, constraints)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">ContainerMeta</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">cls</span><span class="p">,),</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">NAME</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">consraints</span><span class="o">=</span><span class="n">function</span>
+        <span class="p">))</span>
+
+</div>
+<div class="viewcode-block" id="Container.constraints"><a class="viewcode-back" href="../../../api_reference.html#vice.plugins.containers.Container.constraints">[docs]</a>    <span class="k">def</span> <span class="nf">constraints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns a list of constraints to be applied toward items.</span>
+
+<span class="sd">            This method should return a list of comparison expressions used to</span>
+<span class="sd">            validate the item before an action may be committed on it with</span>
+<span class="sd">            respect to the container. If any of the comparisons evaluates to</span>
+<span class="sd">            False, the action is aborted.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+            <span class="s">&#39;All containers should implement a filters method!&#39;</span>
+        <span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Container.insert"><a class="viewcode-back" href="../../../api_reference.html#vice.plugins.containers.Container.insert">[docs]</a>    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">position</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Insert&#39;s an item into the container at position.</span>
+
+<span class="sd">            If the item is valid, it is inserted into the container at the</span>
+<span class="sd">            given position and True is returned to signal success. If the item</span>
+<span class="sd">            is invalid, nothing is inserted, and False is returned.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">constraints</span><span class="p">(</span><span class="n">item</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3><a href="../../../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../preface.html">1. Preface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../player_guide/player_index.html">2. Player Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../designer_guide/designer_index.html">3. Designer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer_guide/developer_index.html">4. Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api_reference.html">5. API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../appendices/appendix_index.html">6. Appendices</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+    <li><a href="https://github.com/aspidites/ViCE">Project Homepage</a> &raquo;</li>
+    
+        <li><a href="../../../index.html">ViCE 0.0.1 documentation</a> &raquo;</li>
+
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../vice.html" >vice</a> &raquo;</li>
+          <li><a href="../plugins.html" >vice.plugins</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011-2012, Edwin Marshall.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
