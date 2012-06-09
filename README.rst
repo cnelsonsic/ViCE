@@ -74,8 +74,7 @@ ViCE comes with extensive documentation. If it isn't documented, it isn't a
 feature.
 
 * Online documentation: http://aspidites.github.com/ViCE
-
-* Offline documentation: (Coming Soon)
+* Offline documentation: https://github.com/downloads/aspidites/ViCE/ViCE.pdf
 
 Community
 #########
