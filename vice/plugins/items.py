@@ -64,7 +64,7 @@ class Item(ItemBase):
     def new(cls, name, attributes):
         """ Convenience method used to help simplify the creation of new items.
 
-            Simply pass an appropriate class name and a sequence of attribute
+            Simply pass an appropriate item name and a sequence of attribute
             names::
 
                 Dice = Item.new('Dice', ('name', 'atk', 'def'))

@@ -78,7 +78,6 @@ class Action(ActionBase):
         """
 
         class_name = function.__name__.title().replace('_', '')
-        print cls
 
         return ActionMeta(class_name, (cls,), PropertyDict(
             NAME=function.__name__,
