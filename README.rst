@@ -76,6 +76,14 @@ feature.
 * Online documentation: http://aspidites.github.com/ViCE
 * Offline documentation: https://github.com/downloads/aspidites/ViCE/ViCE.pdf
 
+.. note::
+    The offline documentation is only updated after each release. If you are
+    using an unstable version of ViCE, either consult the online documentation,
+    or build a new pdf from souce by descending into the doc subdirectory and
+    executing the appropriate make target::
+
+        make latexpdf
+
 Community
 #########
 If you have any questions about ViCE, or would like to contribute, there are
