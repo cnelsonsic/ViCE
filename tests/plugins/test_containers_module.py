@@ -27,7 +27,7 @@ class TestContainer(unittest.TestCase):
                 40 <= len(self) <= 60,
             ]
 
-        Deck = Container.new(constraints)
+        Deck = Container.new('Deck', constraints)
 
         self.assertNotEqual(Deck, None)
 

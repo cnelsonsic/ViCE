@@ -17,12 +17,10 @@ class Container(ContainerBase):
         return len(self.items)
 
     @classmethod
-    def new(cls, function):
+    def new(cls, name, function):
 
-        class_name = function.__name__.title().replace('_', '')
-
-        return ContainerMeta(class_name, (cls,), dict(
-            NAME=class_name,
+        return ContainerMeta(name, (cls,), dict(
+            NAME=name,
             consraints=function
         ))
 
