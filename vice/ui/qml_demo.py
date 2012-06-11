@@ -9,7 +9,7 @@ class MainWindow(QtDeclarative.QDeclarativeView):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
 
-        self.setSource(os.path.abspath(os.path.join(qml_dir, 'main.qml')))
+        self.setSource(os.path.abspath(os.path.join(qml_dir, 'qml_demo.qml')))
 
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
