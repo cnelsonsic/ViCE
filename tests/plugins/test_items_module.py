@@ -1,5 +1,5 @@
 import unittest
-from vice.plugins.items import Item
+from vice.plugins import Item
 from vice.database import Database, string, integer
 
 

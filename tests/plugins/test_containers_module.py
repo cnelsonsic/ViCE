@@ -1,6 +1,5 @@
 import unittest
-from vice.plugins.containers import Container
-from vice.plugins.items import Item
+from vice.plugins import Item, Container
 
 class TestContainer(unittest.TestCase):
     def setUp(self):

@@ -1,6 +1,6 @@
 import random
 import unittest
-from vice.plugins.actions import Action
+from vice.plugins import Action
 
 
 class TestAction(unittest.TestCase):
