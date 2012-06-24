@@ -18,6 +18,7 @@
 # along with ViCE.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import operator as op
 
 from vice import PropertyDict
 class PluginMeta(type):
@@ -208,10 +209,13 @@ class Container(ContainerBase):
                     ]
 
                 Deck = Container.new('Deck', constraints)
+
+            .. note:: self refers to container.
         """
+
         return ContainerMeta(name, (cls,), dict(
             NAME=name,
-            consraints=function
+            constraints=function
         ))
 
 
@@ -222,10 +226,10 @@ class Container(ContainerBase):
             validate the item before an action may be committed on it with
             respect to the container. If any of the comparisons evaluates to
             False, the action is aborted.
-        """
+       """
 
         raise NotImplementedError(
-            'All containers should implement a filters method!'
+            'All containers should implement a constraints method!'
         )
 
     def insert(self, item, position=-1):
