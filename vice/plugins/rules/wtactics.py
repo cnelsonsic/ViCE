@@ -25,3 +25,22 @@ class Zone(Container):
         return [
             item.NAME = 'Card'
         ]
+
+class QuestingZone(Zone):
+    def constraints(self, item):
+        return super(QuestingZone, self).constraints() + [
+            'quest' in item.types
+        ]
+
+class OffensiveZone(Zone):
+    def constraints(self, item):
+        return super(QuestingZone, self).constraints() + [
+            'creature' in item.types
+        ]
+
+class HeroZone(Container):
+    def constraints(self, item):
+        return [
+            item.NAME = 'Card',
+            len(self) == 1
+        ]
