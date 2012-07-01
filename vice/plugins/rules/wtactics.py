@@ -12,7 +12,7 @@ from vice.database import Database
 db = Database('wtactics.db')
 
 # Items
-Card = Item.fromTable('Card', 'cards', exclude=(
+Card = Item.from_table('Card', 'cards', exclude=(
     'border_color', 'footer'
 ))
 Token = Item.new('Token', attributes=(
@@ -23,7 +23,7 @@ Token = Item.new('Token', attributes=(
 class Zone(Container):
     def constraints(self, item):
         return [
-            item.NAME = 'Card'
+            item.NAME == 'Card'
         ]
 
 class QuestingZone(Zone):
@@ -41,6 +41,6 @@ class OffensiveZone(Zone):
 class HeroZone(Container):
     def constraints(self, item):
         return [
-            item.NAME = 'Card',
+            item.NAME == 'Card',
             len(self) == 1
         ]

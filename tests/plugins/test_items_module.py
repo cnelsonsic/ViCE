@@ -27,7 +27,7 @@ class TestItem(unittest.TestCase):
             def_ = integer()
         )
 
-        Card = Item.fromTable('Card', db.cards, exclude=['id'])
+        Card = Item.from_table('Card', db.cards, exclude=['id'])
 
         self.assertEqual(Card.ATTRIBUTES, ('atk', 'def', 'name'))
 

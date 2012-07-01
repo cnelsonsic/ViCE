@@ -308,7 +308,7 @@ class Item(ItemBase):
         """ Convenience method used to create new items from database tables.
 
             Simply pass an appropriate name, valid database table and an optional
-            exclude sequence to Item.fromTable::
+            exclude sequence to Item.from_table::
 
                 db = vice.database.Database('sqlite:///wtactics.sqlite')
                 Card = Item.from_table('Card', db.cards, exclude=['id'])
