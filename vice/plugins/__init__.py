@@ -86,6 +86,7 @@ class ActionMeta(PluginMeta):
     """
 
     def __new__(cls, name, bases, attrs):
+        name = name.title().replace('_', '')
         if not attrs.get('NAME'):
             # convert camel-case to underscores
             caps = [i for i in range(len(name)) if name[i].isupper()]
@@ -119,7 +120,7 @@ class Action(ActionBase):
     """
 
     @classmethod
-    def new(cls, function):
+    def new(cls, name, function=None):
         """ Convenience method used to help simply creation of new actions.
 
             The function's name is converted to title case and used as the name
@@ -131,13 +132,14 @@ class Action(ActionBase):
                 def foo(cls):
                     return 'bar'
 
-                Action.new(foo)
+                Action.new('foo', foo)
         """
 
-        class_name = function.__name__.title().replace('_', '')
+        if name is None:
+            name = function.__name__
 
-        return ActionMeta(class_name, (cls,), PropertyDict(
-            NAME=function.__name__,
+        return ActionMeta(name, (cls,), PropertyDict(
+            NAME=name,
             __call__=function
         ))
 

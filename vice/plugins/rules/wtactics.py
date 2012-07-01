@@ -12,35 +12,26 @@ from vice.database import Database
 db = Database('wtactics.db')
 
 # Items
-Card = Item.from_table('Card', 'cards', exclude=(
+Item.from_table('Card', 'cards', exclude=(
     'border_color', 'footer'
 ))
-Token = Item.new('Token', attributes=(
+
+Item.new('Token', attributes=(
     'owner', 'type_', 'target' # target is which card it is placed on
 ))
 
 # Containers
-class Zone(Container):
-    def constraints(self, item):
-        return [
-            item.NAME == 'Card'
-        ]
+Zone = Container.new('Zone', lambda self, item:
+    item.NAME == 'Card'
+)
 
-class QuestingZone(Zone):
-    def constraints(self, item):
-        return super(QuestingZone, self).constraints() + [
-            'quest' in item.types
-        ]
+for zone in 'Questing', 'Offensive', 'Defensive':
+    Zone.new('{0}Zone'.format(zone), lambda self, item:
+        Zone.consraints + [
+            zone.lower() in item.types
+    ])
 
-class OffensiveZone(Zone):
-    def constraints(self, item):
-        return super(QuestingZone, self).constraints() + [
-            'creature' in item.types
-        ]
-
-class HeroZone(Container):
-    def constraints(self, item):
-        return [
-            item.NAME == 'Card',
-            len(self) == 1
-        ]
+HeroZone = Zone.new('HeroZone', lambda self, item:
+    Zone.constraints + [
+        len(self) == 1
+])

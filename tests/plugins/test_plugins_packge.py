@@ -25,8 +25,6 @@ class TestAction(unittest.TestCase):
 
     def setUp(self):
         class Move(Action):
-            NAME = 'move'
-
             def __call__(cls, index, source, destination):
                 destination.append(source.pop(index))
 
@@ -47,9 +45,9 @@ class TestAction(unittest.TestCase):
 
 
     def test_creation_from_new(self):
-        def shuffle(cls, item):
+        action = Action.new('shuffle', lambda cls, item:
             random.shuffle(item)
-        action = Action.new(shuffle)
+        )
 
         self.assertEqual(action.__name__, 'Shuffle')
         self.assertEqual(action.NAME, 'shuffle')
