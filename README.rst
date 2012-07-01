@@ -147,3 +147,20 @@ concepts are worked on.
         rather a branch that maintains distutils2 (or in python 3.3
         "packaging") scripts. The result is far less clumbsy than distribute,
         and so I'm hoping to replace that entirely once it becomes stable.
+
+    vicescript
+        This branch is where vicescript development happens. While it will
+        always be possible to define plugins in pure python, I wanted to see if
+        it were possible to write a DSL for ViCE that made it easier to both
+        read and write plugins. I felt it neccessary to write a DSL for the
+        following reasons:
+
+        * JSON was riddled with too many quotation marks and brackets. Also,
+          with only minor changes in syntax, it doesn't look much different
+          than a python dictionary
+
+        * YAML's specification is huge, and to my knowledge, there is only one
+          python library that can be used to validate it. 
+
+        * XML's syntax is far too cumbersome. Anyone that knows me also knows
+          of my general distaste for XML. 
