@@ -20,11 +20,16 @@ In it's current state, ViCE has few dependencies:
 
 * `sqlite >= 3.7.11 <http://www.sqlite.org>`_
 
-In the future, the following depenencies will also be required:
+In the future, some or all of the following depenencies will also be required:
 
-* `PySide >= 1.1.1 <http://www.pyside.org>`_
+* `gevent = 0.13.7 <http://www.gevent.org>`_ (Networking)
 
-* `gevent = 0.13.7 <http://www.gevent.org>`_
+* `PySide >= 1.1.1 <http://www.pyside.org>`_ (QML/QWidgets interface)
+
+* `Urwid >= 1.0.1 <http://excess.org/urwid>`_ (Curses interface)
+
+* `Pyparsing >= 1.5.5 <http://pyparsing.wikispaces.com/`_ 
+  (declarative plugin creation and *maybe* card parsing)
 
 Download
 ========
