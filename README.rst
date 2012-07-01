@@ -101,3 +101,49 @@ plenty of options.
 * Forums: http://wtactics.org/forums
 
 * email: mailto:aspidites@wtactics.org
+
+Branches
+========
+This section identifies the different branches of development and their
+purpose. In cases where this file doesn't document a branch, the general rule
+of thumb is that the master branch represents the main development branch of
+development, where as the others are feature branches[2] where experimental
+concepts are worked on.
+
+    master
+        As stated already, this is where a majority of work on ViCE happens.
+        When concepts developed in other branches are completed, they are
+        merged here. It should be noted that already agreed upon concepts are
+        developed directly within this branch, so at no given point is it
+        guaranteed to be stable. If you want to ensure that a checkout is
+        stable, you should checkout a tag instead.
+
+    cli
+        This is where the cli frontent is being developed. At present, I'm
+        experimenting with an interface similar to what a lot of web frameworks
+        provide which generate code stubs for you by passing relevant commands.
+        I would also like to experiment with a REPL-style interface for ViCE.
+        The interface is mostly geared toward developers and designers. If time
+        permits (or there is a demand), I might try and develop an ncurses
+        (through urwid) interface for players. Vim bindings +TCG = PWNAGE?
+        Maybe...
+
+    qml
+        This is where the qml frontend is being developed. While Kivy seemed
+        better suited to touch interfaces as well as android development
+        initially, it seems that QML is more mature and less buggy. That said,
+        I'm an infrequent contributor to Kivy, so don't be surprised if work
+        here ceases and a kivy branch appears.
+
+    gh-pages
+        This is where the generated documentation goes. Changes to
+        documentation should occur in other branches, not here! At present, it
+        is necessary to first delete the doc and vice directories and check
+        them out again before running `make gh-pages`, but once issue #12 is
+        resolved, this will not be so. 
+
+    packaging
+        This is not a branch for packaging for different operating systems, but
+        rather a branch that maintains distutils2 (or in python 3.3
+        "packaging") scripts. The result is far less clumbsy than distribute,
+        and so I'm hoping to replace that entirely once it becomes stable.
