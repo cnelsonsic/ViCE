@@ -46,10 +46,10 @@ How This Manual is Organized
 This book is organized into four parts, the first three of which being guides
 modeled after their respective roles:
 
-#. Player Guide
-#. Designer Guide
-#. Developer Guide
-#. API Reference
+#. :doc:`player_guide/player_index.rst`
+#. :doc:`designer_guide/designer_index.rst`
+#. :doc:`developer_guide/developer_index.rst` 
+#. :doc:`api_reference.rst`
 
 Design Principles
 -----------------
