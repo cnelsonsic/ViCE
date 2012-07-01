@@ -7,7 +7,7 @@ three perspectives (which we refer to as roles), and even includes reference
 documentation for the public API.
 
 .. note::
-    While there are subtle differences between the Trading Card Games and
+    While there are subtle differences between Trading Card Games and
     Collectible Card Games, in the interest of simplicity, this manual refers
     to them collectively (no pun intended) as TCGs. 
 
