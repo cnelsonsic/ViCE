@@ -53,10 +53,10 @@
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1356"
-     inkscape:window-height="742"
-     inkscape:window-x="5"
-     inkscape:window-y="21"
+     inkscape:window-width="1360"
+     inkscape:window-height="746"
+     inkscape:window-x="3"
+     inkscape:window-y="19"
      inkscape:window-maximized="0"
      showguides="true"
      inkscape:guide-bbox="true">
@@ -279,13 +279,13 @@
     <rect
        style="fill:#ffff00;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline"
        id="rect4172-1-1"
-       width="10.685007"
+       width="63.529079"
        height="24.474541"
        x="353.21567"
        y="629.17902" />
     <g
        id="g3416"
-       transform="translate(8.7835778,-13.175367)">
+       transform="translate(8.7835778,-12.560901)">
       <rect
          y="642.25073"
          x="343.4538"
@@ -305,9 +305,16 @@
            id="tspan4039"
            sodipodi:role="line">Other Plugin Types</tspan></text>
     </g>
+    <rect
+       style="fill:#ffff00;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline"
+       id="rect4172-9"
+       width="9.6493568"
+       height="24.474541"
+       x="45.254292"
+       y="599.55286" />
     <g
        id="g3426"
-       transform="translate(8.1691123,-11.306104)">
+       transform="translate(8.7835782,-11.306104)">
       <rect
          y="611.63776"
          x="37.358547"
