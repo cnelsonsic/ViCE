@@ -49,7 +49,6 @@ class TestAction(unittest.TestCase):
     def test_creation_from_new(self):
         def shuffle(cls, item):
             random.shuffle(item)
-
         action = Action.new(shuffle)
 
         self.assertEqual(action.__name__, 'Shuffle')
@@ -76,13 +75,10 @@ class TestContainer(unittest.TestCase):
         self.card.types = 'Land',
 
     def test_creation_from_new(self):
-        def constraints(self, item):
-            return [
-                item.NAME == 'Card',
-                40 <= len(self) <= 60,
-            ]
-
-        Deck = Container.new('Deck', constraints)
+        Deck = Container.new('Deck', lambda cls, item: [
+            item.NAME == 'Card',
+            40 <= len(cls) <= 60
+        ])
 
         self.assertNotEqual(Deck, None)
 
