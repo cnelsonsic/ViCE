@@ -3,5 +3,5 @@ __pycache__
 *.png
 MANIFEST
 .ropeproject
-ViCE.egg-info
+*.egg*
 .buildinfo
