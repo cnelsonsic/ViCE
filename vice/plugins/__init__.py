@@ -30,7 +30,7 @@ class PluginMeta(type):
         return super(PluginMeta, cls).__new__(cls, name, bases, attrs)
 
 
-PluginBase = PluginMeta('Plugin', (object, ), {})
+PluginBase = PluginMeta('PluginBase', (object, ), {})
 
 
 class Plugin(PluginBase):
