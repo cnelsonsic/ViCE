@@ -7,7 +7,7 @@ three perspectives (which we refer to as roles), and even includes reference
 documentation for the public API.
 
 .. note::
-    While there are subtle differences between the Trading Card Games and
+    While there are subtle differences between Trading Card Games and
     Collectible Card Games, in the interest of simplicity, this manual refers
     to them collectively (no pun intended) as TCGs. 
 
@@ -20,7 +20,7 @@ learning, three key user roles have been identified, as follows:
 Players
     These are the individuals who aren't concerned with how 
     ViCE's internals work, and could care less 
-    about creating new or porting existing :abbr:TCGs to 
+    about creating new or porting existing TCGs to 
     the framework. There sole reason for using 
     ViCE is to play whatever games *do* 
     exist for ViCE.
@@ -46,10 +46,10 @@ How This Manual is Organized
 This book is organized into four parts, the first three of which being guides
 modeled after their respective roles:
 
-#. Player Guide
-#. Designer Guide
-#. Developer Guide
-#. API Reference
+#. :doc:`/player_guide/player_index`
+#. :doc:`/designer_guide/designer_index`
+#. :doc:`/developer_guide/developer_index` 
+#. :doc:`/api_reference`
 
 Design Principles
 -----------------
