@@ -9,14 +9,12 @@
 from vice.plugins import Item, Container, Action
 from vice.database import Database
 
-"""
 db = Database('wtactics.db')
 
 # Items
 Item.from_table('Card', 'cards', exclude=(
     'border_color', 'footer'
 ))
-"""
 
 Item.new('Token', attributes=(
     'owner', 'type_', 'target' # target is which card it is placed on
