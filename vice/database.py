@@ -123,7 +123,7 @@ class Database(object):
                 arbitrary, and thus the order in which the columns is
                 specified may differ from what you expect when examining the
                 resulting database. If column order is important, pass
-                column_attrs as an `collections.OrderedDict` instead.
+                column_attrs as a `collections.OrderedDict` instead.
         """
         if table_name in self.tables:
             return
