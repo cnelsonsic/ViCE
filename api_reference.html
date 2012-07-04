@@ -105,22 +105,22 @@ after each operation.</p>
 
 <dl class="method">
 <dt id="vice.database.Database.create_record">
-<tt class="descname">create_record</tt><big>(</big><em>table_name</em>, <em>**parameters</em><big>)</big><a class="reference internal" href="_modules/vice/database.html#Database.create_record"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.database.Database.create_record" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">create_record</tt><big>(</big><em>table_name</em>, <em>parameters</em><big>)</big><a class="reference internal" href="_modules/vice/database.html#Database.create_record"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.database.Database.create_record" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a record in table_name, using parameters.</p>
 <p>Example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">db</span><span class="o">.</span><span class="n">create_record</span><span class="p">(</span><span class="s">&#39;cards&#39;</span><span class="p">,</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">db</span><span class="o">.</span><span class="n">create_record</span><span class="p">(</span><span class="s">&#39;cards&#39;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span>
     <span class="c"># note that id is auto-incremented, so isn&#39;t specified</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;Imp&#39;</span><span class="p">,</span>
     <span class="n">atk</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
     <span class="n">def_</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="p">)</span>
+<span class="p">))</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="vice.database.Database.create_table">
-<tt class="descname">create_table</tt><big>(</big><em>table_name</em>, <em>**column_attrs</em><big>)</big><a class="reference internal" href="_modules/vice/database.html#Database.create_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.database.Database.create_table" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">create_table</tt><big>(</big><em>table_name</em>, <em>column_attrs</em><big>)</big><a class="reference internal" href="_modules/vice/database.html#Database.create_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.database.Database.create_table" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a table in the database named table_name, with columns
 whose attributes match column_attrs.</p>
 <p>table_name may be anything you wish, but if it so happens to be a
@@ -145,12 +145,12 @@ restrictions on data or relationships.</p>
 <dd>primary_key=True &#8211; Marks the column as the primary key.</dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">db</span><span class="o">.</span><span class="n">create_table</span><span class="p">(</span><span class="s">&#39;cards&#39;</span><span class="p">,</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">db</span><span class="o">.</span><span class="n">create_table</span><span class="p">(</span><span class="s">&#39;cards&#39;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span>
     <span class="nb">id</span> <span class="o">=</span> <span class="n">integer</span><span class="p">(</span><span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">string</span><span class="p">(),</span>
     <span class="n">atk</span> <span class="o">=</span> <span class="n">integer</span><span class="p">(),</span>
     <span class="n">def_</span> <span class="o">=</span> <span class="n">integer</span><span class="p">()</span> <span class="c"># notice the trailing underscore</span>
-<span class="p">)</span>
+<span class="p">))</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -158,7 +158,8 @@ restrictions on data or relationships.</p>
 <p class="last">Since column_attrs is a dictionary, definition order is
 arbitrary, and thus the order in which the columns is
 specified may differ from what you expect when examining the
-resulting database.</p>
+resulting database. If column order is important, pass
+column_attrs as an <cite>collections.OrderedDict</cite> instead.</p>
 </div>
 </dd></dl>
 
@@ -219,7 +220,7 @@ __call__ method:</p>
 version of the camel-case class name (eg.FooBar-&gt; foo_bar)</p>
 <dl class="classmethod">
 <dt id="vice.plugins.Action.new">
-<em class="property">classmethod </em><tt class="descname">new</tt><big>(</big><em>function</em><big>)</big><a class="headerlink" href="#vice.plugins.Action.new" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><tt class="descname">new</tt><big>(</big><em>name</em>, <em>call=None</em><big>)</big><a class="headerlink" href="#vice.plugins.Action.new" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convenience method used to help simply creation of new actions.</p>
 <p>The function&#8217;s name is converted to title case and used as the name
 of the class, and it&#8217;s original form is used as the Plugin&#8217;s NAME.</p>
@@ -228,7 +229,7 @@ since this will be used as the class&#8217;s __call__ special method:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
     <span class="k">return</span> <span class="s">&#39;bar&#39;</span>
 
-<span class="n">Action</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">foo</span><span class="p">)</span>
+<span class="n">Action</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="n">foo</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -288,7 +289,7 @@ is invalid, nothing is inserted, and False is returned.</p>
 
 <dl class="classmethod">
 <dt id="vice.plugins.Container.new">
-<em class="property">classmethod </em><tt class="descname">new</tt><big>(</big><em>name</em>, <em>function</em><big>)</big><a class="headerlink" href="#vice.plugins.Container.new" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><tt class="descname">new</tt><big>(</big><em>name</em>, <em>constraints</em><big>)</big><a class="headerlink" href="#vice.plugins.Container.new" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convenience method used to help simplify the creation of new
 containers.</p>
 <p>Simply pass an appropriate container name and a consraints
