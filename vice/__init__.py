@@ -17,6 +17,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with ViCE.  If not, see <http://www.gnu.org/licenses/>.
 
+
 class PropertyDict(dict):
     """ A dict subclass that allows values to be retrieved by accessing their
         keys as properties.
