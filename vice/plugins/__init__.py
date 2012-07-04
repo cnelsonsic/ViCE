@@ -317,6 +317,8 @@ class Item(ItemBase):
            Any columns that match those in the exclude sequence will be ignored.
         """
 
+        exclude = exclude or []
+
         attributes = [
             column.name for column in table.columns
             if column.name not in exclude

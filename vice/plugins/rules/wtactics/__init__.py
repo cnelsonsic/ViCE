@@ -10,10 +10,10 @@ from vice.plugins import Item, Container, Action
 from vice.database import Database
 
 # opens a local db file
-db = Database('wtactics.db')
+db = Database('sqlite:///wtactics.db')
 
 # Items
-Item.from_table('Card', 'cards', exclude=(
+Item.from_table('Card', db.cards, exclude=(
     'border_color', 'footer'
 ))
 

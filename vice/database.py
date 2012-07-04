@@ -148,7 +148,8 @@ class Database(object):
                     def_ = 2
                 )
         """
-        parameters = {key.rstrip('_'): value for key, value in parameters.items()}
+        parameters = {key.rstrip('_'): value
+                      for key, value in parameters.items()}
         insert = getattr(self, table_name).insert().values(**parameters)
         connection = self.engine.connect()
 
