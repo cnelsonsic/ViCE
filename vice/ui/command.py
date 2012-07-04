@@ -26,15 +26,27 @@ item_template = """\
 ))
 """
 
-class ViceConsole(Cmd):
+class ViceCmd(Cmd):
+    prompt = 'vice> '
 
     def do_generate(self, line):
+        print line
         with open('foo.py', 'w') as f:
             plugin_template.format(
                 db_file='foo.db'
             )
             f.write(plugin_template)
 
+    def do_quit(self, line):
+        return True
+
+    def do_EOF(self, line):
+        print('')
+        return True
 
 if __name__ == '__main__':
-    ViceConsole().cmdloop()
+    import sys
+    if len(sys.argv) > 1:
+        ViceCmd().onecmd(' '.join(sys.argv[1:]))
+    else:
+        ViceCmd().cmdloop()
