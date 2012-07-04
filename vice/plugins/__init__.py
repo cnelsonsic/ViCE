@@ -17,10 +17,9 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with ViCE.  If not, see <http://www.gnu.org/licenses/>.
 
-import os
-import operator as op
-
 from vice import PropertyDict
+
+
 class PluginMeta(type):
 
     def __new__(cls, name, bases, attrs):
@@ -120,7 +119,7 @@ class Action(ActionBase):
     """
 
     @classmethod
-    def new(cls, name, function=None):
+    def new(cls, name, call=None):
         """ Convenience method used to help simply creation of new actions.
 
             The function's name is converted to title case and used as the name
@@ -136,11 +135,11 @@ class Action(ActionBase):
         """
 
         if name is None:
-            name = function.__name__
+            name = call.__name__
 
         return ActionMeta(name, (cls,), PropertyDict(
             NAME=name,
-            __call__=function
+            __call__=call
         ))
 
     @classmethod
@@ -197,7 +196,7 @@ class Container(ContainerBase):
         return len(self.items)
 
     @classmethod
-    def new(cls, name, function):
+    def new(cls, name, constraints):
         """ Convenience method used to help simplify the creation of new
             containers.
 
@@ -217,7 +216,7 @@ class Container(ContainerBase):
 
         return ContainerMeta(name, (cls,), dict(
             NAME=name,
-            constraints=function
+            constraints=constraints
         ))
 
 

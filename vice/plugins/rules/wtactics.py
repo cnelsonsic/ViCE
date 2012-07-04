@@ -9,6 +9,7 @@
 from vice.plugins import Item, Container, Action
 from vice.database import Database
 
+# opens a local db file
 db = Database('wtactics.db')
 
 # Items
@@ -36,6 +37,7 @@ HeroZone = Zone.new('HeroZone', lambda cls, item:
         len(cls) == 1
 ])
 
+# register the plugins
 actions = Action.plugins()
 containers = Container.plugins()
 items = Item.plugins()
