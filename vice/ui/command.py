@@ -44,9 +44,13 @@ class ViceCmd(Cmd):
         print('')
         return True
 
-if __name__ == '__main__':
+def main():
     import sys
     if len(sys.argv) > 1:
         ViceCmd().onecmd(' '.join(sys.argv[1:]))
     else:
         ViceCmd().cmdloop()
+
+
+if __name__ == '__main__':
+    main()
