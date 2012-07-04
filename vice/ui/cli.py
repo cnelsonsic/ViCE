@@ -6,8 +6,8 @@ def main():
 
     create_parser = subparsers.add_parser('create',
         help='Create various plugins and their components.')
-    #create_parser.add_argument('game',
-    #    help='create a skeleton for a game plugin')
+    create_parser.add_argument('rules',
+        help='create a skeleton for a rules plugin')
     create_parser.add_argument('database',
         help='create a database')
     create_parser.add_argument('item',
@@ -19,7 +19,8 @@ def main():
     create_parser.add_argument('--interactive', '-i',
         help='create component interactively')
 
-    parser.parse_args()
+    args = parser.parse_args()
+    print args
 
 if __name__ == '__main__':
     main()
