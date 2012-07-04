@@ -86,7 +86,7 @@ class Database(object):
         for table in self.tables:
             setattr(self, table, self.metadata.tables[table])
 
-    def create_table(self, table_name, **column_attrs):
+    def create_table(self, table_name, column_attrs):
         """ Creates a table in the database named table_name, with columns
             whose attributes match column_attrs.
 
@@ -111,18 +111,19 @@ class Database(object):
 
             Example::
 
-                db.create_table('cards',
+                db.create_table('cards', dict(
                     id = integer(primary_key=True),
                     name = string(),
                     atk = integer(),
                     def_ = integer() # notice the trailing underscore
-                )
+                ))
 
             .. note::
                 Since column_attrs is a dictionary, definition order is
                 arbitrary, and thus the order in which the columns is
                 specified may differ from what you expect when examining the
-                resulting database.
+                resulting database. If column order is important, pass
+                column_attrs as an `collections.OrderedDict` instead.
         """
         if table_name in self.tables:
             return
@@ -136,17 +137,17 @@ class Database(object):
 
         self.metadata.create_all(self.engine)
 
-    def create_record(self, table_name, **parameters):
+    def create_record(self, table_name, parameters):
         """ Creates a record in table_name, using parameters.
 
             Example::
 
-                db.create_record('cards',
+                db.create_record('cards', dict(
                     # note that id is auto-incremented, so isn't specified
                     name = 'Imp',
                     atk = 2,
                     def_ = 2
-                )
+                ))
         """
         parameters = {key.rstrip('_'): value
                       for key, value in parameters.items()}
