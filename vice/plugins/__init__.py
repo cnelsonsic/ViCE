@@ -202,6 +202,7 @@ class Container(ContainerBase):
                         item.NAME == 'Card', # container holds cards
                         40 <= len(self) <= 60 # between 40 and 60 cards
                     ]
+
         .. note:: self refers to container.
 
         The NAME attribute, if not specified, is set to be the underscored
