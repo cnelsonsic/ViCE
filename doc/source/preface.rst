@@ -13,9 +13,9 @@ documentation for the public API.
 
 User Roles
 ----------
-ViCE is a framework suitable for use by users 
-of varying interests and technical backgrounds. In an effort to help facilitate 
-learning, three key user roles have been identified, as follows:
+ViCE is a framework suitable for use by users of varying interests and 
+technical backgrounds. In an effort to help facilitate learning [#]_, three key 
+user roles have been identified, as follows:
 
 Players
     These are the individuals who aren't concerned with how 
@@ -34,7 +34,7 @@ Designers
 Developers
     These are the individuals who are interested in *how* 
     ViCE works, for the sake of implementing 
-    new features not possible through the currently available API or fixing bugs.
+    new features not possible through the currently available API or fixing bugs. [#]_
 
 While we have defined three distinct roles, these roles are not mutually
 exclusive, and can be viewed as somewhat hierarchical. That is, an individual
@@ -82,3 +82,11 @@ this imply that new features can be added rather easily, but also that features
 may be used a la carte: if a feature isn't required for you to finish a plugin, 
 it doesn't need to be used.
 
+.. [#] While we mainly mean learning of ViCE and its internals, the code base
+        is thoroughly documented and uses some advanced idioms (such as
+        metaclasses), which makes i a great source of material for learning
+        python itself.
+.. [#] Since ViCE is an open source project, developers are free to use any 
+        parts of the code for their own, unrelated projects, so long as the 
+        resulting work adheres to the term of the 
+        `AGPLv3 <http://www.gnu.org/licenses/agpl-3.0.html>`_. 
