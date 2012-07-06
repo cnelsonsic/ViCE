@@ -1,8 +1,10 @@
 Appendix A: GUI Ideas
 #####################
 This appendix is a scratch-pad of sorts, which serves as a visible
-place for me to document design ideas. Nothing here is concrete, and
-this appendix may at some point even be removed.
+place for me to document design ideas. 
+
+.. warning: 
+    Nothing here is concrete, and this appendix may at some point even be removed.
 
 Interacting with Cards
 ======================
@@ -17,17 +19,17 @@ Key Terms and Notation
 ======================
 
 Primary Cursor (*)
-    On desktops, this is a left-click
-    On mobile devices, this is a tap
+    On desktops, this is a left-click.
+    On mobile devices, this is a tap.
 
 Secondary Cursor (#)
-    On desktops, this is a right-click
-    On mobile multi-touch capable devices, this is a two-fingered tap
-    On other mobile devices, this is a long-tap
+    On desktops, this is a right-click.
+    On mobile multi-touch capable devices, this is a two-fingered tap.
+    On other mobile devices, this is a long-press.
 
 Drag (=>)
-    On desktops, this is a movement of the mouse
-    On mobile devices, this is a sliding of your finger
+    On desktops, this is a movement of the mouse.
+    On mobile devices, this is a sliding of your finger.
 
 Us (U)
     Us, as the player.
