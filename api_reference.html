@@ -336,7 +336,7 @@ is invalid, nothing is inserted, and False is returned.</p>
 <em class="property">classmethod </em><tt class="descname">new</tt><big>(</big><em>name</em>, <em>constraints</em><big>)</big><a class="reference internal" href="_modules/vice/plugins.html#Container.new"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.plugins.Container.new" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convenience method used to help simplify the creation of new
 containers.</p>
-<p>Simply pass an appropriate container name and a consraints
+<p>Simply pass an appropriate container name and a constraints
 function:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">contraints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">[</span>
@@ -348,10 +348,11 @@ function:</p>
 </pre></div>
 </div>
 <p>Alternatively, you may pass a lambda instead:</p>
-<div class="highlight-python"><pre>Deck = Container.new('Deck', lambda self, item: [
-    item.Name = 'Card',
-    40 &lt;= len(self) &lt;= 60
-])</pre>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Deck</span> <span class="o">=</span> <span class="n">Container</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s">&#39;Deck&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="p">[</span>
+    <span class="n">item</span><span class="o">.</span><span class="n">NAME</span> <span class="o">==</span> <span class="s">&#39;Card&#39;</span><span class="p">,</span>
+    <span class="mi">40</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">60</span>
+<span class="p">])</span>
+</pre></div>
 </div>
 </dd></dl>
 
