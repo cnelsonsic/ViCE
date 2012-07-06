@@ -217,7 +217,7 @@ class Container(ContainerBase):
         """ Convenience method used to help simplify the creation of new
             containers.
 
-            Simply pass an appropriate container name and a consraints
+            Simply pass an appropriate container name and a constraints
             function::
 
                 def contraints(self, item):
@@ -231,7 +231,7 @@ class Container(ContainerBase):
             Alternatively, you may pass a lambda instead::
 
                 Deck = Container.new('Deck', lambda self, item: [
-                    item.Name = 'Card',
+                    item.NAME == 'Card',
                     40 <= len(self) <= 60
                 ])
         """
