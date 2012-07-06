@@ -82,6 +82,8 @@ this imply that new features can be added rather easily, but also that features
 may be used a la carte: if a feature isn't required for you to finish a plugin, 
 it doesn't need to be used.
 
+.. rubric:: Footnotes
+
 .. [#] While we mainly mean learning of ViCE and its internals, the code base
         is thoroughly documented and uses some advanced idioms (such as
         metaclasses), which makes i a great source of material for learning
