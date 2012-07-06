@@ -263,6 +263,10 @@ since this will be used as the class&#8217;s __call__ special method:</p>
 <span class="n">Action</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="n">foo</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>Alternatively, you may use a lambda instead:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Action</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">cls</span><span class="p">:</span> <span class="s">&#39;bar&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="classmethod">
@@ -272,8 +276,7 @@ since this will be used as the class&#8217;s __call__ special method:</p>
 <p>Acts similarly to Plugin.plugins(), except that it returns
 instances of the plugin classes, rather than the classes
 themselves:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">FooAction</span><span class="p">(</span><span class="n">Action</span><span class="p">):</span> <span class="k">pass</span>
-<span class="n">actions</span> <span class="o">=</span> <span class="n">Action</span><span class="o">.</span><span class="n">plugins</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">actions</span> <span class="o">=</span> <span class="n">Action</span><span class="o">.</span><span class="n">plugins</span><span class="p">()</span>
 <span class="n">foo</span> <span class="o">=</span> <span class="n">actions</span><span class="o">.</span><span class="n">foo_action</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -293,6 +296,22 @@ objects, optionally placing arbitrary restrictions on its contents.
 Examples of containers include a decks (container of cards with a
 maximum and minumum count requirement), a questing
 zone (contains only quest cards), or a hand (container of cards).</p>
+<p>To create a new container, define a Container subclass and override the
+constraints method:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Foo</span><span class="p">(</span><span class="n">Action</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">contraints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">item</span><span class="o">.</span><span class="n">NAME</span> <span class="o">==</span> <span class="s">&#39;Card&#39;</span><span class="p">,</span> <span class="c"># container holds cards</span>
+            <span class="mi">40</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">60</span> <span class="c"># between 40 and 60 cards</span>
+        <span class="p">]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">self refers to container.</p>
+</div>
+<p>The NAME attribute, if not specified, is set to be the underscored
+version of the camel-case class name (eg.FooBar-&gt; foo_bar)</p>
 <dl class="method">
 <dt id="vice.plugins.Container.constraints">
 <tt class="descname">constraints</tt><big>(</big><em>item</em><big>)</big><a class="reference internal" href="_modules/vice/plugins.html#Container.constraints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vice.plugins.Container.constraints" title="Permalink to this definition">¶</a></dt>
@@ -319,17 +338,20 @@ is invalid, nothing is inserted, and False is returned.</p>
 containers.</p>
 <p>Simply pass an appropriate container name and a consraints
 function:</p>
-<div class="highlight-python"><pre>def contraints(self, item):
-    return [
-        item.NAME = 'Card' # container holds cards
-        40 &lt;= len(self) &lt;= 60 # between 40 and 60 cards
-    ]
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">contraints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="n">item</span><span class="o">.</span><span class="n">NAME</span> <span class="o">==</span> <span class="s">&#39;Card&#39;</span><span class="p">,</span>
+        <span class="mi">40</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">60</span>
+    <span class="p">]</span>
 
-Deck = Container.new('Deck', constraints)</pre>
+<span class="n">Deck</span> <span class="o">=</span> <span class="n">Container</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s">&#39;Deck&#39;</span><span class="p">,</span> <span class="n">constraints</span><span class="p">)</span>
+</pre></div>
 </div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">self refers to container.</p>
+<p>Alternatively, you may pass a lambda instead:</p>
+<div class="highlight-python"><pre>Deck = Container.new('Deck', lambda self, item: [
+    item.Name = 'Card',
+    40 &lt;= len(self) &lt;= 60
+])</pre>
 </div>
 </dd></dl>
 

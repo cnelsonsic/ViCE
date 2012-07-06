@@ -115,7 +115,6 @@ class Action(ActionBase):
 
         The NAME attribute, if not specified, is set to be the underscored
         version of the camel-case class name (eg.FooBar-> foo_bar)
-
     """
 
     @classmethod
@@ -132,6 +131,10 @@ class Action(ActionBase):
                     return 'bar'
 
                 Action.new('foo', foo)
+
+            Alternatively, you may use a lambda instead::
+
+                Action.new('foo', lambda cls: 'bar')
         """
 
         if name is None:
@@ -150,7 +153,6 @@ class Action(ActionBase):
             instances of the plugin classes, rather than the classes
             themselves::
 
-                class FooAction(Action): pass
                 actions = Action.plugins()
                 foo = actions.foo_action()
         """
@@ -190,6 +192,21 @@ class Container(ContainerBase):
         Examples of containers include a decks (container of cards with a
         maximum and minumum count requirement), a questing
         zone (contains only quest cards), or a hand (container of cards).
+
+        To create a new container, define a Container subclass and override the
+        constraints method::
+
+            class Foo(Action):
+                def contraints(self, item):
+                    return [
+                        item.NAME == 'Card', # container holds cards
+                        40 <= len(self) <= 60 # between 40 and 60 cards
+                    ]
+
+        .. note:: self refers to container.
+
+        The NAME attribute, if not specified, is set to be the underscored
+        version of the camel-case class name (eg.FooBar-> foo_bar)
     """
 
     def __len__(self):
@@ -205,13 +222,18 @@ class Container(ContainerBase):
 
                 def contraints(self, item):
                     return [
-                        item.NAME = 'Card' # container holds cards
-                        40 <= len(self) <= 60 # between 40 and 60 cards
+                        item.NAME == 'Card',
+                        40 <= len(self) <= 60
                     ]
 
                 Deck = Container.new('Deck', constraints)
 
-            .. note:: self refers to container.
+            Alternatively, you may pass a lambda instead::
+
+                Deck = Container.new('Deck', lambda self, item: [
+                    item.Name = 'Card',
+                    40 <= len(self) <= 60
+                ])
         """
 
         return ContainerMeta(name, (cls,), dict(
