@@ -3,7 +3,7 @@ Appendix A: GUI Ideas
 This appendix is a scratch-pad of sorts, which serves as a visible
 place for me to document design ideas. 
 
-.. warning: 
+.. warning::
     Nothing here is concrete, and this appendix may at some point even be removed.
 
 Interacting with Cards
