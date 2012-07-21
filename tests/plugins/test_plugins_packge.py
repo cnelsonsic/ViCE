@@ -1,5 +1,6 @@
 import random
 import unittest
+from collections import OrderedDict
 from vice.plugins import Plugin, Action, Item, Container
 from vice.database import Database, integer, string
 
@@ -107,12 +108,12 @@ class TestItem(unittest.TestCase):
 
     def test_creation_from_db(self):
         db = Database('sqlite:///:memory:')
-        db.create_table('cards',
+        db.create_table('cards', OrderedDict(
             id = integer(primary_key=True),
             name = string(),
             atk = integer(),
             def_ = integer()
-        )
+        ))
 
         Card = Item.from_table('Card', db.cards, exclude=['id'])
 

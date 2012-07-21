@@ -1,4 +1,5 @@
 import unittest
+from collections import OrderedDict
 from vice.database import integer, string, Database
 
 class TestSQLiteDatabase(unittest.TestCase):
@@ -7,12 +8,12 @@ class TestSQLiteDatabase(unittest.TestCase):
         self.test_table_creation()
 
     def test_table_creation(self):
-        self.db.create_table('cards',
+        self.db.create_table('cards', OrderedDict(
             id = integer(primary_key=True),
             name = string(),
             def_ = integer(),
             atk = integer()
-        )
+        ))
 
         column_names = [column.name for column in self.db.cards.columns]
 
@@ -26,11 +27,11 @@ class TestSQLiteDatabase(unittest.TestCase):
         self.assertIsNotNone(result)
 
     def test_record_creation(self):
-        result = self.db.create_record('cards',
+        result = self.db.create_record('cards', dict(
             name = 'Imp',
             atk = 2,
             def_ = 2
-        )
+        ))
 
         self.assertIsNotNone(result)
 
