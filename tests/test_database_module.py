@@ -35,5 +35,21 @@ class TestSQLiteDatabase(unittest.TestCase):
 
         self.assertIsNotNone(result)
 
+    def test_table_dropping(self):
+        
+        self.db.create_table('tmp', OrderedDict(
+            id = integer(primary_key=True),
+            name = string(),
+            def_ = integer(),
+            atk = integer()
+        ))
+
+        self.db.drop_table('tmp')
+        self.assertNotIn('tmp', self.db.tables)
+        
+        with self.assertRaises(AttributeError):
+            self.db.drop_table('tmp')
+        
+
 if __name__ == '__main__':
     unittest.main()

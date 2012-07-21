@@ -179,3 +179,22 @@ class Database(object):
         connection = self.engine.connect()
 
         return connection.execute(select)
+
+    def drop_table(self, table_name):
+        """ Drops the given table from the database.
+        
+            Pass if_not_exists=False to get an exception upon attempting to remove an unexisting table.
+
+            Example::
+
+                if 'cards' in db.tables:
+                    db.drop('cards')
+        """
+        
+        if table_name not in self.tables:
+            raise AttributeError(u'Table “{0}” does not exist'.format(table_name))
+        
+        # Drop the table.
+        getattr(self, table_name).drop(self.engine)
+        self.metadata.clear()
+        self.metadata.reflect(self.engine)
