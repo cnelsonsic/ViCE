@@ -198,3 +198,23 @@ class Database(object):
         getattr(self, table_name).drop(self.engine)
         self.metadata.clear()
         self.metadata.reflect(self.engine)
+        
+    def rename_table(self, old_name, new_name):
+        """ Changes the name of a table.
+        
+            Example::
+            
+                db.rename_table('cards', 'items')
+        """
+        if old_name == new_name:
+            return
+        if old_name not in self.tables:
+            raise AttributeError(u'No “{0}” table found'.format(old_name))
+        if new_name in self.tables:
+            raise AttributeError(u'Table “{0}” already exists'.format(new_name))
+        
+        connection = self.engine.connect()
+        sentence = u'ALTER TABLE {0} RENAME TO {1}'.format(old_name, new_name)
+        connection.execute(sentence)
+        self.metadata.clear()
+        self.metadata.reflect(self.engine)
