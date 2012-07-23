@@ -183,17 +183,10 @@ class Database(object):
     def drop_table(self, table_name):
         """ Drops the given table from the database.
 
-            If the table doesn't exist in the database, an AttributeError is
-            raised.
-
             Example::
 
                 db.drop('cards')
         """
-
-        if table_name not in self.tables:
-            raise AttributeError(u"Table '{0}' does not exist".format(table_name))
-
         # Drop the table.
         getattr(self, table_name).drop(self.engine)
         self.metadata.clear()
