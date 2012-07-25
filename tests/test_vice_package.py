@@ -8,7 +8,7 @@ class TestProperyDict(unittest.TestCase):
 
     def test_property_access(self):
         self.fields.name = "Joe"
-        self.assertEqual(self.fields.name, self.fields['name'])
+        assert self.fields.name == self.fields['name']
 
 
 if __name__ == '__main__':

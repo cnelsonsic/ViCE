@@ -16,10 +16,9 @@ class TestPlugin(unittest.TestCase):
         class BarPlugin(self.FooPlugin):
             NAME = 'bar'
 
-        plugins = Plugin.plugins().keys()
+        plugins = Plugin.plugins()
 
-        self.assertIn('foo', plugins)
-        self.assertIn('bar', plugins)
+        assert 'bar' in plugins
 
 
 class TestAction(unittest.TestCase):
@@ -41,8 +40,9 @@ class TestAction(unittest.TestCase):
         self.assertIsInstance(actions.move, self.Move)
 
         actions.move(1, self.source, self.destination)
-        self.assertSequenceEqual(self.source, [1, 3])
-        self.assertSequenceEqual(self.destination, [7, 8, 9, 2])
+
+        assert self.source == [1, 3]
+        assert self.destination ==  [7, 8, 9, 2]
 
 
     def test_creation_from_new(self):
@@ -50,9 +50,8 @@ class TestAction(unittest.TestCase):
             random.shuffle(item)
         )
 
-        self.assertEqual(action.__name__, 'Shuffle')
-        self.assertEqual(action.NAME, 'shuffle')
-        self.assertIn('shuffle', Action.plugins())
+        assert action.__name__ == 'Shuffle'
+        assert 'shuffle' in Action.plugins()
 
 
 class TestContainer(unittest.TestCase):
@@ -79,16 +78,16 @@ class TestContainer(unittest.TestCase):
             40 <= len(cls) <= 60
         ])
 
-        self.assertNotEqual(Deck, None)
+        assert Deck is not None
 
-    def test_container_insert_true(self):
+    def test_container_insertion(self):
         land_zone = self.LandZone()
-        self.assertTrue(land_zone.insert(self.card))
+        assert land_zone.insert(self.card)
 
-    def test_container_insert_false(self):
+    def test_invalid_container_insertion(self):
         land_zone = self.LandZone()
         land_zone.insert(self.card)
-        self.assertFalse(land_zone.insert(self.card))
+        assert not land_zone.insert(self.card)
 
 
 class TestItem(unittest.TestCase):
@@ -102,9 +101,8 @@ class TestItem(unittest.TestCase):
     def test_creation_from_new(self):
         item = Item.new('Dice', ('sides',))
 
-        self.assertEqual(item.__name__, 'Dice')
-        self.assertEqual(item.NAME, 'Dice')
-        self.assertTrue('Dice' in Item.plugins())
+        assert item.__name__ == 'Dice'
+        assert 'Dice' in Item.plugins()
 
     def test_creation_from_db(self):
         db = Database('sqlite:///:memory:')
@@ -117,19 +115,20 @@ class TestItem(unittest.TestCase):
 
         Card = Item.from_table('Card', db.cards, exclude=['id'])
 
-        self.assertEqual(Card.ATTRIBUTES, ('atk', 'def', 'name'))
+        assert all(hasattr(Card, attr) for attr in ('atk', 'def', 'name'))
 
     def test_attributes_created(self):
-        self.assertTrue(hasattr(self.counter, 'value'))
+        assert hasattr(self.counter, 'value')
 
     def test_new_atttribute_creation_impossible(self):
         self.counter.owner = 'me'
 
-        self.assertFalse(hasattr(self.counter, 'owner'))
+        assert not hasattr(self.counter, 'owner')
 
     def test_attribute_assignable(self):
         self.counter.value  = 7
-        self.assertEqual(self.counter.value, 7)
+
+        assert self.counter.value == 7
 
 
 if __name__ == '__main__':
