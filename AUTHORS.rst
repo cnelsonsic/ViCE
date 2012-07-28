@@ -6,5 +6,5 @@ forgotten, please email Edwin Marshall at mailto:aspidites@wtactics.org.
 
 Code
 ====
-Edwin Marshall (mailto:aspidites@wtactics.org)
-Gallaecio (mailto:gallaecio@wtactics.org)
+Edwin Marshall (aspidites) <mailto:aspidites@wtactics.org>
+Adrián Chaves Fernández (Gallaecio) <mailto:adriyetichaves@gmail.com>
