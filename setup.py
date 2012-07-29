@@ -1,12 +1,14 @@
 from setuptools import setup, find_packages
 from setuptools import Command
 
+
 class Doc(Command):
     """Command to generate documentation"""
     """ TODO:
         * add --sphinxopts command to replace SHINXOPTS
         * add --sphinxbuild command to set sphinxbuild command
         * add --builddir command to set build directory
+        * rewrite process_images.sh in python
     """
 
     description = "Generate documentation"
@@ -28,11 +30,13 @@ class Doc(Command):
     def run(self):
         import os
         import sphinx
+        from subprocess import call
 
         sphinxbuild = os.environ.get('SPHINXBUILD', 'sphinx-build')
         args = '{0} -b {1} -d ./build/doctere -W ./doc/source build'
 
         for fmt in self.formats:
+            call(['./doc/process_images.sh'])
             sphinx.main(args.format(sphinxbuild, fmt).split())
 
 setup(
