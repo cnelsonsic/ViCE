@@ -61,7 +61,9 @@ class Plugin(PluginBase):
 
         def find_subclasses(cls):
             """ Recursive function needed to find subclassses of subclasses. """
-            subclasses = cls.__subclasses__()
+            subclasses = [subclass for subclass in cls.__subclasses__()
+                if 'Base' not in subclass.__name__
+            ]
 
             if subclasses:
                 cls._plugins += subclasses
@@ -85,13 +87,11 @@ class ActionMeta(PluginMeta):
     """
 
     def __new__(cls, name, bases, attrs):
-        name = name.title().replace('_', '')
-        if not attrs.get('NAME'):
-            # convert camel-case to underscores
-            caps = [i for i in range(len(name)) if name[i].isupper()]
-            words = [name[caps[i]:caps[i+1]] for i in range(len(caps)-1)]
-            words.append(name[caps[-1]:])
-            attrs['NAME'] = '_'.join((word.lower() for word in words))
+        head = [name[0].lower()]
+        tail = ['_{0}'.format(char.lower()) if char.isupper() else char
+            for char in name[1:]
+        ]
+        attrs['NAME'] = ''.join(head + tail)
 
         return super(ActionMeta, cls).__new__(cls, name, bases, attrs)
 
