@@ -1,4 +1,6 @@
 from collections import OrderedDict
+import pytest
+from sqlalchemy.exc import OperationalError
 from vice.database import integer, string, Database
 
 def pytest_funcarg__db(request):
@@ -18,9 +20,33 @@ def test_table_creation():
     return db
 
 def test_record_creation(db):
-    result = self.db.create_record('cards', dict(
+    result = db.create_record('cards', dict(
         nme = 'Imp',
         atk = 2,
         def_ = 2))
 
     assert result
+
+def test_simple_table_selection(db):
+    result = db.select('cards')
+
+    assert result is not None
+
+def test_table_renaming(db):
+    db.rename_table('cards', 'items')
+
+    assert 'cards' not in db.tables
+    assert 'items' in db.tables
+
+def test_invalid_table_renaming(db):
+    with pytest.raises(OperationalError):
+        db.rename_table('items', 'cards')
+
+def test_table_dropping(db):
+    db.drop_table('cards')
+
+    assert 'cards' not in db.tables
+
+def test_invalid_table_dropping(db):
+    with pytest.raises(AttributeError):
+        db.drop_table('items')
