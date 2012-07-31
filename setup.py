@@ -1,6 +1,17 @@
 from setuptools import setup, find_packages
 from setuptools import Command
+from setuptools.command.test import test
 
+
+class PyTest(test):
+    def finalize_options(self):
+        test.finalize_options(self)
+        self.test_args = []
+        self.test_suite = True
+
+    def run_tests(self):
+        import pytest
+        pytest.main(self.test_args)
 
 class Doc(Command):
     """Command to generate documentation"""
@@ -60,8 +71,9 @@ setup(
     ],
     packages=find_packages(exclude=['*test*']),
     install_requires=['SQLAlchemy>=0.7.6'],
-    test_suite='tests',
+    tests_require=['pytest'],
     cmdclass={
-        'doc': Doc
+        'doc': Doc,
+        'test': PyTest
     },
 )
