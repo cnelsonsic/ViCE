@@ -87,6 +87,7 @@ class ActionMeta(PluginMeta):
     """
 
     def __new__(cls, name, bases, attrs):
+        # convert CamelCase to underscore_case
         head = [name[0].lower()]
         tail = ['_{0}'.format(char.lower()) if char.isupper() else char
             for char in name[1:]
