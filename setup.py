@@ -14,8 +14,13 @@ class PyTest(test):
         import pytest
         pytest.main(self.test_args)
 
-class Doc(Command):
+class doc(Command):
     """Command to generate documentation"""
+
+    # TODO:
+    # * --clean command
+    # * ghpages format
+    # * --github command for use with ghpages format
 
     description = "Generate documentation"
 
@@ -117,5 +122,5 @@ setup(
     install_requires=['SQLAlchemy>=0.7.6'],
     tests_require=['pytest'],
     cmdclass={
-        'doc': Doc,
+        'doc': doc,
         'test': PyTest})
