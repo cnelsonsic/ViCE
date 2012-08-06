@@ -1,4 +1,6 @@
 import os
+import sys
+import shutil
 from setuptools import setup, find_packages
 from setuptools import Command
 from setuptools.command.test import test
@@ -18,7 +20,8 @@ class doc(Command):
     """Command to generate documentation"""
 
     # TODO:
-    # * --clean command
+    # * print more useful output after each command
+    # * fix pdf output
     # * ghpages format
     # * --github command for use with ghpages format
 
@@ -34,7 +37,9 @@ class doc(Command):
         ('sphinxbuild=', None,
          'name of sphinx-build executable'),
         ('sphinxopts=', None,
-         'options to pass to sphinx-build')]
+         'options to pass to sphinx-build'),
+        ('clean', None,
+         'remove genenerated documenation files')]
 
     def initialize_options(self):
         self.formats = None
@@ -42,6 +47,7 @@ class doc(Command):
         self.sourcedir = None
         self.sphinxbuild = None
         self.sphinxopts = None
+        self.clean = None
 
     def finalize_options(self):
         if not self.formats:
@@ -63,20 +69,25 @@ class doc(Command):
         if not self.sphinxopts:
             self.sphinxopts = '-W'
 
+        if self.clean is None:
+            self.clean = False
+
     def run(self):
-        import sphinx
+        if self.clean:
+            shutil.rmtree(self.builddir)
+        else:
+            import sphinx
 
-        sphinxbuild = os.environ.get('SPHINXBUILD', self.sphinxbuild)
-        sphinxopts = os.environ.get('SPHINXOPTS', self.sphinxopts)
-        args = '{0} -b {1} -d {2}/doctree {3} {4} {2}/{1}'
+            sphinxbuild = os.environ.get('SPHINXBUILD', self.sphinxbuild)
+            sphinxopts = os.environ.get('SPHINXOPTS', self.sphinxopts)
+            args = '{0} -b {1} -d {2}/doctree {3} {4} {2}/{1}'
 
-        self._process_images()
-        for fmt in self.formats:
-            sphinx.main(args.format(sphinxbuild, fmt, self.builddir, sphinxopts, self.sourcedir).split())
+            self._process_images()
+            for fmt in self.formats:
+                sphinx.main(args.format(sphinxbuild,
+                    fmt, self.builddir, sphinxopts, self.sourcedir).split())
 
     def _process_images(self):
-        return
-        import shutil
         from subprocess import call
 
         imagedir = os.path.join(self.sourcedir, '_static')
@@ -85,11 +96,11 @@ class doc(Command):
         args = 'pyreverse -my -o svg -p ViCE vice'
         call(args.split())
 
-        for image in os.listdir('.'):
+        for filename in os.listdir('.'):
             if filename.endswith('.svg'):
                 try:
                     shutil.move(filename, imagedir)
-                except IOError:
+                except shutil.Error:
                     pass
 
         # convnert svgs to pngs
