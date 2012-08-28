@@ -1,5 +1,9 @@
 Architecture
 ============
+.. contents::
+    :local:
+    :backlinks: top
+
 .. image:: /_static/stack_diagram.png
 
 As you can see from the architecture stack diagram above, ViCE's core is

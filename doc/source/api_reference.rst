@@ -1,5 +1,9 @@
 API Reference
 #############
+.. contents::
+    :local:
+    :backlinks: top
+
 .. _vice:
 
 vice -- main package; also provides PropertyDict
