@@ -1,6 +1,7 @@
 import os
-import sys
 import shutil
+from subprocess import call
+
 from setuptools import setup, find_packages
 from setuptools import Command
 from setuptools.command.test import test
@@ -20,7 +21,6 @@ class doc(Command):
     """Command to generate documentation"""
 
     # TODO:
-    # * fix pdf output
     # * ghpages format
     # * --github command for use with ghpages format
 
@@ -71,39 +71,7 @@ class doc(Command):
         if self.clean is None:
             self.clean = False
 
-    def run(self):
-        if self.clean:
-            if not os.path.exists(self.builddir):
-                print('Nothing to clean, quiting...')
-                return
-
-            prompt = ('This action will remove all files in {0}, '
-                      'would you like to continue? (y/N)').format(
-                os.path.abspath(self.builddir))
-
-            try:
-                answer = raw_input(prompt)
-            except NameError:
-                answer = input(prompt)
-            finally:
-                if answer.lower() == 'y':
-                    shutil.rmtree(self.builddir)
-                else:
-                    print('Operation aborted.')
-        else:
-            import sphinx
-
-            sphinxbuild = os.environ.get('SPHINXBUILD', self.sphinxbuild)
-            sphinxopts = os.environ.get('SPHINXOPTS', self.sphinxopts)
-            args = '{0} -b {1} -d {2}/doctree {3} {4} {2}/{1}'
-
-            self._process_images()
-            for fmt in self.formats:
-                sphinx.main(args.format(sphinxbuild,
-                    fmt, self.builddir, sphinxopts, self.sourcedir).split())
-
     def _process_images(self):
-        from subprocess import call
 
         imagedir = os.path.join(self.sourcedir, '_static')
 
@@ -125,6 +93,50 @@ class doc(Command):
             os.path.join(imagedir, filename.replace('svg', 'png')),
             os.path.join(imagedir, filename)).split())
             for filename in os.listdir(imagedir) if filename.endswith('.svg')]
+
+    def _run_sphinx(self, fmt):
+        import sphinx
+
+        sphinxbuild = os.environ.get('SPHINXBUILD', self.sphinxbuild)
+        sphinxopts = os.environ.get('SPHINXOPTS', self.sphinxopts)
+        args = '{0} -b {1} -d {2}/doctree {3} {4} {2}/{1}'
+
+        sphinx.main(args.format(sphinxbuild, fmt, self.builddir, sphinxopts,
+            self.sourcedir).split())
+
+    def run(self):
+        if self.clean:
+            if not os.path.exists(self.builddir):
+                print('Nothing to clean, quiting...')
+                return
+
+            prompt = ('This action will remove all files in {0}, '
+                      'would you like to continue? (y/N)').format(
+                os.path.abspath(self.builddir))
+
+            try:
+                answer = raw_input(prompt)
+            except NameError:
+                answer = input(prompt)
+            finally:
+                if answer.lower() == 'y':
+                    shutil.rmtree(self.builddir)
+                else:
+                    print('Operation aborted.')
+        else:
+            self._process_images()
+            for fmt in self.formats:
+                if fmt == 'pdf':
+                    self._run_sphinx('latex')
+                    args = 'make -C {0} all-pdf'
+                    call(args.format(
+                        os.path.join(self.builddir, 'latex')).split())
+                elif fmt == 'coverage':
+                    pass
+                elif fmt == 'gh-pages':
+                    pass
+                else:
+                    self._run_sphinx(fmt)
 
 
 setup(
