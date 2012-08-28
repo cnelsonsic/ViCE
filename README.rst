@@ -16,20 +16,17 @@ In it's current state, ViCE has few dependencies:
 
 * `python >= 2.7 (including 3.x) <http://python.org>`_
 
-* `sqlalchemy >= 0.7 <http://www.sqlalchemy.org>`_
+* `sqlalchemy >= 0.7 <http://www.sqlalchemy.org>`_ : `vice.database`
 
-* `sqlite >= 3.7.11 <http://www.sqlite.org>`_
+* `sqlite >= 3.7.11 <http://www.sqlite.org>`_ : `vice.database`
 
 In the future, some or all of the following depenencies will also be required:
 
-* `gevent = 0.13.7 <http://www.gevent.org>`_ (Networking)
+* `gevent = 0.13.7 <http://www.gevent.org>`_ : `vice.client` and `vice.server`
 
-* `PySide >= 1.1.1 <http://www.pyside.org>`_ (QML/QWidgets interface)
+* `PySide >= 1.1.1 <http://www.pyside.org>`_ : `vice.ui.qt`
 
-* `Urwid >= 1.0.1 <http://excess.org/urwid>`_ (Curses interface)
-
-* `Pyparsing >= 1.5.5 <http://pyparsing.wikispaces.com/`_ 
-  (declarative plugin creation and *maybe* card parsing)
+* `Kivy >= 1.4.0 <http://www.kivy.org`_ : `vice.ui.kviy`
 
 Download
 ========
@@ -87,7 +84,22 @@ feature.
     or build a new pdf from souce by descending into the doc subdirectory and
     executing the appropriate make target::
 
-        make latexpdf
+        python setup.py doc --formats latexpdf
+
+    To avoid havingto type the --formats option repeatedly, you may modify
+    setup.cfg. For example::
+
+        [doc]
+        formats = pdf,html
+
+    Will generate pdf and html documentation by default::
+
+        python setup.py doc
+
+    For other configurable options, type::
+
+        python setup.py doc --help
+
 
 Community
 #########
@@ -146,4 +158,5 @@ packaging
     This is not a branch for packaging for different operating systems, but
     rather a branch that maintains distutils2 (or in python 3.3
     "packaging") scripts. The result is far less clumbsy than distribute,
-    and so I'm hoping to replace that entirely once it becomes stable.
+    so I'm hoping to merge this branch as a drop-in replacement for the current
+    setup.py script.
