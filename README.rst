@@ -90,7 +90,7 @@ feature.
     setup.cfg. For example::
 
         [doc]
-        formats = latexpdf,htl
+        formats = pdf,html
 
     Will generate pdf and html documentation by default::
 

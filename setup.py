@@ -20,7 +20,6 @@ class doc(Command):
     """Command to generate documentation"""
 
     # TODO:
-    # * print more useful output after each command
     # * fix pdf output
     # * ghpages format
     # * --github command for use with ghpages format
@@ -57,7 +56,7 @@ class doc(Command):
                 format.strip() for format in self.formats.split(',')]
 
         if not self.builddir:
-            self.builddir = 'build'
+            self.builddir = os.path.join('doc', 'build')
 
         if not self.sourcedir:
             self.sourcedir = os.path.join('doc', 'source')
@@ -74,7 +73,23 @@ class doc(Command):
 
     def run(self):
         if self.clean:
-            shutil.rmtree(self.builddir)
+            if not os.path.exists(self.builddir):
+                print('Nothing to clean, quiting...')
+                return
+
+            prompt = ('This action will remove all files in {0}, '
+                      'would you like to continue? (y/N)').format(
+                os.path.abspath(self.builddir))
+
+            try:
+                answer = raw_input(prompt)
+            except NameError:
+                answer = input(prompt)
+            finally:
+                if answer.lower() == 'y':
+                    shutil.rmtree(self.builddir)
+                else:
+                    print('Operation aborted.')
         else:
             import sphinx
 
@@ -93,6 +108,7 @@ class doc(Command):
         imagedir = os.path.join(self.sourcedir, '_static')
 
         # create class and pacakge diagrams
+        print('Calling pyreverse to generate class diagrams...')
         args = 'pyreverse -my -o svg -p ViCE vice'
         call(args.split())
 
@@ -103,7 +119,7 @@ class doc(Command):
                 except shutil.Error:
                     pass
 
-        # convnert svgs to pngs
+        print('Converting svgs to pngs for inclusion in documentation...')
         args = 'inkscape -D -e {0} {1}'
         [call(args.format(
             os.path.join(imagedir, filename.replace('svg', 'png')),
