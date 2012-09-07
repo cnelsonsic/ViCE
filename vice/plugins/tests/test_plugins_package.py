@@ -21,12 +21,12 @@ class TestItem(unittest.TestCase):
 
     def test_creation_from_db(self):
         db = Database('sqlite:///:memory:')
-        db.create_table('cards', OrderedDict(
-            id = integer(primary_key=True),
-            name = string(),
-            atk = integer(),
-            def_ = integer()
-        ))
+        db.create_table(
+            'cards', OrderedDict(
+                id = integer(primary_key=True),
+                name = string(),
+                atk = integer(),
+                def_ = integer()))
 
         Card = Item.from_table('Card', db.cards, exclude=['id'])
 

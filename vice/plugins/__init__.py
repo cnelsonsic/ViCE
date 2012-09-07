@@ -23,8 +23,7 @@ from vice import PropertyDict
 class PluginMeta(type):
 
     def __new__(cls, name, bases, attrs):
-        if not attrs.get('NAME'):
-            attrs['NAME'] = name
+        attrs['NAME'] = attrs.get('NAME') or name
 
         return super(PluginMeta, cls).__new__(cls, name, bases, attrs)
 
@@ -62,8 +61,7 @@ class Plugin(PluginBase):
         def find_subclasses(cls):
             """ Recursive function needed to find subclassses of subclasses. """
             subclasses = [subclass for subclass in cls.__subclasses__()
-                if 'Base' not in subclass.__name__
-            ]
+                          if 'Base' not in subclass.__name__]
 
             if subclasses:
                 cls._plugins += subclasses
@@ -73,9 +71,7 @@ class Plugin(PluginBase):
 
         find_subclasses(cls)
 
-        return PropertyDict((plugin.NAME, plugin)
-            for plugin in cls._plugins
-        )
+        return PropertyDict((plugin.NAME, plugin) for plugin in cls._plugins)
 
 
 class ActionMeta(PluginMeta):
@@ -90,8 +86,7 @@ class ActionMeta(PluginMeta):
         # convert CamelCase to underscore_case
         head = [name[0].lower()]
         tail = ['_{0}'.format(char.lower()) if char.isupper() else char
-            for char in name[1:]
-        ]
+                for char in name[1:]]
         attrs['NAME'] = ''.join(head + tail)
 
         return super(ActionMeta, cls).__new__(cls, name, bases, attrs)
@@ -160,13 +155,11 @@ class Action(ActionBase):
 
         return PropertyDict(
             (pluginName, plugin(*args, **kwargs))
-            for pluginName, plugin in super(Action, cls).plugins().items()
-        )
+            for pluginName, plugin in super(Action, cls).plugins().items())
 
     def __call__(self):
         raise NotImplementedError(
-            'All actions should implement a __call__ method!'
-        )
+            'All actions should implement a __call__ method!')
 
 
 class ContainerMeta(PluginMeta):
@@ -201,8 +194,7 @@ class Container(ContainerBase):
                 def contraints(self, item):
                     return [
                         item.NAME == 'Card', # container holds cards
-                        40 <= len(self) <= 60 # between 40 and 60 cards
-                    ]
+                        40 <= len(self) <= 60 # between 40 and 60 cards]
 
         .. note:: self refers to container.
 
@@ -224,23 +216,20 @@ class Container(ContainerBase):
                 def contraints(self, item):
                     return [
                         item.NAME == 'Card',
-                        40 <= len(self) <= 60
-                    ]
+                        40 <= len(self) <= 60]
 
                 Deck = Container.new('Deck', constraints)
 
             Alternatively, you may pass a lambda instead::
 
-                Deck = Container.new('Deck', lambda self, item: [
-                    item.NAME == 'Card',
-                    40 <= len(self) <= 60
-                ])
+                Deck = Container.new(
+                    'Deck', lambda self, item: [
+                        item.NAME == 'Card',
+                        40 <= len(self) <= 60])
         """
 
-        return ContainerMeta(name, (cls,), dict(
-            NAME=name,
-            constraints=constraints
-        ))
+        return ContainerMeta(
+            name, (cls,), dict(NAME=name, constraints=constraints))
 
 
     def constraints(self, item):
@@ -253,8 +242,7 @@ class Container(ContainerBase):
        """
 
         raise NotImplementedError(
-            'All containers should implement a constraints method!'
-        )
+            'All containers should implement a constraints method!')
 
     def insert(self, item, position=-1):
         """ Insert's an item into the container at position.
@@ -280,8 +268,7 @@ class ItemMeta(PluginMeta):
 
     def __new__(cls, name, bases, attrs):
         if attrs.get('ATTRIBUTES'):
-            for attribute in attrs['ATTRIBUTES']:
-                attrs[attribute] = None
+            attrs.update(dict.fromkeys(attrs['ATTRIBUTES']))
 
         return super(ItemMeta, cls).__new__(cls, name, bases, attrs)
 
@@ -322,10 +309,10 @@ class Item(ItemBase):
                 Dice = Item.new('Dice', ('name', 'atk', 'def'))
         """
 
-        return ItemMeta(name, (cls,), dict(
-            NAME=name,
-            ATTRIBUTES=tuple(set(attributes))
-        ))
+        return ItemMeta(
+            name, (cls,), dict(
+                NAME=name,
+                ATTRIBUTES=tuple(set(attributes))))
 
     @classmethod
     def from_table(cls, name, table, exclude=None):
@@ -344,8 +331,7 @@ class Item(ItemBase):
 
         attributes = [
             column.name for column in table.columns
-            if column.name not in exclude
-        ]
+            if column.name not in exclude]
 
         return cls.new(name, attributes)
 

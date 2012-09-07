@@ -8,11 +8,12 @@ def pytest_funcarg__db(request):
 
 def test_table_creation():
     db = Database('sqlite:///:memory:')
-    db.create_table('cards', OrderedDict(
-        id = integer(primary_key=True),
-        name = string(),
-        def_ = integer(),
-        atk = integer()))
+    db.create_table(
+        'cards', OrderedDict(
+            id = integer(primary_key=True),
+            name = string(),
+            def_ = integer(),
+            atk = integer()))
 
     columns = (column.name for column in db.cards.columns)
 

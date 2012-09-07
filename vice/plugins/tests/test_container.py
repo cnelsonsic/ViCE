@@ -12,12 +12,11 @@ def pytest_funcarg__land_zone(request):
     return request.cached_setup(setup=test_define_from_new, scope='function')
 
 def test_define_from_new():
-    LandZone = Container.new('LandZone', lambda cls, item: [
-        item.NAME == 'Card',
-        len(cls) < 1,
-        'Land' in item.types
-
-    ])
+    LandZone = Container.new(
+        'LandZone', lambda cls, item: [
+            item.NAME == 'Card',
+            len(cls) < 1,
+            'Land' in item.types])
 
     assert 'LandZone' in Container.plugins()
     return LandZone()

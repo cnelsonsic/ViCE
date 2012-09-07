@@ -115,8 +115,7 @@ class Database(object):
                     id = integer(primary_key=True),
                     name = string(),
                     atk = integer(),
-                    def_ = integer() # notice the trailing underscore
-                ))
+                    def_ = integer())) # notice the trailing underscore
 
             .. note::
                 Since column_attrs is a dictionary, definition order is
@@ -131,9 +130,9 @@ class Database(object):
         columns = (sqlalchemy.Column(attr.rstrip('_'), **column_attrs[attr])
                    for attr in column_attrs.keys())
 
-        setattr(self, table_name,
-            sqlalchemy.Table(table_name.rstrip('_'), self.metadata, *columns
-        ))
+        setattr(
+            self, table_name, sqlalchemy.Table(
+                table_name.rstrip('_'), self.metadata, *columns))
 
         self.metadata.create_all(self.engine)
 
@@ -146,8 +145,7 @@ class Database(object):
                     # note that id is auto-incremented, so isn't specified
                     name = 'Imp',
                     atk = 2,
-                    def_ = 2
-                ))
+                    def_ = 2))
         """
         parameters = {key.rstrip('_'): value
                       for key, value in parameters.items()}
