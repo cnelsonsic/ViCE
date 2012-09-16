@@ -49,11 +49,10 @@ class Database(object):
     def __init__(self, location=':memory:'):
         self.location = location
         self._conn = sqlite3.connect(self.location)
+        self._conn.isolation_level = None # autocommit mode
 
     def create_table(self, name, columns):
         setattr(self, name, Table(self._conn, name, columns))
-
-
 
 
 class Record(object):

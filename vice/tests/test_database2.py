@@ -15,7 +15,7 @@ def test_create_table(db):
             atk = integer()
         ))
 
-    assert db.cards.columns.keys() == ['atk', 'def_', 'id_', 'name']
+    assert sorted(db.cards.columns) == ['atk', 'def_', 'id_', 'name']
 
 # Data Manipulation Language
 def test_insert(db):
@@ -44,7 +44,5 @@ def test_select(db):
 
     assert record == dict(
         name = 'Imp',
-        atk = 2,
-        def_ = 2)
         atk = 2,
         def_ = 2)
