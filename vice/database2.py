@@ -20,10 +20,33 @@ null = partial(column, kind='null')
 
 class Table(object):
 
+
+    @property
+    def info(self):
+        # name, type, null, default, primary_key
+        columns = self._conn.execute(
+            "PRAGMA table_info({0})".format(self.name)).fetchall()
+
+        return dict(
+            (column[1], {
+                'index': column[0],
+                'type': column[2], 'null_allowed': bool(column[3]),
+                'default': column[4], 'primary_key': bool(column[5])})
+            for column in columns)
+
+    @property
+    def columns(self):
+        return self.info.keys()
+
+    @property
+    def primary_key(self):
+        for key, value in self.info.items():
+            if value['primary_key']:
+                return key
+
     def __init__(self, connection, name, columns):
         self._conn = connection
         self.name = name
-        self.columns = columns.keys()
 
         columns = ', '.join(value(name=key) for key, value in columns.items())
         query = """CREATE TABLE {name}

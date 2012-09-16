@@ -2,9 +2,25 @@ import os
 from collections import OrderedDict
 from vice.database2 import Database, integer, text
 
-def pytest_funcarg__db(request):
-    return Database()
 
+def pytest_funcarg__db(request):
+
+    def setup():
+        db = Database('wtactics.db')
+
+        assert os.path.exists('wtactics.db')
+        return db
+
+    def teardown(db):
+        os.remove(db.location)
+
+        assert not os.path.exists(db.location)
+        del db
+
+    return request.cached_setup(
+        setup=setup, teardown=teardown, scope='module')
+
+# Data Definition Language
 def test_create_table(db):
     db.create_table(
         'cards',
@@ -12,11 +28,13 @@ def test_create_table(db):
             id_ = integer(primary_key=True),
             name = text(),
             def_ = integer(),
-            atk = integer()
-        ))
+            atk = integer()))
 
     assert sorted(db.cards.columns) == ['atk', 'def_', 'id_', 'name']
 
+def test_primary_key(db):
+    assert db.cards.primary_key == 'id_'
+"""
 # Data Manipulation Language
 def test_insert(db):
     db.cards.insert(
@@ -46,3 +64,4 @@ def test_select(db):
         name = 'Imp',
         atk = 2,
         def_ = 2)
+"""
