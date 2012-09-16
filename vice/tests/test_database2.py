@@ -20,7 +20,6 @@ def pytest_funcarg__db(request):
     return request.cached_setup(
         setup=setup, teardown=teardown, scope='module')
 
-# Data Definition Language
 def test_create_table(db):
     db.create_table(
         'cards',
@@ -32,35 +31,39 @@ def test_create_table(db):
 
     assert sorted(db.cards.columns) == ['atk', 'def_', 'id_', 'name']
 
+def test_tables(db):
+    assert db.tables == ['cards']
+
 def test_primary_key(db):
     assert db.cards.primary_key == 'id_'
-"""
-# Data Manipulation Language
+
 def test_insert(db):
     db.cards.insert(
-        name = 'Imp',
+        name = "'Imp'",
         atk = 2,
         def_ = 2)
 
     assert len(db.cards) == 1
 
+"""
 def test_select_using_attributes(db):
+    test_insert(db)
     db.cards.insert(
         name = 'Foo',
         atk = 4,
         def_ = 1)
 
-    record = db.cards[1]
+    row = db.cards[1]
 
-    assert record.columns == dict(
+    assert row.columns == dict(
         name = 'Foo',
         atk = 4,
         def_ = 1)
 
 def test_select(db):
-    record = db.cards.select(atk = 2).next()
+    row = db.cards.select(atk = 2).next()
 
-    assert record == dict(
+    assert row == dict(
         name = 'Imp',
         atk = 2,
         def_ = 2)
