@@ -22,49 +22,38 @@ def pytest_funcarg__db(request):
 
 def test_create_table(db):
     db.create_table(
-        'cards',
-        OrderedDict(
-            id_ = integer(primary_key=True),
-            name = text(),
-            def_ = integer(),
-            atk = integer()))
+        'cards', **{
+            'id': integer(primary_key=True),
+            'name': text(),
+            'def': integer(),
+            'atk': integer()})
 
-    assert sorted(db.cards.columns) == ['atk', 'def_', 'id_', 'name']
+    assert sorted(db.cards.columns) == ['atk', 'def', 'id', 'name']
 
 def test_tables(db):
     assert db.tables == ['cards']
 
 def test_primary_key(db):
-    assert db.cards.primary_key == 'id_'
+    assert db.cards.primary_key == 'id'
 
 def test_insert(db):
-    db.cards.insert(
-        name = "'Imp'",
-        atk = 2,
-        def_ = 2)
+    db.cards.insert(2, 2, name='Imp')
 
     assert len(db.cards) == 1
 
-"""
-def test_select_using_attributes(db):
-    test_insert(db)
-    db.cards.insert(
-        name = 'Foo',
-        atk = 4,
-        def_ = 1)
-
-    row = db.cards[1]
-
-    assert row.columns == dict(
-        name = 'Foo',
-        atk = 4,
-        def_ = 1)
-
 def test_select(db):
-    row = db.cards.select(atk = 2).next()
+    db.cards.insert(2, 1, 'Runt')
+    db.cards.insert(0, 0, 'Air')
+    db.cards.insert(10, 10, 'God')
+    rows = db.cards.select(atk=2)
 
-    assert row == dict(
-        name = 'Imp',
-        atk = 2,
-        def_ = 2)
-"""
+    assert len(rows.fetchall()) == 2
+
+def test_operator_select(db):
+    pass
+
+def test_drop(db):
+    pass
+
+def test_rename_table(db):
+    pass

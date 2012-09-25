@@ -1,4 +1,5 @@
 import sqlite3
+from collections import OrderedDict
 from functools import partial
 
 def column(kind='text', name=None, primary_key=False):
@@ -18,6 +19,7 @@ blob = partial(column, kind='blob')
 null = partial(column, kind='null')
 
 class Row(object):
+    #TODO: assign column values as properties
     def __init__(self, connection, table, **kwargs):
         self._conn = connection
         self._table = table
@@ -26,19 +28,21 @@ class Row(object):
                    ({columns})
                    VALUES ({values})""".format(
             table=self._table,
-            columns=', '.join(repr(key) for key in kwargs.keys()),
+            columns=', '.join(str(key) for key in kwargs.keys()),
             values=', '.join(repr(value) for value in kwargs.values()))
 
         self._conn.execute(query)
 
 
 class Table(object):
-    def __init__(self, connection, name, columns=None):
+    def __init__(self, connection, table_name, **kwargs):
         self._conn = connection
-        self.name = name
+        self.name = table_name
 
-        if columns:
-            self.create_columns(columns)
+        if kwargs.get('columns'):
+            self.create_columns(kwargs['columns'])
+        elif kwargs:
+            self.create_columns(kwargs)
 
     def __len__(self):
         cursor = self._conn.execute("""SELECT count(*) from {name}""".format(
@@ -51,14 +55,33 @@ class Table(object):
         query = """CREATE TABLE if not exists {0}
                    ({1})""".format(self.name, columns)
 
-        self._conn.execute(query)
+        return self._conn.execute(query)
 
-    def insert(self, **kwargs):
-        return Row(self._conn, self.name, **kwargs)
+    def insert(self, *args, **kwargs):
+        columns = OrderedDict(zip(self.columns, args))
+        kwargs.update((key, value) for key, value in columns.items()
+            if key not in kwargs)
+
+        Row(self._conn, self.name, **kwargs)
         #TODO: add attribute by primary key
 
-    def select(self):
-        pass
+    def select(self, *args, **kwargs):
+        if not args and not kwargs:
+            query = """SELECT *
+                       FROM {table}""".format(table=self.name)
+        else:
+            columns = OrderedDict(zip(self.columns, args))
+            kwargs.update((key, value) for key, value in columns.items()
+                if key not in kwargs)
+
+            columns = ", ".join(["{key} = {value}".format(key=key, value=value)
+                for key, value in kwargs.items()])
+
+            query = """SELECT *
+                       FROM {table}
+                       WHERE {columns}""".format(table=self.name, columns=columns)
+
+        return self._conn.execute(query)
 
     @property
     def info(self):
@@ -102,8 +125,8 @@ class Database(object):
         if name in self.tables:
             return Table(self._conn, name)
 
-    def create_table(self, name, columns):
-        return Table(self._conn, name, columns)
+    def create_table(self, table_name, **kwargs):
+        return Table(self._conn, table_name, **kwargs)
 
     @property
     def tables(self):
