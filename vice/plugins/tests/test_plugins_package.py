@@ -20,13 +20,13 @@ class TestItem(unittest.TestCase):
         assert 'Dice' in Item.plugins()
 
     def test_creation_from_db(self):
-        db = Database('sqlite:///:memory:')
+        db = Database()
         db.create_table(
-            'cards', OrderedDict(
-                id = integer(primary_key=True),
-                name = string(),
-                atk = integer(),
-                def_ = integer()))
+            'cards', **OrderedDict({
+                'id': integer(primary_key=True),
+                'name': text(),
+                'atk': integer(),
+                'def': integer()}))
 
         Card = Item.from_table('Card', db.cards, exclude=['id'])
 

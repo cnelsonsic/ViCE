@@ -328,12 +328,8 @@ class Item(ItemBase):
         """
 
         exclude = exclude or []
-
-        attributes = [
-            column.name for column in table.columns
-            if column.name not in exclude]
-
-        return cls.new(name, attributes)
+        return cls.new(name, [column for column in table.columns
+            if column not in exclude])
 
     def __setattr__(self, name, value):
         if hasattr(self, name):
