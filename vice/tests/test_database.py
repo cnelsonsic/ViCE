@@ -1,6 +1,6 @@
 import os
 from collections import OrderedDict
-from vice.database2 import Database, integer, text
+from vice.database import Database, integer, text
 
 
 def pytest_funcarg__db(request):
@@ -53,7 +53,13 @@ def test_operator_select(db):
     pass
 
 def test_drop(db):
-    pass
+    db.drop('cards')
+
+    assert not db.tables
 
 def test_rename_table(db):
-    pass
+    test_create_table(db)
+    db.rename_table('cards', 'dogs')
+
+    assert 'dogs' in db.tables
+    assert 'cards' not in db.tables

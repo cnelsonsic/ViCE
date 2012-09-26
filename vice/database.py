@@ -1,206 +1,176 @@
-# -*- coding: utf-8 -*-
+import sqlite3
+from collections import OrderedDict
+from functools import partial
+from vice import PropertyDict
 
-# Copyright (C) 2011-2012 Edwin Marshall <emarshall85@gmail.com>
-#
-# This file is part of ViCE.
-#
-# ViCE is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# ViCE is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public License
-# along with ViCE.  If not, see <http://www.gnu.org/licenses/>.
 
-import sqlalchemy
+def property_dict_factory(cursor, row):
+    """ Returns the cursor's row as a property dict."""
+    pd = PropertyDict()
+    for idx, col in enumerate(cursor.description):
+        pd[col[0]] = row[idx]
 
-def string(**kwargs):
-    """ Returns a kwargs dictionary suitable for creating an SQLAlchemy
-        String column.
+    return pd
+
+
+def column(kind='text', name=None, primary_key=False):
+    """ Returns a string to be used as a column declaration for
+        an SQL query with the given column name and type (kind).
     """
 
-    kwargs.update({'type_': sqlalchemy.String})
+    query = '{name} {kind}'
+    if primary_key:
+        query += ' PRIMARY KEY'
 
-    return kwargs
+    if name:
+        return query.format(name=name, kind=kind)
+    else:
+        return partial(query.format, kind=kind)
 
-def integer(**kwargs):
-    """ Returns a kwargs dictionary suitable for creating an SQLAlchemy
-        Integer column.
+text = partial(column, kind='text')
+integer = partial(column, kind='integer')
+real = partial(column, kind='real')
+blob = partial(column, kind='blob')
+null = partial(column, kind='null')
+
+
+
+class Table(object):
+    """ Abstraction layer on top of python's sqlite3 API.
+
+        This class wraps python's sqlite3 API, making it more object oriented
+        and intuitive to use.
     """
+    def __init__(self, connection, table_name, **kwargs):
+        self._conn = connection
+        self.name = table_name
 
-    kwargs.update({'type_': sqlalchemy.Integer})
+        if kwargs.get('columns'):
+            self._create_columns(kwargs['columns'])
+        elif kwargs:
+            self._create_columns(kwargs)
 
-    return kwargs
+    def __len__(self):
+        cursor = self._conn.execute("""SELECT count(*) from {name}""".format(
+            name=self.name))
 
-class Database(object):
-    """ Abstraction layer on top of SQLAlchemy's interface.
+        return len(cursor.fetchall())
 
-        While SQLAlchemy abstracts the particulars of different
-        database backends and the subtle ways SQL may differ within them,
-        this Database class abstracts the SQLAlchemy API into something more
-        simple, meanwhile adding facilities that make it integrate better with
-        ViCE's plugin architecture.
-    """
+    def _create_columns(self, columns):
+        columns = ', '.join(value(name=key) for key, value in columns.items())
+        query = """CREATE TABLE if not exists {0}
+                   ({1})""".format(self.name, columns)
 
-    def __init__(self, URI=None, echo=False):
-        """ Instantiate a new database object, calling connect if a valid URI
-            is given.
+        return self._conn.execute(query)
+
+    def insert(self, *args, **kwargs):
+        """ Insert a new row into the database.
+
+            Positional arguemnts are understood to be column
+            names (in alphabetical order), where as keyword arguemnts are
+            understood to be key value  pairs representing the columns and their
+            values respectively.
+        """
+        columns = dict(zip(self.columns, args))
+        kwargs.update((key, value) for key, value in columns.items()
+            if key not in kwargs)
+
+        query = """INSERT INTO {table}
+                ({columns})
+                VALUES ({values})""".format(
+            table=self.name,
+            columns=', '.join(str(key) for key in kwargs.keys()),
+            values=', '.join(repr(value) for value in kwargs.values()))
+
+        return self._conn.execute(query)
+
+    def select(self, *args, **kwargs):
+        """ Select rows from the database.
+
+            If no arguments are given, every row is returned. Positional
+            arguemnts are understood to be column names (in alphabetical order),
+            where as keyword arguemnts are
+            understood to be key value  pairs representing the columns and their
+            values respectively.
         """
 
-        self.metadata = sqlalchemy.MetaData()
-        if URI:
-            self.connect(URI, echo)
+        if not args and not kwargs:
+            query = """SELECT *
+                       FROM {table}""".format(table=self.name)
         else:
-            self.engine = None
+            columns = OrderedDict(zip(self.columns, args))
+            kwargs.update((key, value) for key, value in columns.items()
+                if key not in kwargs)
+
+            columns = ", ".join(["{key} = {value}".format(key=key, value=value)
+                for key, value in kwargs.items()])
+
+            query = """SELECT *
+                       FROM {table}
+                       WHERE {columns}""".format(table=self.name, columns=columns)
+
+        return self._conn.execute(query)
+
+    @property
+    def info(self):
+        # name, type, null, default, primary_key
+        columns = self._conn.execute(
+            "PRAGMA table_info({0})".format(self.name)).fetchall()
+
+
+        return dict(
+            (column.name, {
+                'index': column.cid,
+                'type': column.type,
+                'null_allowed': bool(column.notnull),
+                'default': column.dflt_value,
+                'primary_key': bool(column.pk)})
+            for column in columns)
+
+    @property
+    def columns(self):
+        return self.info.keys()
+
+    @property
+    def primary_key(self):
+        for key, value in self.info.items():
+            if value['primary_key']:
+                return key
+
+
+class Database(object):
+
+    def __init__(self, location=':memory:'):
+        self.location = location
+        self._conn = sqlite3.connect(self.location)
+        self._conn.isolation_level = None # autocommit mode
+        self._conn.row_factory = property_dict_factory #sqlite3.Row
+
+    def __getattr__(self, name):
+        if name in self.tables:
+            return Table(self._conn, name)
+
+    def create_table(self, table_name, **kwargs):
+        return Table(self._conn, table_name, **kwargs)
+
+    def rename_table(self, old_name, new_name):
+        query = """ALTER TABLE {old_name}
+                   RENAME TO {new_name}""".format(
+                        old_name=str(old_name), new_name=repr(new_name))
+
+        return self._conn.execute(query)
+
+    def drop(self, table_name):
+        query = """DROP TABLE {table}""".format(table=table_name)
+
+        return self._conn.execute(query)
+
+    def execute(self, query, *args, **kwargs):
+        return self._conn.execute(query, *args, **kwargs)
 
     @property
     def tables(self):
-        """ Returns a list of table names for the current database object. """
-        return self.metadata.tables.keys()
+        cursor = self._conn.execute("""SELECT name from sqlite_master
+                                        WHERE type = 'table'""")
 
-    def connect(self, URI, echo=False):
-        """ Connects to an existing database, or creates a new one if one
-            isn't found.
-
-            URI may be any URI recognized by SQLAlchemy, and generally follows
-            the form::
-
-                "<protocol>:///<location>"
-
-            For example::
-
-                "sqlite:///wtactics.db"
-
-            echo determines whether or not SQL statements are echoed to stdout
-            after each operation.
-        """
-
-        self.engine = sqlalchemy.create_engine(URI, echo=echo)
-        self.metadata.reflect(bind=self.engine)
-
-        for table in self.tables:
-            setattr(self, table, self.metadata.tables[table])
-
-    def create_table(self, table_name, column_attrs):
-        """ Creates a table in the database named table_name, with columns
-            whose attributes match column_attrs.
-
-            table_name may be anything you wish, but if it so happens to be a
-            reserved word in Python (eg. 'def'), then you must suffix it with
-            an underscore ('_'). You needn't worry, however, since the
-            trailing underscore is removed inside the actual database.
-
-            All remaining keyword arguments will be processed as column
-            attributes where the keys should be valid column names, and the values
-            should be arguments to column types.
-
-            Valid column types are currently:
-                * string() -- Represents an string column.
-                * integer() -- Represents an integer column .
-
-            Arguments may be passed to these column types to further specify
-            restrictions on data or relationships.
-
-            Valid arguments are currently:
-                primary_key=True -- Marks the column as the primary key.
-
-            Example::
-
-                db.create_table('cards', dict(
-                    id = integer(primary_key=True),
-                    name = string(),
-                    atk = integer(),
-                    def_ = integer())) # notice the trailing underscore
-
-            .. note::
-                Since column_attrs is a dictionary, definition order is
-                arbitrary, and thus the order in which the columns is
-                specified may differ from what you expect when examining the
-                resulting database. If column order is important, pass
-                column_attrs as a `collections.OrderedDict` instead.
-        """
-        if table_name in self.tables:
-            return
-
-        columns = (sqlalchemy.Column(attr.rstrip('_'), **column_attrs[attr])
-                   for attr in column_attrs.keys())
-
-        setattr(
-            self, table_name, sqlalchemy.Table(
-                table_name.rstrip('_'), self.metadata, *columns))
-
-        self.metadata.create_all(self.engine)
-
-    def create_record(self, table_name, parameters):
-        """ Creates a record in table_name, using parameters.
-
-            Example::
-
-                db.create_record('cards', dict(
-                    # note that id is auto-incremented, so isn't specified
-                    name = 'Imp',
-                    atk = 2,
-                    def_ = 2))
-        """
-        parameters = {key.rstrip('_'): value
-                      for key, value in parameters.items()}
-        insert = getattr(self, table_name).insert().values(**parameters)
-        connection = self.engine.connect()
-
-        return connection.execute(insert)
-
-    def select(self, tables, **kwargs):
-        """ Selects all records of the given tables.
-
-            tables is a list of table names.
-
-            .. warning::
-                The interface is mostly ported directly from SQLAlchemy. In
-                the future, a simpler interface will be implemented, most
-                probably named "find", and this one will be deprecated for
-                immediate removal.
-        """
-
-        kwargs = {key.rstrip('_'): value for key, value in kwargs.items()}
-
-        if not hasattr(tables, 'join'):
-            tables = [getattr(self, table) for table in tables]
-        else:
-            tables = [getattr(self, tables)]
-
-        select = sqlalchemy.sql.select(tables, **kwargs)
-        connection = self.engine.connect()
-
-        return connection.execute(select)
-
-    def drop_table(self, table_name):
-        """ Drops the given table from the database.
-
-            Example::
-
-                db.drop('cards')
-        """
-
-        # Drop the table.
-        getattr(self, table_name).drop(self.engine)
-        self.metadata.clear()
-        self.metadata.reflect(self.engine)
-
-    def rename_table(self, old_name, new_name):
-        """ Changes the name of a table.
-
-            Example::
-
-                db.rename_table('cards', 'items')
-        """
-
-        connection = self.engine.connect()
-        sentence = 'ALTER TABLE {0} RENAME TO {1}'.format(old_name, new_name)
-        connection.execute(sentence)
-        self.metadata.clear()
-        self.metadata.reflect(self.engine)
+        return [row.name for row in cursor]

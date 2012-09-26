@@ -2,7 +2,7 @@ import random
 import unittest
 from collections import OrderedDict
 from vice.plugins import Plugin, Action, Item, Container
-from vice.database import Database, integer, string
+from vice.database import Database, integer, text
 
 
 class TestItem(unittest.TestCase):
