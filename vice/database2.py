@@ -1,6 +1,16 @@
 import sqlite3
 from collections import OrderedDict
 from functools import partial
+from vice import PropertyDict
+
+
+def property_dict_factory(cursor, row):
+    pd = PropertyDict()
+    for idx, col in enumerate(cursor.description):
+        pd[col[0]] = row[idx]
+
+    return pd
+
 
 def column(kind='text', name=None, primary_key=False):
     query = '{name} {kind}'
@@ -18,21 +28,6 @@ real = partial(column, kind='real')
 blob = partial(column, kind='blob')
 null = partial(column, kind='null')
 
-class Row(object):
-    #TODO: assign column values as properties
-    def __init__(self, connection, table, **kwargs):
-        self._conn = connection
-        self._table = table
-
-        query = """INSERT INTO {table}
-                   ({columns})
-                   VALUES ({values})""".format(
-            table=self._table,
-            columns=', '.join(str(key) for key in kwargs.keys()),
-            values=', '.join(repr(value) for value in kwargs.values()))
-
-        self._conn.execute(query)
-
 
 class Table(object):
     def __init__(self, connection, table_name, **kwargs):
@@ -40,9 +35,9 @@ class Table(object):
         self.name = table_name
 
         if kwargs.get('columns'):
-            self.create_columns(kwargs['columns'])
+            self._create_columns(kwargs['columns'])
         elif kwargs:
-            self.create_columns(kwargs)
+            self._create_columns(kwargs)
 
     def __len__(self):
         cursor = self._conn.execute("""SELECT count(*) from {name}""".format(
@@ -50,7 +45,7 @@ class Table(object):
 
         return len(cursor.fetchall())
 
-    def create_columns(self, columns):
+    def _create_columns(self, columns):
         columns = ', '.join(value(name=key) for key, value in columns.items())
         query = """CREATE TABLE if not exists {0}
                    ({1})""".format(self.name, columns)
@@ -58,12 +53,18 @@ class Table(object):
         return self._conn.execute(query)
 
     def insert(self, *args, **kwargs):
-        columns = OrderedDict(zip(self.columns, args))
+        columns = dict(zip(self.columns, args))
         kwargs.update((key, value) for key, value in columns.items()
             if key not in kwargs)
 
-        Row(self._conn, self.name, **kwargs)
-        #TODO: add attribute by primary key
+        query = """INSERT INTO {table}
+                ({columns})
+                VALUES ({values})""".format(
+            table=self.name,
+            columns=', '.join(str(key) for key in kwargs.keys()),
+            values=', '.join(repr(value) for value in kwargs.values()))
+
+        return self._conn.execute(query)
 
     def select(self, *args, **kwargs):
         if not args and not kwargs:
@@ -89,11 +90,14 @@ class Table(object):
         columns = self._conn.execute(
             "PRAGMA table_info({0})".format(self.name)).fetchall()
 
+
         return dict(
-            (column[1], {
-                'index': column[0],
-                'type': column[2], 'null_allowed': bool(column[3]),
-                'default': column[4], 'primary_key': bool(column[5])})
+            (column.name, {
+                'index': column.cid,
+                'type': column.type,
+                'null_allowed': bool(column.notnull),
+                'default': column.dflt_value,
+                'primary_key': bool(column.pk)})
             for column in columns)
 
     @property
@@ -105,7 +109,6 @@ class Table(object):
         for key, value in self.info.items():
             if value['primary_key']:
                 return key
-
 
 
 class Database(object):
@@ -120,6 +123,7 @@ class Database(object):
         self.location = location
         self._conn = sqlite3.connect(self.location)
         self._conn.isolation_level = None # autocommit mode
+        self._conn.row_factory = property_dict_factory #sqlite3.Row
 
     def __getattr__(self, name):
         if name in self.tables:
@@ -133,4 +137,4 @@ class Database(object):
         cursor = self._conn.execute("""SELECT name from sqlite_master
                                         WHERE type = 'table'""")
 
-        return [row[0] for row in cursor]
+        return [row.name for row in cursor]

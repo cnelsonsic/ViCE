@@ -146,7 +146,7 @@ setup(
         'Topic :: Games/Entertainment :: Turn Based Strategy',
         'Topic :: Software Development :: Libraries :: Python Modules'],
     packages=find_packages(exclude=['*test*']),
-    install_requires=['SQLAlchemy>=0.7.6'],
+    install_requires=[],
     tests_require=['pytest'],
     cmdclass={
         'doc': doc,
