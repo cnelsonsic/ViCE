@@ -18,12 +18,8 @@
 # along with ViCE. If not, see <http://www.gnu.org/licenses/>.
 
 import sqlite3
-from collections import OrderedDict
 from functools import partial
 from vice import PropertyDict
-
-#TODO: see if i can do kwargs.update(columns) instead of checking for either/or
-
 
 def property_dict_factory(cursor, row):
     """ Returns the cursor's row as a property dict."""
