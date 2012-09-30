@@ -1,7 +1,6 @@
 import os
 from collections import OrderedDict
-from vice.database import Database, integer, text
-
+from vice.database import Database, integer, text, gt
 
 def pytest_funcarg__db(request):
 
@@ -22,7 +21,7 @@ def pytest_funcarg__db(request):
 
 def test_create_table(db):
     db.create_table(
-        'cards', **{
+        'cards', {
             'id': integer(primary_key=True),
             'name': text(),
             'def': integer(),
@@ -37,20 +36,29 @@ def test_primary_key(db):
     assert db.cards.primary_key == 'id'
 
 def test_insert(db):
-    db.cards.insert(2, 2, name='Imp')
+    db.cards.insert({
+        'name': 'Imp',
+        'atk': 2,
+        'def': 2})
 
     assert len(db.cards) == 1
 
 def test_select(db):
-    db.cards.insert(2, 1, 'Runt')
-    db.cards.insert(0, 0, 'Air')
-    db.cards.insert(10, 10, 'God')
-    rows = db.cards.select(atk=2)
+    for n, a, d in [
+        ['Runt', 2, 1],
+        ['Air', 0, 0],
+        ['God', 10, 10]]:
+        db.cards.insert({'def': d}, name=n, atk=a)
 
-    assert len(rows.fetchall()) == 2
+    rows = db.cards.select(atk=2).fetchall()
+
+    assert len(rows) == 2
 
 def test_operator_select(db):
-    pass
+    rows = db.cards.select(**{
+        'def': gt(0)}).fetchall()
+
+    assert len(rows) == 3
 
 def test_drop(db):
     db.drop('cards')

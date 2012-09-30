@@ -1,19 +1,38 @@
+# -*- coding: utf-8 -*-
+
+# Copyright (C) 2011-2012 Edwin Marshall <emarshall85@gmail.com>
+#
+# This file is part of ViCE.
+#
+# ViCE is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# ViCE is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with ViCE. If not, see <http://www.gnu.org/licenses/>.
+
 import sqlite3
 from collections import OrderedDict
 from functools import partial
 from vice import PropertyDict
 
+#TODO: see if i can do kwargs.update(columns) instead of checking for either/or
+
 
 def property_dict_factory(cursor, row):
     """ Returns the cursor's row as a property dict."""
-    pd = PropertyDict()
-    for idx, col in enumerate(cursor.description):
-        pd[col[0]] = row[idx]
 
-    return pd
+    return PropertyDict(
+        (col[0], row[idx]) for idx, col in enumerate(cursor.description))
 
 
-def column(kind='text', name=None, primary_key=False):
+def column(name=None, kind='text', primary_key=False):
     """ Returns a string to be used as a column declaration for
         an SQL query with the given column name and type (kind).
     """
@@ -27,13 +46,27 @@ def column(kind='text', name=None, primary_key=False):
     else:
         return partial(query.format, kind=kind)
 
+""" Typed Columns """
 text = partial(column, kind='text')
 integer = partial(column, kind='integer')
 real = partial(column, kind='real')
 blob = partial(column, kind='blob')
 null = partial(column, kind='null')
 
+def comparison(value=None, column=None, operator='='):
+    query = '{column} {operator} {value}'
 
+    if column:
+        return query.format(column=column, operator=operator, value=repr(value))
+    else:
+        return partial(query.format, operator=operator, value=repr(value))
+
+lt = partial(comparison, operator='<')
+le = partial(comparison, operator='<=')
+eq = partial(comparison, operator='=')
+ge = partial(comparison, operator='>=')
+gt = partial(comparison, operator='>')
+ne = partial(comparison, operator='!=')
 
 class Table(object):
     """ Abstraction layer on top of python's sqlite3 API.
@@ -41,17 +74,17 @@ class Table(object):
         This class wraps python's sqlite3 API, making it more object oriented
         and intuitive to use.
     """
-    def __init__(self, connection, table_name, **kwargs):
+    def __init__(self, connection, table_name, columns=None, **kwargs):
+
         self._conn = connection
         self.name = table_name
 
-        if kwargs.get('columns'):
-            self._create_columns(kwargs['columns'])
-        elif kwargs:
+        kwargs.update(columns or {})
+        if kwargs:
             self._create_columns(kwargs)
 
     def __len__(self):
-        cursor = self._conn.execute("""SELECT count(*) from {name}""".format(
+        cursor = self.execute("""SELECT count(*) from {name}""".format(
             name=self.name))
 
         return len(cursor.fetchall())
@@ -61,17 +94,15 @@ class Table(object):
         query = """CREATE TABLE if not exists {0}
                    ({1})""".format(self.name, columns)
 
-        return self._conn.execute(query)
+        return self.execute(query)
 
-    def insert(self, *args, **kwargs):
+    def insert(self, columns, **kwargs):
         """ Insert a new row into the database.
 
-            Positional arguemnts are understood to be column
-            names (in alphabetical order), where as keyword arguemnts are
-            understood to be key value  pairs representing the columns and their
-            values respectively.
+            Keyword arguemnts are understood to be key value  pairs
+            representing the columns and their values respectively.
         """
-        columns = dict(zip(self.columns, args))
+        kwargs.update(columns or {})
         kwargs.update((key, value) for key, value in columns.items()
             if key not in kwargs)
 
@@ -82,9 +113,9 @@ class Table(object):
             columns=', '.join(str(key) for key in kwargs.keys()),
             values=', '.join(repr(value) for value in kwargs.values()))
 
-        return self._conn.execute(query)
+        return self.execute(query)
 
-    def select(self, *args, **kwargs):
+    def select(self, comparisons=None, **kwargs):
         """ Select rows from the database.
 
             If no arguments are given, every row is returned. Positional
@@ -92,29 +123,42 @@ class Table(object):
             where as keyword arguemnts are
             understood to be key value  pairs representing the columns and their
             values respectively.
-        """
 
-        if not args and not kwargs:
+            Comparison functions (lt, le, eq, gt, ge, ne) pay be passed as
+            keyword values in order to broaden query results::
+
+                db.cards.select({
+                    'def': gt(2),
+                    'atk': ge(3),
+                    'type': 'Elf'})
+        """
+        kwargs.update(comparisons or {})
+
+        if not kwargs:
             query = """SELECT *
                        FROM {table}""".format(table=self.name)
         else:
-            columns = OrderedDict(zip(self.columns, args))
-            kwargs.update((key, value) for key, value in columns.items()
-                if key not in kwargs)
+            kwargs.update(
+                dict((key, eq(value)) for key, value in kwargs.items()
+                    if not callable(value)))
 
-            columns = ", ".join(["{key} = {value}".format(key=key, value=value)
-                for key, value in kwargs.items()])
+            comparisons = ' AND '.join(
+                value(column=key) for key, value in kwargs.items())
 
             query = """SELECT *
-                       FROM {table}
-                       WHERE {columns}""".format(table=self.name, columns=columns)
+                    FROM {table}
+                    WHERE {comparisons}""".format(
+                        table=self.name, comparisons=comparisons)
 
-        return self._conn.execute(query)
+        return self.execute(query)
+
+    def execute(self, query, *args, **kwargs):
+        return self._conn.execute(query, *args, **kwargs)
 
     @property
     def info(self):
         # name, type, null, default, primary_key
-        columns = self._conn.execute(
+        columns = self.execute(
             "PRAGMA table_info({0})".format(self.name)).fetchall()
 
 
@@ -149,8 +193,26 @@ class Database(object):
     def __getattr__(self, name):
         if name in self.tables:
             return Table(self._conn, name)
+        else:
+            raise AttributeError(
+                "'Database' object has no attribute '{0}'".format(name))
 
-    def create_table(self, table_name, **kwargs):
+    def create_table(self, table_name, columns=None, **kwargs):
+        """ Create a table in the database named table_name with columns whose
+            name and value correspond to the keys and values of kwargs.
+
+            table_name may be anything you wish, but if you wish to use names
+            that collide with reserved words in Python (eg. 'def' or 'id'),
+            simply pass a dictionary instead::
+                db.create_table('cards', {
+                    'id': integer(primary_key=True),
+                    'name': text(),
+                    'atk': integer(),
+                    'def': integer()})
+        """
+
+        kwargs.update(columns or {})
+
         return Table(self._conn, table_name, **kwargs)
 
     def rename_table(self, old_name, new_name):
@@ -158,19 +220,19 @@ class Database(object):
                    RENAME TO {new_name}""".format(
                         old_name=str(old_name), new_name=repr(new_name))
 
-        return self._conn.execute(query)
+        return self.execute(query)
 
     def drop(self, table_name):
         query = """DROP TABLE {table}""".format(table=table_name)
 
-        return self._conn.execute(query)
+        return self.execute(query)
 
     def execute(self, query, *args, **kwargs):
         return self._conn.execute(query, *args, **kwargs)
 
     @property
     def tables(self):
-        cursor = self._conn.execute("""SELECT name from sqlite_master
+        cursor = self.execute("""SELECT name from sqlite_master
                                         WHERE type = 'table'""")
 
         return [row.name for row in cursor]
