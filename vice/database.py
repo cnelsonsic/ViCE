@@ -42,7 +42,7 @@ def column(name=None, kind='text', primary_key=False):
     else:
         return partial(query.format, kind=kind)
 
-""" Typed Columns """
+""" Column Shortcuts """
 text = partial(column, kind='text')
 integer = partial(column, kind='integer')
 real = partial(column, kind='real')
@@ -50,6 +50,10 @@ blob = partial(column, kind='blob')
 null = partial(column, kind='null')
 
 def comparison(value=None, column=None, operator='='):
+    """ Returns a string to be used as a comparison declaration for an SQL
+        query with the given value, column, and operator.
+    """
+
     query = '{column} {operator} {value}'
 
     if column:
@@ -57,6 +61,7 @@ def comparison(value=None, column=None, operator='='):
     else:
         return partial(query.format, operator=operator, value=repr(value))
 
+""" Operator Shortcuts """
 lt = partial(comparison, operator='<')
 le = partial(comparison, operator='<=')
 eq = partial(comparison, operator='=')
@@ -67,8 +72,7 @@ ne = partial(comparison, operator='!=')
 class Table(object):
     """ Abstraction layer on top of python's sqlite3 API.
 
-        This class wraps python's sqlite3 API, making it more object oriented
-        and intuitive to use.
+        This class wraps python's sqlite3 API, providing a simple to use Table class.
     """
     def __init__(self, connection, table_name, columns=None, **kwargs):
 
@@ -153,10 +157,29 @@ class Table(object):
 
     @property
     def info(self):
+        """ Returns a dictionary of columns and their attributes.
+
+            Each column holds the following attributes:
+
+                index
+                    The column's index
+
+                type
+                    The column's type (text, integer, real, blob, null)
+
+                null_allowed
+                    Whether or not a null (None) value is allowed in the column
+
+                default
+                    The default value of the column, if there is one
+
+                primary_key
+                    Whether or not the column is a primary key
+        """
+
         # name, type, null, default, primary_key
         columns = self.execute(
             "PRAGMA table_info({0})".format(self.name)).fetchall()
-
 
         return dict(
             (column.name, {
@@ -169,16 +192,23 @@ class Table(object):
 
     @property
     def columns(self):
+        """ Returns a list of column names """
         return self.info.keys()
 
     @property
     def primary_key(self):
+        """ Returns the table's primary key """
+
         for key, value in self.info.items():
             if value['primary_key']:
                 return key
 
 
 class Database(object):
+    """ Abstraction layer on top of python's sqlite3 API.
+
+        This class wraps python's sqlite3 API, providing a simple to use Database class.
+    """
 
     def __init__(self, location=':memory:'):
         self.location = location
@@ -212,6 +242,7 @@ class Database(object):
         return Table(self._conn, table_name, **kwargs)
 
     def rename_table(self, old_name, new_name):
+        """ Renames a table """
         query = """ALTER TABLE {old_name}
                    RENAME TO {new_name}""".format(
                         old_name=str(old_name), new_name=repr(new_name))
@@ -219,15 +250,24 @@ class Database(object):
         return self.execute(query)
 
     def drop(self, table_name):
+        """ Removes an existing table from the database. """
         query = """DROP TABLE {table}""".format(table=table_name)
 
         return self.execute(query)
 
     def execute(self, query, *args, **kwargs):
+        """ Provides low-level access to Python's sqlite3 API.
+
+            Functions identically to the sqlite3.Connection.execute() and uses
+            the Connection object instatiated when the Database object was
+            first created.
+        """
+
         return self._conn.execute(query, *args, **kwargs)
 
     @property
     def tables(self):
+        """ Returns a list of the database's table names. """
         cursor = self.execute("""SELECT name from sqlite_master
                                         WHERE type = 'table'""")
 
