@@ -1,23 +1,18 @@
 import os
 from collections import OrderedDict
+import pytest
 from vice.database import Database, integer, text, gt
 
-def pytest_funcarg__db(request):
+@pytest.fixture(scope='module')
+def db(request):
+    db = Database('wtactics.db')
 
-    def setup():
-        db = Database('wtactics.db')
-
-        assert os.path.exists('wtactics.db')
-        return db
-
-    def teardown(db):
+    def fin():
         os.remove(db.location)
 
-        assert not os.path.exists(db.location)
-        del db
+    request.addfinalizer(fin)
 
-    return request.cached_setup(
-        setup=setup, teardown=teardown, scope='module')
+    return db
 
 def test_create_table(db):
     db.create_table(

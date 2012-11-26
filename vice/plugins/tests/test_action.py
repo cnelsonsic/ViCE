@@ -1,10 +1,9 @@
 import random
+import pytest
 from vice.plugins import Action
 
-def pytest_funcarg__actions(request):
-    return request.cached_setup(setup=test_define_from_new, scope='function')
-
-def test_define_from_new():
+@pytest.fixture(scope='function')
+def actions():
     Echo = Action.new('Echo', lambda x: x)
 
     assert Echo.NAME == 'echo'

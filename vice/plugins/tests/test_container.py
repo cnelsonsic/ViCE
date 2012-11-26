@@ -1,17 +1,16 @@
+import pytest
 from vice.plugins import Item, Container
 
-
-def pytest_funcarg__card(request):
+@pytest.fixture(scope='function')
+def card(request):
     card = Item.new('Card', ('name', 'types'))()
     card.name = 'SomeCard'
-    card.types = 'Land',
+    card.types = ('Land', )
 
     return card
 
-def pytest_funcarg__land_zone(request):
-    return request.cached_setup(setup=test_define_from_new, scope='function')
-
-def test_define_from_new():
+@pytest.fixture(scope='function')
+def land_zone(request):
     LandZone = Container.new(
         'LandZone', lambda cls, item: [
             item.NAME == 'Card',

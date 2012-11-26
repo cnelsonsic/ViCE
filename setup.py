@@ -1,8 +1,6 @@
 import os
-import sys
 import shutil
-from setuptools import setup, find_packages
-from setuptools import Command
+from setuptools import setup, find_packages, Command
 from setuptools.command.test import test
 
 
@@ -120,11 +118,13 @@ class doc(Command):
                     pass
 
         print('Converting svgs to pngs for inclusion in documentation...')
-        args = 'inkscape -D -e {0} {1}'
-        [call(args.format(
-            os.path.join(imagedir, filename.replace('svg', 'png')),
-            os.path.join(imagedir, filename)).split())
-            for filename in os.listdir(imagedir) if filename.endswith('.svg')]
+
+        for filename in os.listdir(imagedir):
+            if filename.endswith('.svg'):
+                call('inkscape -D -e {0} {1}'.format(
+                    os.path.join(imagedir, filename.replace('svg', 'png')),
+                    os.path.join(imagedir, filename)).split())
+
 
 
 setup(
@@ -147,7 +147,7 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules'],
     packages=find_packages(exclude=['*test*']),
     install_requires=[],
-    tests_require=['pytest'],
+    tests_require=['pytest>=2.3'],
     cmdclass={
         'doc': doc,
         'test': PyTest})
